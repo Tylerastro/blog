@@ -1,15 +1,11 @@
 import { useTranslations } from "next-intl";
 
 import Link from "next/link";
-import { Menu } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import Intro from "./intro";
 
 export default function Home({ params }: { params: { locale: string } }) {
   unstable_setRequestLocale(params.locale);
-  const t = useTranslations("HomePage");
   return (
     <>
       <main className="flex-1">

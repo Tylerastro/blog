@@ -7,7 +7,16 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: "en",
+  pathnames: {
+    "/": "/",
+    "/pathnames": {
+      en: "/pathnames",
+      zh: "/pfadnamen",
+    },
+  },
 });
+
+export type Locale = (typeof routing.locales)[number];
 
 // Lightweight wrappers around Next.js' navigation APIs
 // that will consider the routing configuration

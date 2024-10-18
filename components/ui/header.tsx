@@ -4,6 +4,7 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import LocaleSwitcher from "../LocaleSwitcher";
 
 export default function Header() {
   return (
@@ -39,6 +40,7 @@ export default function Header() {
             <Link href="/contact">Contact</Link>
           </nav>
         </div>
+        <LocaleSwitcher />
         <ModeToggle />
       </div>
     </header>
