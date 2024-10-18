@@ -40,8 +40,10 @@ export default function Header() {
             <Link href="/contact">Contact</Link>
           </nav>
         </div>
-        <LocaleSwitcher />
-        <ModeToggle />
+        <div>
+          <LocaleSwitcher />
+          <ModeToggle />
+        </div>
       </div>
     </header>
   );
