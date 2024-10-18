@@ -2,27 +2,26 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
+import { cn } from "@/lib/utils";
 import { getMessages } from "next-intl/server";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/ui/header";
 import { routing } from "@/i18n/routing";
-
+import { Roboto_Mono, Edu_VIC_WA_NT_Beginner } from "next/font/google";
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
-const geistSans = localFont({
-  src: "./fonts/GeistVF.woff",
-  variable: "--font-geist-sans",
-  weight: "100 900",
+const roboto_mono = Roboto_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-roboto-mono",
 });
-const geistMono = localFont({
-  src: "./fonts/GeistMonoVF.woff",
-  variable: "--font-geist-mono",
-  weight: "100 900",
+const local_edu_vic_wa_nt_beginner = localFont({
+  src: "./fonts/EduAUVICWANTDots-VariableFont_wght.ttf",
+  weight: "200",
+  variable: "--font-edu-vic-wa-nt-beginner",
 });
-
 export const metadata: Metadata = {
   title: "Blog",
   description: "",
@@ -42,7 +41,11 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={cn(
+          "antialiased",
+          roboto_mono.variable,
+          local_edu_vic_wa_nt_beginner.variable
+        )}
       >
         <ThemeProvider
           attribute="class"

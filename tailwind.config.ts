@@ -1,3 +1,4 @@
+import { Edu_NSW_ACT_Foundation } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -9,6 +10,10 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        robotoMono: ["var(--font-roboto-mono)"],
+        local_edu_vic_wa_nt_beginner: ["var(--font-edu-vic-wa-nt-beginner)"],
+      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",

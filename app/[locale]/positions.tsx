@@ -10,14 +10,14 @@ export default function Positions() {
           strings={[
             "Tyler",
             "or Tylerastro",
-            "an Astronomer",
             "a Developer",
+            "an Astronomer",
             "a Physicist",
           ]}
-          typeSpeed={40}
-          backSpeed={55}
+          typeSpeed={50}
+          backSpeed={30}
           loop
-          className="font-semibold text-primary"
+          className="font-semibold text-2xl text-primary font-local_edu_vic_wa_nt_beginner"
         />
       </p>
     </div>
