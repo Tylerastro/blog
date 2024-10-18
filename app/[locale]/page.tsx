@@ -16,7 +16,6 @@ export default function Home({ params }: { params: { locale: string } }) {
         <Intro />
         <section className="w-full py-12 md:py-24 lg:py-32">
           <div className="container px-4 md:px-6">
-            <h1>{t("title")}</h1>
             <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl mb-8">
               Recent Posts
             </h2>
