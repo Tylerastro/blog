@@ -10,8 +10,8 @@ export default function Home({ params }: { params: { locale: string } }) {
     <>
       <main className="flex-1">
         <Intro />
-        <section className="w-full py-12 md:py-24 lg:py-32">
-          <div className="container px-4 md:px-6">
+        {/* <section className="w-full py-12 md:py-24 lg:py-32">
+          <div className=" px-4 md:px-6">
             <h2 className="text-2xl font-bold tracking-tighter sm:text-3xl md:text-4xl mb-8">
               Recent Posts
             </h2>
@@ -43,19 +43,8 @@ export default function Home({ params }: { params: { locale: string } }) {
               ))}
             </div>
           </div>
-        </section>
+        </section> */}
       </main>
-      <footer className="w-full border-t py-6">
-        <div className="container flex flex-col items-center justify-center gap-4 md:flex-row md:gap-8">
-          <p className="text-center text-sm leading-loose text-gray-500 dark:text-gray-400 md:text-left">
-            © 2023 My Personal Blog. All rights reserved.
-          </p>
-          <nav className="flex items-center space-x-4 text-sm font-medium">
-            <Link href="/privacy">Privacy Policy</Link>
-            <Link href="/terms">Terms of Service</Link>
-          </nav>
-        </div>
-      </footer>
     </>
   );
 }

@@ -8,7 +8,8 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/ui/header";
 import { routing } from "@/i18n/routing";
-import { Roboto_Mono, Edu_VIC_WA_NT_Beginner } from "next/font/google";
+import { Roboto_Mono } from "next/font/google";
+import Footer from "@/components/ui/footer";
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
@@ -34,8 +35,6 @@ export default async function LocaleLayout({
   children: React.ReactNode;
   params: { locale: string };
 }) {
-  // Providing all messages to the client
-  // side is the easiest way to get started
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
   return (
@@ -54,10 +53,9 @@ export default async function LocaleLayout({
           disableTransitionOnChange
         >
           <NextIntlClientProvider messages={messages}>
-            <div className="min-h-screen flex flex-col">
-              <Header />
-              {children}
-            </div>
+            <Header />
+            {children}
+            <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
       </body>
