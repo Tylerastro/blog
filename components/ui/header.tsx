@@ -40,7 +40,7 @@ export default function Header() {
             <Link href="/contact">Contact</Link>
           </nav>
         </div>
-        <div>
+        <div className="flex items-center space-x-4">
           <LocaleSwitcher />
           <ModeToggle />
         </div>

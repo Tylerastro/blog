@@ -1,28 +1,35 @@
 "use client";
 
-import clsx from "clsx";
+import * as React from "react";
+import { Globe } from "lucide-react";
 import { useParams } from "next/navigation";
-import { ChangeEvent, ReactNode, useTransition } from "react";
 import { Locale, usePathname, useRouter } from "@/i18n/routing";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 type Props = {
-  children: ReactNode;
   defaultValue: string;
   label: string;
+  locales: { code: Locale; name: string }[];
 };
 
 export default function LocaleSwitcherSelect({
-  children,
   defaultValue,
   label,
+  locales,
 }: Props) {
   const router = useRouter();
-  const [isPending, startTransition] = useTransition();
+  const [isPending, startTransition] = React.useTransition();
   const pathname = usePathname();
   const params = useParams();
 
-  function onSelectChange(event: ChangeEvent<HTMLSelectElement>) {
-    const nextLocale = event.target.value as Locale;
+  const handleLocaleChange = (nextLocale: Locale) => {
     startTransition(() => {
       router.replace(
         // @ts-expect-error -- TypeScript will validate that only known `params`
@@ -32,25 +39,29 @@ export default function LocaleSwitcherSelect({
         { locale: nextLocale }
       );
     });
-  }
+  };
 
   return (
-    <label
-      className={clsx(
-        "relative text-gray-400",
-        isPending && "transition-opacity [&:disabled]:opacity-30"
-      )}
-    >
-      <p className="sr-only">{label}</p>
-      <select
-        className="inline-flex appearance-none bg-transparent py-3 pl-2 pr-6"
+    <div className="relative inline-block">
+      <Select
         defaultValue={defaultValue}
+        onValueChange={handleLocaleChange}
         disabled={isPending}
-        onChange={onSelectChange}
       >
-        {children}
-      </select>
-      <span className="pointer-events-none absolute right-2 top-[8px]">⌄</span>
-    </label>
+        <SelectTrigger className="w-[180px] bg-background">
+          <Globe className="mr-2 h-4 w-4" />
+          <SelectValue placeholder={label} />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            {locales.map((locale) => (
+              <SelectItem key={locale.code} value={locale.code}>
+                {locale.name}
+              </SelectItem>
+            ))}
+          </SelectGroup>
+        </SelectContent>
+      </Select>
+    </div>
   );
 }

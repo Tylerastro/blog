@@ -1,24 +1,25 @@
 import { useLocale, useTranslations } from "next-intl";
-import { routing } from "@/i18n/routing";
+import { routing, Locale } from "@/i18n/routing";
 import LocaleSwitcherSelect from "./LocaleSwitcherSelect";
 
-const locales = [
+const locales: { code: Locale; name: string }[] = [
   { code: "en", name: "English" },
-  { code: "zh", name: "Español" },
+  { code: "zh", name: "繁體中文" },
   // ... other locales
 ];
 
 export default function LocaleSwitcher() {
   const t = useTranslations("LocaleSwitcher");
-  const locale = useLocale();
+  const locale = useLocale() as Locale;
 
   return (
-    <LocaleSwitcherSelect defaultValue={locale} label={t("label")}>
-      {routing.locales.map((cur) => (
-        <option key={cur} value={cur}>
-          {t("locale", { locale: cur })}
-        </option>
-      ))}
-    </LocaleSwitcherSelect>
+    <LocaleSwitcherSelect
+      defaultValue={locale}
+      label={t("label")}
+      locales={locales.map((l) => ({
+        ...l,
+        name: l.name,
+      }))}
+    />
   );
 }
