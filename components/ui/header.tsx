@@ -5,6 +5,14 @@ import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import LocaleSwitcher from "../LocaleSwitcher";
+import { AnimatedButton } from "./AnimatedButton";
+
+const pages = [
+  { href: "/about", label: "About", enabled: true },
+  { href: "/posts", label: "Posts", enabled: true },
+  { href: "/projects", label: "Projects", enabled: true },
+  { href: "/contact", label: "Contact", enabled: true },
+];
 
 export default function Header() {
   return (
@@ -20,24 +28,33 @@ export default function Header() {
             </SheetTrigger>
             <SheetContent side="left">
               <nav className="flex flex-col space-y-4">
-                <Link href="/">Home</Link>
-                <Link href="/about">About</Link>
-                <Link href="/posts">Posts</Link>
-                <Link href="/projects">Projects</Link>
-                <Link href="/contact">Contact</Link>
+                {pages.map((page) => (
+                  <AnimatedButton
+                    key={page.label}
+                    href={page.href}
+                    disabled={!page.enabled}
+                  >
+                    {page.label}
+                  </AnimatedButton>
+                ))}
               </nav>
             </SheetContent>
           </Sheet>
-          <div className="hidden lg:block">
+          <div className="hidden lg:block pr-12">
             <Link href="/" className="mr-6 flex items-center space-x-2">
-              <span className="font-bold">My Blog</span>
+              <span className="text-xl font-bold">My Blog</span>
             </Link>
           </div>
-          <nav className="hidden lg:flex items-center space-x-6 text-sm font-medium">
-            <Link href="/about">About</Link>
-            <Link href="/posts">Posts</Link>
-            <Link href="/projects">Projects</Link>
-            <Link href="/contact">Contact</Link>
+          <nav className="hidden lg:flex items-center space-x-6 text-lg font-medium">
+            {pages.map((page) => (
+              <AnimatedButton
+                key={page.label}
+                href={page.href}
+                disabled={!page.enabled}
+              >
+                {page.label}
+              </AnimatedButton>
+            ))}
           </nav>
         </div>
         <div className="flex items-center space-x-4">

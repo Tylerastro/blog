@@ -3,6 +3,7 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Intro from "./intro";
+import DropMeMessage from "@/components/ui/DropMeMessage";
 
 export default function Home({ params }: { params: { locale: string } }) {
   unstable_setRequestLocale(params.locale);
@@ -44,6 +45,7 @@ export default function Home({ params }: { params: { locale: string } }) {
             </div>
           </div>
         </section> */}
+        <DropMeMessage />
       </main>
     </>
   );

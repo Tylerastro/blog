@@ -41,7 +41,7 @@ export default async function LocaleLayout({
     <html lang={locale}>
       <body
         className={cn(
-          "antialiased",
+          "antialiased bg-gradient-to-b from-background to-secondary",
           roboto_mono.variable,
           local_edu_vic_wa_nt_beginner.variable
         )}
@@ -54,7 +54,7 @@ export default async function LocaleLayout({
         >
           <NextIntlClientProvider messages={messages}>
             <Header />
-            {children}
+            <div className="animate-page-transition">{children}</div>
             <Footer />
           </NextIntlClientProvider>
         </ThemeProvider>
