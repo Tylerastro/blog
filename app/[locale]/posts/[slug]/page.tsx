@@ -34,7 +34,6 @@ export async function generateMetadata({
 export default function RecipePage(props: { params: { slug: string } }) {
   const slug = props.params.slug;
   const post = getPostContent(slug);
-  console.log(post);
   return (
     <main>
       <article>
