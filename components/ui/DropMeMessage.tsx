@@ -21,7 +21,7 @@ export default function DropMeMessage() {
   };
 
   return (
-    <section className="relative bg-background py-16 overflow-hidden">
+    <section className="relative  py-16 overflow-hidden">
       {/* Clipped background */}
       <div
         className="absolute inset-0 bg-primary/50"
@@ -35,7 +35,7 @@ export default function DropMeMessage() {
         <h2 className="text-3xl font-bold text-center mb-8">Contact Me</h2>
         <form
           onSubmit={handleSubmit}
-          className="max-w-md mx-auto space-y-4 bg-background p-6 rounded-lg shadow-md"
+          className="max-w-lg mx-auto space-y-4 bg-background p-6 rounded-lg shadow-md"
         >
           <div>
             <label htmlFor="name" className="block text-sm font-medium mb-1">
