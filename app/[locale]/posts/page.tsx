@@ -3,7 +3,6 @@ import { useTranslations } from "next-intl";
 import getPostMetadata from "@/utils/getPostMetaData";
 import { BlogPostsListProps } from "@/types/posts";
 import RecentPosts from "@/components/posts/Posts";
-import AnimatedTabs from "@/components/Tabs";
 
 const POSTS_PER_PAGE = 6;
 
