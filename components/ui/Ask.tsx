@@ -30,7 +30,9 @@ export default function AskMeAnything() {
       setAnswer(data.answer);
     } catch (err) {
       setError(
-        "An error occurred while fetching the answer. Please try again."
+        `An error occurred: ${
+          err instanceof Error ? err.message : "Failed to get an answer"
+        }`
       );
     } finally {
       setIsLoading(false);

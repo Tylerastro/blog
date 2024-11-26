@@ -1,6 +1,3 @@
-import { useTranslations } from "next-intl";
-
-import Link from "next/link";
 import { unstable_setRequestLocale } from "next-intl/server";
 import Intro from "./intro";
 import DropMeMessage from "@/components/ui/DropMeMessage";

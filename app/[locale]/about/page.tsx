@@ -46,8 +46,8 @@ export default function AboutMe() {
       <div className="text-center mb-12">
         <h2 className="text-3xl font-semibold mb-4">About Me</h2>
         <p className="text-lg text-muted-foreground">
-          I am a software engineer, an astronomer, and a physicist, stronly
-          beleive in by putting each one's effort, we can make a better world.
+          I am a software engineer, an astronomer, and a physicist, strongly
+          believe in by putting each one&apos;s effort, we can make a better world.
         </p>
       </div>
 

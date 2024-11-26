@@ -97,7 +97,7 @@ const Timeline = ({ posts }: TimelineProps) => {
       {loadedYears.map((year) => (
         <div key={year} className="mb-12">
           <h2 className="mb-8 text-center text-3xl font-bold">{year}</h2>
-          {groupedPosts[year]?.map((post, index) => (
+          {groupedPosts[year]?.map((post) => (
             <div
               key={post.slug}
               className="timeline-event relative mb-8 mr-0 ml-auto w-1/2 pr-0 pl-8 group"
