@@ -12,3 +12,4 @@ interface BlogPostsListProps {
 }
 
 export type { BlogPost, BlogPostsListProps };
+export type PostMetadata = BlogPost;
