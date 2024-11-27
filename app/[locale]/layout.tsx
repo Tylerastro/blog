@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
+import { Toaster } from "@/components/ui/toaster";
+
 import { unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -28,21 +30,15 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function LocaleLayout(
-  props: {
-    children: React.ReactNode;
-    params: Promise<{ locale: string }>;
-  }
-) {
+export default async function LocaleLayout(props: {
+  children: React.ReactNode;
+  params: Promise<{ locale: string }>;
+}) {
   const params = await props.params;
 
-  const {
-    locale
-  } = params;
+  const { locale } = params;
 
-  const {
-    children
-  } = props;
+  const { children } = props;
 
   unstable_setRequestLocale(locale);
   const messages = await getMessages();
@@ -63,6 +59,7 @@ export default async function LocaleLayout(
         >
           <NextIntlClientProvider messages={messages}>
             <Header />
+            <Toaster />
             <div className="animate-page-transition">{children}</div>
             <Footer />
           </NextIntlClientProvider>
