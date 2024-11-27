@@ -3,6 +3,7 @@
 import { PostMetadata } from "@/types/posts";
 import { useEffect, useRef } from "react";
 import gsap from "gsap";
+import Markdown from "markdown-to-jsx";
 
 interface PostDrawerProps {
   post: PostMetadata | null;
@@ -53,7 +54,7 @@ const PostDrawer = ({ post, isOpen }: PostDrawerProps) => {
   return (
     <div
       ref={drawerRef}
-      className="fixed top-1/2 -translate-y-1/2 right-8 z-50 h-[80svh] w-1/2 bg-white dark:bg-gray-800 shadow-xl overflow-y-auto rounded-2xl border border-gray-200 dark:border-gray-700"
+      className="fixed z-10 top-1/2 -translate-y-1/2 right-8 z-50 h-[80svh] w-[40svw] bg-white dark:bg-gray-800 shadow-xl overflow-y-auto rounded-2xl border border-gray-200 dark:border-gray-700"
       style={{ display: "none" }}
     >
       <div className="p-8">
@@ -73,8 +74,10 @@ const PostDrawer = ({ post, isOpen }: PostDrawerProps) => {
             ))}
           </div>
         )}
-        {post.description && (
-          <p className="text-gray-700 dark:text-gray-300">{post.description}</p>
+        {post.preview && (
+          <div className="prose dark:prose-invert max-w-none">
+            <Markdown>{post.preview}</Markdown>
+          </div>
         )}
       </div>
     </div>

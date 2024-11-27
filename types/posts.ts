@@ -4,6 +4,7 @@ interface BlogPost {
   tags: string[];
   slug: string;
   description?: string;
+  preview?: string;
 }
 
 interface BlogPostsListProps {

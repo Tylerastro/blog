@@ -10,11 +10,17 @@ export default function getPostMetadata(basePath: string) {
   const posts = markdownPosts.map((filename) => {
     const fileContents = fs.readFileSync(`${basePath}/${filename}`, "utf8");
     const matterResult = matter(fileContents);
+    
+    // Get preview content (everything before <!--more-->)
+    const preview = matterResult.content.split("<!--more-->")[0].trim();
+
     return {
       title: matterResult.data.title,
-      created_date: matterResult.data.created_date,
+      created_date: matterResult.data.date,
       tags: matterResult.data.tags,
+      categories: matterResult.data.categories,
       slug: filename.replace(".md", ""),
+      preview: preview,
     };
   });
   return posts;

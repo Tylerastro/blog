@@ -20,7 +20,7 @@ export default function BlogPostsList({ locale }: BlogPostsListProps) {
   return (
     <section className="container mx-auto px-4 py-10 md:py-12 lg:py-16">
       <h1 className="mb-8 text-center text-4xl font-bold">{t("title")}</h1>
-      <div className="pr-[65%]">
+      <div className="max-w-5xl mx-auto">
         <Timeline posts={posts} />
       </div>
     </section>

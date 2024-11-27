@@ -26,6 +26,14 @@ const Timeline = ({ posts }: TimelineProps) => {
     triggerOnce: false,
   });
 
+  const formatDate = (date: string | Date): string => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, '0');
+    const day = String(d.getDate()).padStart(2, '0');
+    return `${year}/${month}/${day}`;
+  };
+
   // Group posts by year
   useEffect(() => {
     const grouped = posts.reduce((acc: GroupedPosts, post) => {
@@ -91,7 +99,7 @@ const Timeline = ({ posts }: TimelineProps) => {
   }, [loadedYears]);
 
   return (
-    <div className="relative w-full" ref={timelineRef}>
+    <div className="relative right-1/2 w-full" ref={timelineRef}>
       <div className="absolute left-1/2 h-full w-px bg-gray-200 dark:bg-gray-700" />
 
       {loadedYears.map((year) => (
@@ -131,7 +139,7 @@ const Timeline = ({ posts }: TimelineProps) => {
                   </a>
                 </h3>
                 <p className="text-sm text-gray-600 dark:text-gray-400">
-                  {new Date(post.created_date).toLocaleDateString()}
+                  {formatDate(post.created_date)}
                 </p>
               </div>
             </div>

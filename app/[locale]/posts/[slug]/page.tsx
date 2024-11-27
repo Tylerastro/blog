@@ -18,21 +18,21 @@ export const generateStaticParams = async () => {
   return posts.map((post) => ({ slug: post.slug }));
 };
 
-export async function generateMetadata({
-  params,
-  searchParams,
-}: {
-  params: { slug: string };
-  searchParams: { [key: string]: string | string[] | undefined };
-}) {
+export async function generateMetadata(
+  props: {
+    params: Promise<{ slug: string }>;
+    searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
+  }
+) {
+  const params = await props.params;
   const id = params?.slug ? " ⋅ " + params?.slug : "";
   return {
     title: `The Bubbly Baker ${id.replaceAll("_", " ")}`,
   };
 }
 
-export default function RecipePage(props: { params: { slug: string } }) {
-  const slug = props.params.slug;
+export default async function RecipePage(props: { params: Promise<{ slug: string }> }) {
+  const slug = (await props.params).slug;
   const post = getPostContent(slug);
   return (
     <main>
