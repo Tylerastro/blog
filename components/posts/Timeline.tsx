@@ -39,11 +39,12 @@ const Timeline = ({ posts }: TimelineProps) => {
     }, {});
 
     setGroupedPosts(grouped);
-    // Initially load the three most recent years
+    // Load initial years (at least 4 or all if less)
     const sortedYears = Object.keys(grouped).sort(
       (a, b) => parseInt(b) - parseInt(a)
     );
-    setLoadedYears(sortedYears.slice(0, 3));
+    const initialYearsCount = Math.min(4, sortedYears.length);
+    setLoadedYears(sortedYears.slice(0, initialYearsCount));
   }, [posts]);
 
   // Load more years when scrolling to bottom
@@ -70,17 +71,21 @@ const Timeline = ({ posts }: TimelineProps) => {
       gsap.fromTo(
         event,
         {
-          opacity: 0,
-          x: -50,
+          opacity: 0.2,
+          x: -40,
+          y: -25,
         },
         {
           opacity: 1,
           x: 0,
-          duration: 0.8,
+          y: 0,
+          duration: 0.85,
           scrollTrigger: {
             trigger: event,
-            start: "top center+=100",
-            toggleActions: "play none none",
+            start: "top bottom-=100",
+            end: "top center",
+            toggleActions: "play none none none",
+            once: true,
           },
         }
       );
@@ -103,24 +108,14 @@ const Timeline = ({ posts }: TimelineProps) => {
               key={post.slug}
               className="timeline-event relative mb-8 mr-0 ml-auto w-1/2 pr-0 pl-8 group"
               onMouseEnter={() => {
-                gsap.to(`.post-${post.slug}`, {
-                  scale: 1.05,
-                  duration: 0.3,
-                  ease: "power2.out",
-                });
                 setHoveredPost(post);
               }}
               onMouseLeave={() => {
-                gsap.to(`.post-${post.slug}`, {
-                  scale: 1,
-                  duration: 0.3,
-                  ease: "power2.in",
-                });
                 setHoveredPost(null);
               }}
             >
               <div
-                className={`post-${post.slug} relative rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 transition-shadow hover:shadow-lg`}
+                className={`post-${post.slug} relative rounded-lg border border-gray-200 bg-white p-6 shadow-sm dark:border-gray-700 dark:bg-gray-800 transition-all duration-300 hover:scale-105 hover:shadow-lg`}
               >
                 <div className="absolute top-6 -left-4 h-3 w-3 rounded-full bg-primary-500" />
                 <h3 className="mb-2 text-xl font-semibold">
@@ -141,7 +136,7 @@ const Timeline = ({ posts }: TimelineProps) => {
       ))}
 
       <div ref={bottomRef} className="h-10" />
-      <PostDrawer post={hoveredPost} isOpen={hoveredPost !== null} />
+      {/* <PostDrawer post={hoveredPost} isOpen={hoveredPost !== null} /> */}
     </div>
   );
 };

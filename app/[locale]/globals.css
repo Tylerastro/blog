@@ -79,10 +79,12 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
 @keyframes shimmer {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -90,12 +92,73 @@ body {
 
 .shimmer {
   animation: shimmer 2s infinite linear;
-  background: linear-gradient(
-    to right,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.2) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%);
   background-size: 1000px 100%;
   height: 100%;
+}
+
+.prevent-select {
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
+}
+
+blockquote {
+  background-color: #f9f9f9;
+  border-left: 5px solid #ccc;
+  margin: 1.5em 10px;
+  padding: 0.5em 10px;
+  quotes: "\201C" "\201D" "\2018" "\2019";
+  font-style: italic;
+  color: #555;
+  -webkit-user-select: none;
+  /* Safari */
+  -ms-user-select: none;
+  /* IE 10 and IE 11 */
+  user-select: none;
+  /* Standard syntax */
+}
+
+blockquote:before {
+  color: #ccc;
+  content: open-quote;
+  font-size: 4em;
+  line-height: 0.1em;
+  margin-right: 0.25em;
+  vertical-align: -0.4em;
+}
+
+blockquote p {
+  display: inline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  blockquote {
+    margin: 1em 0;
+    padding: 0.5em 5px;
+  }
+}
+
+/* Alternative style with a different color scheme */
+.blockquote-alt {
+  background-color: #e6f3ff;
+  border-left: 5px solid #3498db;
+  color: #2c3e50;
+}
+
+.blockquote-alt:before {
+  color: #3498db;
+}
+
+.article {
+  padding-bottom: 1.2rem;
+  border-bottom: 2px solid #474442;
+  margin-bottom: 2rem;
 }

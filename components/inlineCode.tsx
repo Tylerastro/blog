@@ -1,35 +1,40 @@
 "use client";
 
-import React from "react";
-import { Highlight, themes } from "prism-react-renderer";
+import React, { useState } from "react";
+import { Check, Copy } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-interface InlineCodeProps {
-  children: string;
-  className?: string;
-}
+export function InlineCode({ children }: { children: React.ReactNode }) {
+  const [isCopied, setIsCopied] = useState(false);
 
-export function InlineCode({ children, className }: InlineCodeProps) {
-  // Extract the language from className (markdown-to-jsx passes it as "language-{lang}")
-  const language = className?.replace(/language-/, "") || "text";
-  
+  const copyToClipboard = async () => {
+    try {
+      await navigator.clipboard.writeText(children?.toString() || "");
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy text: ", err);
+    }
+  };
+  console.log(children);
+
   return (
-    <Highlight theme={themes.nightOwl} code={children} language={language}>
-      {({ tokens, getTokenProps }) => (
-        <code className="rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm font-semibold">
-          {tokens[0].map((token, i) => {
-            const tokenProps = getTokenProps({ token, key: i });
-            return (
-              <span
-                key={i}
-                className={tokenProps.className}
-                style={tokenProps.style}
-              >
-                {tokenProps.children}
-              </span>
-            );
-          })}
-        </code>
-      )}
-    </Highlight>
+    <span className="inline-flex items-center rounded bg-muted px-2 py-1 text-sm font-mono text-muted-foreground">
+      {" "}
+      {children}{" "}
+      <Button
+        variant="ghost"
+        size="icon"
+        className="ml-2 h-4 w-4"
+        onClick={copyToClipboard}
+        aria-label="Copy code"
+      >
+        {isCopied ? (
+          <Check className="h-3 w-3 text-green-500" />
+        ) : (
+          <Copy className="h-3 w-3" />
+        )}
+      </Button>
+    </span>
   );
 }

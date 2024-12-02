@@ -24,7 +24,7 @@ date: 2024-02-28 00:17:45
 > 創造你的環境，不論使用conde env或是virtualenv，確保使用Python3.8+
 
 `conda create --name yt-dlp python=3.11`
-接著`pip install yt-dlp`  [yt-dlp](https://pypi.org/project/yt-dlp/)
+接著 `pip install yt-dlp`
 
 完成安裝後，`yt-dlp --version` 確認當前版本。
 
@@ -34,7 +34,7 @@ date: 2024-02-28 00:17:45
 <!--more-->
 
 如果你也是Mac用戶，建議在安裝步驟也安裝ffmpeg，`brew install ffmpeg`。
-如果你是其他系統用戶，可以參考官方文件(ffmpeg download)[https://ffmpeg.org/download.html]
+如果你是其他系統用戶，可以參考官方文件[ffmpeg download](https://ffmpeg.org/download.html)
 
 
 # 使用

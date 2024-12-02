@@ -6,6 +6,9 @@ import React from "react";
 import fs from "fs";
 import matter from "gray-matter";
 import { notFound } from "next/navigation";
+import { BadgeLink } from "@/components/BadgeLink";
+import { HR } from "@/components/HR";
+import { CodeBlock } from "@/components/CodeBlock";
 
 function getPostContent(slug: string) {
   try {
@@ -68,7 +71,7 @@ export default async function PostPage(props: {
             overrides: {
               h1: {
                 props: {
-                  className: "text-3xl font-bold mt-8 mb-4",
+                  className: "text-3xl font-bold mt-8 mb-4 article",
                 },
               },
               h2: {
@@ -76,15 +79,16 @@ export default async function PostPage(props: {
                   className: "text-2xl font-bold mt-6 mb-4",
                 },
               },
+              hr: {
+                component: HR,
+              },
               p: {
                 props: {
                   className: "mb-4 leading-relaxed",
                 },
               },
               a: {
-                props: {
-                  className: "text-blue-600 hover:text-blue-800 underline",
-                },
+                component: BadgeLink,
               },
               img: {
                 props: {
@@ -95,10 +99,7 @@ export default async function PostPage(props: {
                 component: InlineCode,
               },
               pre: {
-                props: {
-                  className:
-                    "bg-gray-100 dark:bg-gray-800 rounded p-4 my-4 overflow-x-auto",
-                },
+                component: CodeBlock,
               },
             },
           }}
