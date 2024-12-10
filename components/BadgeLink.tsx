@@ -2,13 +2,12 @@ import React from "react";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 
-interface BadgeLinkProps {
+export function BadgeLink(props: {
   href: string;
-  children: React.ReactNode;
   external?: boolean;
-}
-
-export function BadgeLink({ href, children, external = true }: BadgeLinkProps) {
+  children: React.ReactNode;
+}) {
+  const { href, external = true, children } = props;
   return (
     <Link
       href={href}

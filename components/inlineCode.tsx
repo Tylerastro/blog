@@ -16,7 +16,6 @@ export function InlineCode({ children }: { children: React.ReactNode }) {
       console.error("Failed to copy text: ", err);
     }
   };
-  console.log(children);
 
   return (
     <span className="inline-flex items-center rounded bg-muted px-2 py-1 text-sm font-mono text-muted-foreground">
