@@ -45,7 +45,7 @@ export function TableOfContents() {
   };
 
   return (
-    <nav className="fixed right-4 top-1/4 w-64 p-4 bg-white dark:bg-gray-800 opacity-55 rounded-lg shadow-lg overflow-auto max-h-[70vh]">
+    <nav className="fixed right-3 top-1/4 w-64 p-4 bg-muted dark:bg-muted opacity-55 rounded-lg shadow-lg overflow-auto max-h-[70vh]">
       <ul className="space-y-2">
         {toc.map((item) => (
           <li
@@ -54,8 +54,8 @@ export function TableOfContents() {
               ${item.level === 2 ? "pl-0" : item.level === 3 ? "pl-4" : "pl-8"}
               ${
                 activeId === item.id
-                  ? "text-blue-500 font-medium"
-                  : "text-gray-600 dark:text-gray-300 hover:text-blue-500 dark:hover:text-blue-400"
+                  ? "text-blue-300 font-semibold"
+                  : "text-muted-foreground dark:text-muted-foreground hover:text-blue-500 dark:hover:text-blue-400"
               }`}
             onClick={() => handleClick(item.id)}
           >

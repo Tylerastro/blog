@@ -11,7 +11,7 @@ export function BadgeLink(props: {
   return (
     <Link
       href={href}
-      className="inline-flex my-2 mx-2 items-center rounded-full bg-primary px-2 py-2 text-sm font-medium text-primary-foreground transition-all hover:bg-primary/90 hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+      className="inline-flex my-2 mx-2 items-center px-2 py-2 text-base font-medium text-secondary-foreground  transition-all hover:shadow-md focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-full after:origin-left after:scale-x-100 after:bg-current after:transition-transform hover:after:scale-x-0"
       target={external ? "_blank" : undefined}
       rel={external ? "noopener noreferrer" : undefined}
     >

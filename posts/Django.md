@@ -162,7 +162,7 @@ CSS就是你的畫筆，要如何創作在一張空白頁面上面，就要靠�
 
 SASS/SCSS就是處理css的高階語言，有著類似程式語言的寫法，可以提出variable等概念，再由轉譯器轉譯成css讓網頁讀取
 
-概略上來講，sass不使用括號，分號，而scss較貼近於原本css寫法，保有大括號以及分號，使用`:`來作為assignment等等。端看你常使用的語言較貼近哪種寫法，再來選擇要使用sass或者scss就可以了。
+概略上來講，sass不使用括號，分號，而scss較貼近於原本css寫法，保有大括號以及分號，使用:來作為assignment等等。端看你常使用的語言較貼近哪種寫法，再來選擇要使用sass或者scss就可以了。
 [Sass Basics](https://sass-lang.com/guide)官網上提供了Sass/Scss的一些比較寫法，有興趣可以深入一些。使用上可以終端開著`sass --watch input.scss output.css`隨時做compile。
 
 ----
@@ -328,7 +328,7 @@ Flask以及Django都是Python使用者常用的框架，兩者各有優缺點，
 當我們確認完安裝後，`django-admin startproject mysite`就可以開始我們的專案，輸入完後會有一系列資料夾產生，那就是你專案裡面的東西。
 我的版本為4.0.6，每個版本之間可能會有所不同。
 底下的資料結構會長成這樣：
-```
+```bash
 ├── mysite
 │   ├── manage.py
 │   └── mysite
@@ -384,7 +384,7 @@ ASGI如同WSGI，是對於網路服務的接口，定義網路上的請求要如
 你會發現你的App底下並沒有`templates`,`static`,`urls.py`，這些要自行創建上去，由於他們很常用，建議是先創建，如果沒有用到再刪除也可以。
 接下來我們會一個一個檔案走過，描述大致上的功用，坐穩囉！
 
-```
+```bash
 ├── __init__.py
 ├── admin.py
 ├── apps.py
@@ -412,28 +412,27 @@ ASGI如同WSGI，是對於網路服務的接口，定義網路上的請求要如
 
 最為簡單的方法為回應一個簡單的httpresponse，我們可以創建一個簡單的view作為網頁回應。
 
-{% codeblock views.py lang:python %}
+```python
 def simpleResonse(request):
     return HttpResponse("It's a simple response.")
-{% endcodeblock %}
+```
 
 ##### render
 
 `render`是最常見的方法，藉由呼叫寫好的html,css等檔案，送進參數，直接輸出成網頁回傳到使用者端。
 render會處理第一個就是用戶發出的request，第二項參數會放入我們的html檔案，官方建議是放`app/templates/app/index.html`，重複兩次app名稱的資料夾，來作為存放地點，這樣呼叫時可以使用底下的格式，第三個參數`context`則是選擇性輸入字典，輸入參數到我們的模板中。
 
-{% codeblock views.py lang:python %}
+```python
 def renderResponse(request):
     return render(request, "[appName]/index.html", context)
-{% endcodeblock %}
+```
 
 ##### Handling form post
 
 除非我們是只發布消息，否則我們一定會處理到使用者發出的form，這邊我們示範如何處理一個使用者發出的POST，並把裡面的資料傳達到資料庫裡面。
 這裡的`NewTargetForm`是我們待會再`forms.py`裡面定義的一個class，可以想像是一個表單物件。
 
-{% codeblock formview.py lang:python %}
-
+```python
 def standardform(request):
     # 確認使用者發出的為POST
     if request.method == 'POST':
@@ -451,16 +450,14 @@ def standardform(request):
     elif request.method == 'GET':
         form = NewTargetForm()
     return render(request, "form.html", {'form':form})
-
-{% endcodeblock %}
+```
 
 #### urls.py
 
 在url裡面我們會告訴網站要如何傳導我們的網址，我們使用`path`，來放入我們要顯示的路徑，對應到的view，以及在Django內部我們如何呼叫的名稱。
 
 
-{% codeblock urls.py lang:python %}
-
+```python
 from django.urls import path
 from . import views
 
@@ -469,8 +466,7 @@ urlpatterns = [
     path('', views.home, name='home'),
     path('standardform/',views.standardform,name="standardform"),
 ]
-
-{% endcodeblock %}
+```
 
 
 #### models.py
@@ -482,8 +478,7 @@ urlpatterns = [
 每個field在models裡面必須先確立field types，在[Model field reference](https://docs.djangoproject.com/en/4.2/ref/models/fields/)可以找到支援的field類型，不論是date, date time, char,或者是boolean等。
 
 
-{% codeblock models.py lang:python %}
-
+```python
 from django.db import models
 
 class Observations(models.Model):
@@ -565,8 +560,7 @@ class Observations(models.Model):
     verbose_name='Priority', help_text='Observation priority.',
     default='N'
     )
-
-{% endcodeblock %}
+```
 
 ## Deployment
 
@@ -681,7 +675,7 @@ Creating deployment_web_1 ... done
 我們要把Postgres加入到我們的service裡頭，所以我們要對剛寫好的docker-compose.yml進行修改。
 這裡面的volume會指出可以被不同container共享的位址。
 
-```
+```yaml
 # Deprecated. only informative now.
 version: '3.8'
 
@@ -713,8 +707,7 @@ volumes:
 這邊我們開始將參數輸入至環境變數中，而不直接存放在code裡面，再藉由os.environ.get去存取環境變數，第二個參數是存取不到時的預設值。
 這裡記得要`import os`在最前面。))像我就忘記，dockerize之後才又要重跑😝
 
-{% codeblock Settings.py lang:python %}
-
+```Python
 # Before
 
 DATABASES = {
@@ -726,7 +719,6 @@ DATABASES = {
 
 
 # After
-```Python
 DATABASES = {
     "default": {
         "ENGINE": os.environ.get("SQL_ENGINE", "django.db.backends.sqlite3"),
@@ -743,8 +735,8 @@ DATABASES = {
 #### Update Dockerfile
 
 這邊我們將很多東西存進環境變數裡，但我們可不想要每次都要export這些變數，在Dockerfile裡面我們可以藉由`ENV`去設定環境變數。
-{% codeblock Docker ENVs lang:docker %}
 
+```Dockerfile
 # set environment variables
 ENV SQL_ENGINE=django.db.backends.postgresql
 ENV SQL_DATABASE=deployment_db
@@ -752,19 +744,17 @@ ENV SQL_USER=tyler
 ENV SQL_PASSWORD=password
 ENV SQL_HOST=db
 ENV SQL_PORT=5432
-
-{% endcodeblock %}
+```
 
 接著將python與postgresql溝通的套件:`psycopg2-binary==2.9.1`給加入我們`requirements.txt`中。
 並且安裝相關的dependencies.
-{% codeblock install dependencies lang:docker %}
 
+```Dockerfile
 ## install psycopg2 dependencies
 RUN apt-get -y update
 RUN apt-get -y upgrade
 RUN apt-get install postgresql postgresql-contrib libpq-dev nginx supervisor vim -y
-
-{% endcodeblock %}
+```
 
 ----
 
@@ -779,7 +769,7 @@ RUN apt-get install postgresql postgresql-contrib libpq-dev nginx supervisor vim
 依然先不做down的動作，我們`docker-compose exec db psql --username=tyler --dbname=deployment_db`來測試是否可以進入postgresql的database裡頭。
 
 
-```
+```Bash
 docker-compose exec db psql --username=tyler --dbname=deployment_db
 psql (14.5 (Debian 14.5-1.pgdg110+1))
 Type "help" for help.
@@ -849,7 +839,7 @@ deployment_db=# \q
 
 我們將這個service加入到我們的compose，並將web service的ports更改為expose.
 
-{% codeblock DockerCompose lang:docker %}
+```yaml
   web:
     # build should point to a directory containing the Dockerfile
     build: ./
@@ -860,17 +850,16 @@ deployment_db=# \q
       - 8000
     depends_on:
       - db
-{% endcodeblock %}
+```
 
-{% codeblock Nginx conf lang:nginxconf %}
+```yaml
 nginx:
   build: ./nginx
   ports:
     - 1337:80
   depends_on:
     - web
-{% endcodeblock %}
-
+```
 #### conf files
 
 當我們加進nginx卻沒有設定檔怎麼行呢，我們在底下建立一個nginx資料夾，並在裡頭新增Dockerfile以及nginx.conf
@@ -878,18 +867,16 @@ nginx:
 
 ##### Dockerfile
 
-{% codeblock Docker Nginx lang:docker %}
-
+```yaml
 FROM nginx:1.23
 
 RUN rm /etc/nginx/conf.d/default.conf
 COPY nginx.conf /etc/nginx/conf.d
-
-{% endcodeblock %}
+```
 
 ##### nginx.conf
 
-{% codeblock Nginx conf lang:nginxconf %}
+```yaml
 upstream deployment {
     server web:8000;
 }
@@ -906,7 +893,7 @@ server {
     }
 
 }
-{% endcodeblock %}
+```
 
 ----
 
@@ -926,8 +913,7 @@ server {
 
 這時後伺服器會呈現找不到reponse資料，在我們收集之前，我們將共用資料夾先寫入docker-compose裡。
 
-{% codeblock Dockerfile lang:docker %}
-
+```yaml
 # Deprecated. only informative now.
 version: '3.8'
 
@@ -961,11 +947,11 @@ services:
 volumes:
   postgres_data:
   static_volume:
-{% endcodeblock %}
+```
 
 我們新增了static_volume在web以及nginx裡面，確保靜態物件可以被share使用。
 接著我們建立資料夾存放，在Dockerfile我們加入底下這段並在nginx.conf新增路徑
-```
+```Dockerfile
 # create the appropriate directories
 ENV HOME=/home/app
 ENV APP_HOME=/home/app/web
@@ -974,7 +960,7 @@ RUN mkdir $APP_HOME/staticfiles
 WORKDIR $APP_HOME
 ```
 
-```
+```yaml
 upstream deployment {
     server web:8000;
 }

@@ -18,7 +18,7 @@ export function InlineCode({ children }: { children: React.ReactNode }) {
   };
 
   return (
-    <span className="inline-flex items-center rounded bg-muted px-2 py-1 text-sm font-mono text-muted-foreground">
+    <span className="inline-flex items-center rounded bg-muted mx-2 px-2 py-1 text-sm font-mono text-muted-foreground">
       {" "}
       {children}{" "}
       <Button

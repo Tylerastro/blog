@@ -53,7 +53,7 @@ export default async function LocaleLayout(props: {
       >
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
+          defaultTheme="dark"
           enableSystem
           disableTransitionOnChange
         >

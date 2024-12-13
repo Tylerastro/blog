@@ -7,6 +7,7 @@ import { Check, Copy } from "lucide-react";
 require("prismjs/components/prism-python");
 require("prismjs/components/prism-bash");
 require("prismjs/components/prism-css");
+require("prismjs/components/prism-docker");
 
 interface CodeBlockProps {
   code: string;
