@@ -2,6 +2,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import matter from "gray-matter";
+import Title from "@/components/posts/Title";
 
 async function getPostContent(slug: string) {
   try {
@@ -47,5 +48,15 @@ export default async function PostPage({
     options: { parseFrontmatter: true },
   });
 
-  return <>{content}</>;
+  const title = markdown.data.title;
+  const date = markdown.data.date;
+  const tags = markdown.data.tags;
+  const readingTime = Math.ceil(markdown.content.split(/\s+/).length / 200); // Assuming 200 words per minute
+
+  return (
+    <main className="max-w-4xl mx-auto px-12 py-12  ">
+      <Title title={title} date={date} tags={tags} readingTime={readingTime} />
+      {content}
+    </main>
+  );
 }

@@ -13,6 +13,7 @@ const config: Config = {
       fontFamily: {
         robotoMono: ["var(--font-roboto-mono)"],
         local_edu_vic_wa_nt_beginner: ["var(--font-edu-vic-wa-nt-beginner)"],
+        cabin: ["var(--font-cabin)"],
       },
       colors: {
         background: "hsl(var(--background))",
@@ -89,20 +90,20 @@ const config: Config = {
           },
         },
         "card-reflection": {
-          "0%": { 
+          "0%": {
             left: "-20%",
-            opacity: "0"
+            opacity: "0",
           },
           "10%": {
-            opacity: "0.4"
+            opacity: "0.4",
           },
           "90%": {
-            opacity: "0.4"
+            opacity: "0.4",
           },
-          "100%": { 
+          "100%": {
             left: "120%",
-            opacity: "0"
-          }
+            opacity: "0",
+          },
         },
       },
       animation: {

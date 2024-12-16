@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-
+import { Cabin } from "next/font/google";
 import { unstable_setRequestLocale } from "next-intl/server";
 import { NextIntlClientProvider } from "next-intl";
 import { cn } from "@/lib/utils";
@@ -12,9 +12,11 @@ import Header from "@/components/ui/header";
 import { routing } from "@/i18n/routing";
 import { Roboto_Mono } from "next/font/google";
 import Footer from "@/components/ui/footer";
+
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
+
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
   display: "swap",
@@ -25,6 +27,13 @@ const local_edu_vic_wa_nt_beginner = localFont({
   weight: "200",
   variable: "--font-edu-vic-wa-nt-beginner",
 });
+const cabin = Cabin({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-cabin",
+  weight: "500",
+});
+
 export const metadata: Metadata = {
   title: "Blog",
   description: "",
@@ -46,9 +55,11 @@ export default async function LocaleLayout(props: {
     <html lang={locale}>
       <body
         className={cn(
-          "antialiased bg-gradient-to-b from-background to-secondary",
+          "antialiased bg-background ",
+          "font-cabin",
           roboto_mono.variable,
-          local_edu_vic_wa_nt_beginner.variable
+          local_edu_vic_wa_nt_beginner.variable,
+          cabin.variable
         )}
       >
         <ThemeProvider
