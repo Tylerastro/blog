@@ -53,9 +53,9 @@ body {
     --primary-foreground: 0 0% 9%;
     --secondary: 0 0% 14.9%;
     --secondary-foreground: 0 0% 98%;
-    --muted: 0 0% 14.9%;
+    --muted: 72 4% 73%;
     --muted-foreground: 0 0% 63.9%;
-    --accent: 0 0% 14.9%;
+    --accent: 175 94% 50%;
     --accent-foreground: 0 0% 98%;
     --destructive: 0 62.8% 30.6%;
     --destructive-foreground: 0 0% 98%;
@@ -110,64 +110,4 @@ body {
   /* IE 10 and IE 11 */
   user-select: none;
   /* Standard syntax */
-}
-
-blockquote {
-  background-color: #f9f9f9;
-  border-left: 5px solid #ccc;
-  margin: 1.5em 10px;
-  padding: 0.5em 10px;
-  quotes: "\201C""\201D""\2018""\2019";
-  font-style: italic;
-  color: #555;
-  -webkit-user-select: none;
-  /* Safari */
-  -ms-user-select: none;
-  /* IE 10 and IE 11 */
-  user-select: none;
-  /* Standard syntax */
-}
-
-blockquote:before {
-  color: #ccc;
-  content: open-quote;
-  font-size: 4em;
-  line-height: 0.1em;
-  margin-right: 0.25em;
-  vertical-align: -0.4em;
-}
-
-blockquote p {
-  display: inline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  blockquote {
-    margin: 1em 0;
-    padding: 0.5em 5px;
-  }
-}
-
-/* Alternative style with a different color scheme */
-.blockquote-alt {
-  background-color: #e6f3ff;
-  border-left: 5px solid #3498db;
-  color: #2c3e50;
-}
-
-.blockquote-alt:before {
-  color: #3498db;
-}
-
-.article {
-  padding-bottom: 1.2rem;
-  border-bottom: 2px solid #474442;
-  margin-bottom: 2rem;
-}
-
-.article-glow {
-  -webkit-box-shadow: 0px 0px 168px 26px rgba(46, 46, 255, 0.11);
-  -moz-box-shadow: 0px 0px 168px 26px rgba(46, 46, 255, 0.11);
-  box-shadow: 0px 0px 168px 26px rgba(46, 46, 255, 0.11);
 }

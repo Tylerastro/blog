@@ -18,11 +18,21 @@ export default function BlogPostsList({ locale }: BlogPostsListProps) {
   }
 
   return (
-    <section className="container mx-auto px-4 py-10 md:py-12 lg:py-16">
-      <h1 className="mb-8 text-center text-4xl font-bold">{t("title")}</h1>
-      <div className="max-w-5xl mx-auto">
-        <Timeline posts={posts} />
-      </div>
-    </section>
+    <main className="grid grid-cols-5 ">
+      <section className="px-4 py-10 md:py-12 lg:py-16 col-span-3">
+        <h1 className="mb-8 text-center text-4xl font-bold">{t("title")}</h1>
+        <div className="flex flex-col gap-8 items-center justify-center">
+          <Timeline posts={posts} />
+        </div>
+      </section>
+      <section className="sticky top-32 md:block px-4 py-10 md:py-12 lg:py-16 col-span-2">
+        <h1 className="mb-8 text-center text-4xl font-bold">
+          {t("Categories")}
+        </h1>
+        <div className="flex flex-col gap-8 items-center justify-center"></div>
+        <h1 className="mb-8 text-center text-4xl font-bold">{t("Tags")}</h1>
+        <div></div>
+      </section>
+    </main>
   );
 }

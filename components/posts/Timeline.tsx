@@ -96,7 +96,7 @@ const Timeline = ({ posts }: TimelineProps) => {
   }, [loadedYears]);
 
   return (
-    <div className="relative right-1/2 w-full" ref={timelineRef}>
+    <div className="relative right-[15%] w-full" ref={timelineRef}>
       <div className="absolute left-1/2 h-full w-px bg-gray-200 dark:bg-gray-700" />
 
       {loadedYears.map((year) => (
