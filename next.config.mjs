@@ -11,7 +11,10 @@ const nextConfig = {
   }
    
   const withMDX = createMDX({
-    // Add markdown plugins here, as desired
-  })
+    rehypePlugins: [
+    ],
+  }
+)
+
  
 export default withNextIntl(withMDX(nextConfig));

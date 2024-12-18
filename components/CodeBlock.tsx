@@ -1,61 +1,58 @@
 "use client";
-
 import React, { useState } from "react";
-import { Highlight, themes, Prism } from "prism-react-renderer";
-import { Check, Copy } from "lucide-react";
-(typeof global !== "undefined" ? global : window).Prism = Prism;
-require("prismjs/components/prism-python");
-require("prismjs/components/prism-bash");
-require("prismjs/components/prism-css");
-require("prismjs/components/prism-docker");
 
 interface CodeBlockProps {
-  code: string;
-  language: string;
+  children: React.ReactNode;
+  className?: string;
+  "data-copyable"?: boolean;
+  [key: string]: any;
 }
 
-export function CodeBlock({ code, language }: CodeBlockProps) {
+const CodeBlock = ({
+  children,
+  className,
+  "data-copyable": copyable,
+  ...props
+}: CodeBlockProps) => {
   const [copied, setCopied] = useState(false);
+  console.log(copyable);
 
-  const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(code);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleCopy = () => {
+    if (copyable && typeof children === "string") {
+      const textToCopy = children.replace(/\{copy:(true|false)\}/g, "").trim();
+      navigator.clipboard.writeText(textToCopy);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    }
   };
 
   return (
-    <div className="relative">
-      <Highlight
-        theme={themes.gruvboxMaterialDark}
-        code={code}
-        language={language}
+    <div className="relative inline-block">
+      <code
+        {...props}
+        className={`${className || ""} ${copyable ? "cursor-pointer" : ""}`}
+        onClick={handleCopy}
       >
-        {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre
-            className={`${className} p-4 rounded-lg overflow-auto`}
-            style={style}
-          >
-            {tokens.map((line, i) => (
-              <div key={i} {...getLineProps({ line })}>
-                {line.map((token, key) => (
-                  <span key={key} {...getTokenProps({ token })} />
-                ))}
-              </div>
-            ))}
-          </pre>
-        )}
-      </Highlight>
-      <button
-        onClick={copyToClipboard}
-        className="absolute top-2 right-2 p-2 rounded-md bg-gray-800 text-gray-300 hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-600"
-        aria-label="Copy code to clipboard"
-      >
-        {copied ? (
-          <Check className="w-5 h-5 text-green-500" />
-        ) : (
-          <Copy className="w-5 h-5" />
-        )}
-      </button>
+        {/* Remove the {copy:true} from display if it exists */}
+        {typeof children === "string"
+          ? children.replace(/\{copy:(true|false)\}/g, "").trim()
+          : children}
+      </code>
+      {copyable && copied && (
+        <span className="absolute -top-6 left-0 bg-green-500 text-white text-xs px-2 py-1 rounded">
+          Copied!
+        </span>
+      )}
+      {copyable && (
+        <button
+          onClick={handleCopy}
+          className="absolute -top-6 right-0 bg-gray-200 text-xs px-2 py-1 rounded hover:bg-gray-300"
+        >
+          Copy
+        </button>
+      )}
     </div>
   );
-}
+};
+
+export default CodeBlock;

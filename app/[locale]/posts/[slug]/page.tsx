@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import fs from "fs";
 import matter from "gray-matter";
 import Title from "@/components/posts/Title";
+import CodeBlock from "@/components/CodeBlock";
 
 async function getPostContent(slug: string) {
   try {
@@ -52,14 +53,7 @@ function CustomP({
   children,
   ...props
 }: React.HTMLAttributes<HTMLHeadingElement>) {
-  return (
-    <p
-      id={`${children?.toString().toLowerCase().replace(/\s+/g, "-")}`}
-      className="my-4 text-lg"
-    >
-      {children}
-    </p>
-  );
+  return <p className="my-4 text-lg">{children}</p>;
 }
 
 function CustomA({
@@ -113,14 +107,28 @@ function CustomBlockQuote({
   ...props
 }: React.HTMLAttributes<HTMLQuoteElement>) {
   return (
-    <blockquote
-      id={`${children?.toString().toLowerCase().replace(/\s+/g, "-")}`}
-      className="relative pl-8 pr-4 py-4 my-8 border-l-4 border-gray-300"
-    >
-      <div className="relative z-10 text-lg text-gray-400 italic">
-        {children}
-      </div>
+    <blockquote className="relative pl-8 pr-4  my-8 border-l-4 border-gray-300">
+      <div className="relative z-10 text-lg text-gray-400 ">{children}</div>
     </blockquote>
+  );
+}
+
+function CustomCodeBlock({
+  children,
+  "data-copyable": copyable,
+  ...props
+}: React.HTMLAttributes<HTMLDivElement> & { "data-copyable"?: boolean }) {
+  console.log(children);
+  console.log(copyable);
+  return (
+    <div {...props}>
+      <CodeBlock
+        className="relative px-3 py-1 text-sm font-semibold text-gray-400 rounded-lg bg-gray-900"
+        data-copyable={copyable}
+      >
+        {children}
+      </CodeBlock>
+    </div>
   );
 }
 
@@ -131,6 +139,7 @@ const overrideComponents = {
   li: CustomLi,
   p: CustomP,
   blockquote: CustomBlockQuote,
+  // code: CustomCodeBlock,
 };
 
 export default async function PostPage({
