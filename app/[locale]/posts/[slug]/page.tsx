@@ -2,6 +2,7 @@ import { compileMDX } from "next-mdx-remote/rsc";
 import { notFound } from "next/navigation";
 import fs from "fs";
 import matter from "gray-matter";
+import Code from "@/components/posts/Code";
 import Title from "@/components/posts/Title";
 import CodeBlock from "@/components/CodeBlock";
 
@@ -31,6 +32,13 @@ function CustomH2({
       <span className="block mt-2 h-1 w-full bg-gray-400"></span>
     </h2>
   );
+}
+
+function CustomCode({
+  children,
+  ...props
+}: React.HTMLAttributes<HTMLHeadingElement>) {
+  return <Code {...props}>{children}</Code>;
 }
 
 function CustomH3({
@@ -115,20 +123,15 @@ function CustomBlockQuote({
 
 function CustomCodeBlock({
   children,
-  "data-copyable": copyable,
   ...props
-}: React.HTMLAttributes<HTMLDivElement> & { "data-copyable"?: boolean }) {
-  console.log(children);
-  console.log(copyable);
+}: React.HTMLAttributes<HTMLPreElement>) {
+  console.log("CodeBlock props:", props);
   return (
-    <div {...props}>
-      <CodeBlock
-        className="relative px-3 py-1 text-sm font-semibold text-gray-400 rounded-lg bg-gray-900"
-        data-copyable={copyable}
-      >
+    <pre {...props}>
+      <CodeBlock className="relative px-3 py-1 text-sm font-semibold text-gray-400 rounded-lg bg-gray-900">
         {children}
       </CodeBlock>
-    </div>
+    </pre>
   );
 }
 
@@ -138,15 +141,15 @@ const overrideComponents = {
   a: CustomA,
   li: CustomLi,
   p: CustomP,
+  // code: CustomCode,
   blockquote: CustomBlockQuote,
   // code: CustomCodeBlock,
 };
 
-export default async function PostPage({
-  params,
-}: {
-  params: { slug: string };
+export default async function PostPage(props: {
+  params: Promise<{ slug: string }>;
 }) {
+  const params = await props.params;
   const markdown = await getPostContent(params.slug);
 
   if (!markdown) {

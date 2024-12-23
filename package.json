@@ -41,6 +41,10 @@
     "react-markdown": "^9.0.1",
     "react-syntax-highlighter": "^15.6.1",
     "react-typed": "^2.0.12",
+    "rehype-mathjax": "^6.0.0",
+    "rehype-mdx-code-props": "^3.0.1",
+    "rehype-starry-night": "^2.2.0",
+    "remark-math": "^6.0.0",
     "tailwind-merge": "^2.5.3",
     "tailwindcss-animate": "^1.0.7",
     "zod": "^3.23.8"
