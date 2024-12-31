@@ -1,14 +1,13 @@
-import { unstable_setRequestLocale } from "next-intl/server";
 import Intro from "./intro";
 import DropMeMessage from "@/components/ui/DropMeMessage";
-import ProjectCard from "@/components/ProjectCard";
 import Projects from "./projects";
 
-export default async function Home(props: {
-  params: Promise<{ locale: string }>;
+export default async function Home({
+  params,
+}: {
+  params: Promise<{ lang: string }>;
 }) {
-  const params = await props.params;
-  unstable_setRequestLocale(params.locale);
+  const lang = (await params).lang;
   return (
     <main className="flex-1">
       <Intro />

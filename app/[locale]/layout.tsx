@@ -9,13 +9,8 @@ import { getMessages } from "next-intl/server";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/ui/header";
-import { routing } from "@/i18n/routing";
 import { Roboto_Mono } from "next/font/google";
 import Footer from "@/components/ui/footer";
-
-export function generateStaticParams() {
-  return routing.locales.map((locale) => ({ locale }));
-}
 
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
@@ -50,7 +45,6 @@ export default async function LocaleLayout(props: {
   const { children } = props;
 
   unstable_setRequestLocale(locale);
-  const messages = await getMessages();
   return (
     <html lang={locale}>
       <body
@@ -68,12 +62,10 @@ export default async function LocaleLayout(props: {
           enableSystem
           disableTransitionOnChange
         >
-          <NextIntlClientProvider messages={messages}>
-            <Header />
-            <Toaster />
-            <div className="animate-page-transition">{children}</div>
-            <Footer />
-          </NextIntlClientProvider>
+          <Header />
+          <Toaster />
+          <div className="animate-page-transition">{children}</div>
+          <Footer />
         </ThemeProvider>
       </body>
     </html>

@@ -1,7 +1,6 @@
 import ScrollProgressBar from "@/components/ProgressBar";
 import type { Metadata } from "next";
 import { TableOfContents } from "@/components/posts/TableOfContents";
-import { unstable_setRequestLocale } from "next-intl/server";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -18,7 +17,6 @@ export default async function LocaleLayout(props: {
 
   const { children } = props;
 
-  unstable_setRequestLocale(locale);
   return (
     <>
       <TableOfContents />

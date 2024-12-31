@@ -4,7 +4,6 @@ import Link from "next/link";
 import { Menu } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
-import LocaleSwitcher from "../LocaleSwitcher";
 import { AnimatedButton } from "./AnimatedButton";
 
 const pages = [
@@ -58,7 +57,6 @@ export default function Header() {
           </nav>
         </div>
         <div className="flex items-center space-x-4">
-          <LocaleSwitcher />
           <ModeToggle />
         </div>
       </div>
