@@ -46,7 +46,7 @@ export default async function LocaleLayout(props: {
 
   unstable_setRequestLocale(locale);
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body
         className={cn(
           "antialiased bg-background ",

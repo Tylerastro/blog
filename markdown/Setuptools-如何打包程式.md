@@ -5,6 +5,7 @@ tags:
 categories:
   - Notes
 date: 2021-07-31 16:33:19
+preview: 為了讓後面流程順暢，我們先把需要的套件先安裝好，並且在[PYPI](https://pypi.org)以及[TestPYPI](https://test.pypi.org)申請帳號，等等上傳package到兩個網站上面
 ---
 
 

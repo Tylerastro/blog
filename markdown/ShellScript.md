@@ -26,14 +26,14 @@ date: 2022-07-11 14:12:19
 另一個例子像是Hexo在搭建部落格時，有時候我會先用`hexo server --draft`來查看剛寫好的文章排版，但要先執行clean以及generate的動作，前後雖然只有3個指令，但有時校稿n次，那麼我就要執行n*3次的指令輸入。
 因此簡化的方式就是寫一個bash，讓我開啟本端伺服器時不需要輸入那麼多指令並且等待。
 
-{% codeblock Hexo Server lang:bash %}
+```bash
 #!/bin/sh
 echo "Opening server" 
 hexo clean
 hexo g
 hexo server --draft
+```
 
-{% endcodeblock %}
 
 
 # Basics
@@ -217,19 +217,17 @@ Implicitly則是用數字來表示權限等級，並且依照ugo的順序。
 
 ### if
 
-{% codeblock if lang:bash %}
-
+```bash
 if [condition]
 then
   action
 else
   action
 fi
+```
 
-{% endcodeblock %}
 
-{% codeblock elif lang:bash %}
-
+```bash
 if [condition]
 then
   action
@@ -239,14 +237,11 @@ then
 else
   action
 fi
-
-{% endcodeblock %}
-
+```
 
 ### case
 
-{% codeblock case lang:bash %}
-
+```bash
 read -p "Are you 21 or over? Y/N " ANSWER
 case "$ANSWER" in 
   [yY] | [yY][eE][sS])
@@ -259,16 +254,13 @@ case "$ANSWER" in
     echo "Please enter y/yes or n/no"
     ;;
 esac
-
-{% endcodeblock %}
-
+```
 
 
 ### for loop
 
 
-{% codeblock Rename files lang:bash %}
-
+```bash
 FILES=$(ls *.txt)
 NEW="new"
 for FILE in $FILES  
@@ -276,34 +268,26 @@ for FILE in $FILES
     echo "Renaming $FILE to new-$FILE"
     mv $FILE $NEW-$FILE
 done
-
-{% endcodeblock %}
+```
 
 ### while loop
 
-{% codeblock while loop lang:bash %}
-
+```bash
 LINE=1
 while read -r CURRENT_LINE
   do
     echo "$LINE: $CURRENT_LINE"
     ((LINE++))
 done < "./new-1.txt"
-
-{% endcodeblock %}
+```
 
 ### function
 
-
-
-{% codeblock function lang:bash %}
-
+```bash
 function greet() {
   echo "Hello, I am $1 and I am $2"
 }
-
-{% endcodeblock %}
-
+```
 
 
 ## Control operators
@@ -327,9 +311,6 @@ function greet() {
 
 這小短篇算是把常用實用的指令給涵括，還有很多指令沒提到，但我想這些指令大概夠我碩士畢業了😂
 在shell script上也許會有另一篇advance的筆記)？
-
-
-
 
 # References
 

@@ -5,6 +5,7 @@ tags:
 categories:
   - Notes
 date: 2023-09-30 10:25:15
+preview: 一個月前拿到後端工程師的職位，在準備Canonical的時候得知了Hacktoberfest，於是今年想要也參加這項活動! If you're seeking for an English version, here is the article on [Medium](https://tylerastro.medium.com/hacktoberfest-2023-from-a-junior-engineer-perspective-f3798ef72eb0)
 ---
 
 

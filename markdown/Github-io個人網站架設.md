@@ -4,6 +4,7 @@ categories:
 - Notes
 tags: Hexo
 date: 2021-07-27 15:23:19
+preview: 一切的啟發源自看到[白噪音](https://wn86.github.io/2021/01/04/test/#more)的Blog架設，雖然她沒有往後更新，不過持續在[Twitch](https://www.twitch.tv/cantbackdown86)開台，是個蠻有趣的人。之後也嘗試在Medium寫文章，但是Medium推廣Membership的制度，讓我很不開心，我寫文章大都是為了筆記或者分享，而不是要盈利，付費文章我很認同，但是Medium上很常點閱到標題寫的很好，但是內容乏善可陳，然後還要扣我free member-only stories。
 ---
 
 

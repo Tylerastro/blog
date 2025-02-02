@@ -5,6 +5,7 @@ tags:
   - Python
 categories:
   - 27 Master Journey
+preview: 這是一系列關於我拿到天文碩士學位，我一路所學到的技能，以及我認為必須延伸的技能組的文章，技能主線會保留在Medium上，以中英文方式呈現，而技能支線，會以中文形式在GitHub.io，也就是這裡發表。
 ---
 
 
@@ -23,11 +24,10 @@ categories:
 
 ### abs()
 
-Short for absolute. 絕對值<br>
+Short for absolute. 絕對值<br/>
 回傳數值的絕對值，如果輸入為複數，則回傳magnitude.
 
-{% codeblock abs() lang:python %}
-
+```python
 >>> abs(-2)
 2
 >>> abs(0.3)
@@ -38,9 +38,8 @@ Short for absolute. 絕對值<br>
 12.0
 >>> abs(-12.000)
 12.0
+```
 
-
-{% endcodeblock %}
 
 
 <!--more-->
@@ -50,7 +49,7 @@ Short for absolute. 絕對值<br>
 From documentation:
 Return True if all elements of the iterable are true (or if the iterable is empty)
 
-```
+```python
 def all(iterable):
     for element in iterable:
         if not element:
@@ -61,8 +60,7 @@ def all(iterable):
 從官方解釋其實很好理解了，只要你的list裡面或是可迭代的物件裡面，**全部**不為空值，則回傳True。
 我們可以藉由一些例子來更好理解，也可以判別None,np.nan這些物件會被判別成怎樣
 
-{% codeblock all() lang:python %}
-
+```python
 import numpy as np
 
 print(all([]))
@@ -76,8 +74,7 @@ True
 False
 True
 False
-
-{% endcodeblock %}
+```
 
 
 ### any()
@@ -85,7 +82,7 @@ False
 any是跟all 相反的一種模式，只要迭代物件裡面任一是有值，就會回傳True
 
 From documentation:
-```
+```python
 def any(iterable):
     for element in iterable:
         if element:
@@ -93,8 +90,7 @@ def any(iterable):
     return False
 ```
 
-{% codeblock any() lang:python %}
-
+```python
 import numpy as np
 
 print(all([]))
@@ -108,7 +104,7 @@ True
 True
 True
 False
-{% endcodeblock %}
+```
 
 ## B*
 
@@ -116,15 +112,14 @@ False
 
 回傳boolean ,布林值， True or False，與any(),all()類似。
 
-{% codeblock bool() lang:python %}
-
+```python
 print(bool(1))
 print(bool(0))
 
 True
 False
+```
 
-{% endcodeblock %}
 
 
 ### breakpoint()
@@ -134,7 +129,7 @@ False
 
 breakpoint()可以想像是一個暫停點，程式會在breakpoint處停下來，你可以檢視目前的變數值等等。
 舉個例子，這以下的迴圈當中，i的值也許很好判斷，那j的值已經跑到哪裡了，也許是我們有興趣的
-```
+```python
 for i  in range(10):
     i = 0
     for j in range(10):
@@ -142,8 +137,7 @@ for i  in range(10):
 ```
 
 
-{% codeblock breakpoint() lang:python %}
-
+```python
 for i  in range(10):
     i = 0
 	breakpoint()
@@ -170,8 +164,8 @@ for i  in range(10):
 (Pdb) print(j)
 9
 (Pdb) 
+```
 
-{% endcodeblock %}
 
 
 如果有經驗，可能一眼就看出這個迴圈有問題，然而一開始沒經驗，可能會想說j怎麼沒有一直加上去，然後最後output出來就完全抓不到bug在哪裡。此時設立breakpoint，就可以知道每跑一次迴圈，數值的變化如何，那問題點會在第一個或是第二個回圈裡面。
@@ -191,7 +185,7 @@ for i  in range(10):
 在講到Class之前，我們先講到如何刪除屬性。由於Python語法是基於物件導向，任何東西都是視為一個物件在處理，類別(Class)也不例外，所以類別就會有屬性(attribute)。
 舉個例子，
 一個立方體的類別我們叫做cube,那立方體有的就是三邊的邊長，我們各自叫x,y,z，我們呼叫一個a為一個立方體，那他有三個屬性就分別是x,y,z，我們可以透過a.x, a.y, a.z來檢視a的屬性。當要刪除x的屬性時，可以使用delattr()。
-{% codeblock delattr() lang:python %}
+```python
 class  cube():
     def __init__(self,x,y,z) -> None:
         self.x = x 
@@ -221,8 +215,8 @@ print(a.volume())
 # Python 會告訴我們立方體a並沒有x的屬性
 print(a.x, a.y, a.z)
 AttributeError: 'cube' object has no attribute 'x'
+```
 
-{% endcodeblock %}
 
 > `delattr(a,'x')` 也等同於 `del a.x`
 
@@ -231,14 +225,14 @@ AttributeError: 'cube' object has no attribute 'x'
 dict 為字典類別，用法類似於list(), set()，會創造出一個字典物件。
 根據官方文件指出，底下6種方式皆可以創造出`{"one": 1, "two": 2, "three": 3}`。
 
-{% codeblock dict() lang:python %}
+```python
 a = dict(one=1, two=2, three=3)
 b = {'one': 1, 'two': 2, 'three': 3}
 c = dict(zip(['one', 'two', 'three'], [1, 2, 3]))
 d = dict([('two', 2), ('one', 1), ('three', 3)])
 e = dict({'three': 3, 'one': 1, 'two': 2})
 f = dict({'one': 1, 'three': 3}, two=2) 
-{% endcodeblock %}
+```
 
 從其中幾種方式不難看出，在創建字典物件時，內建的`dict()`並不是必須，單純的使用`{}` 就可以創立字典物件。但在多個list物件時，或是要用zip將list合併成字典時，`dict()`會是更好用的選擇。
 
@@ -250,7 +244,7 @@ f = dict({'one': 1, 'three': 3}, two=2)
 簡單的不同範例應該可以更好理解，在沒有給參數的python檔案裡面，我們直接print(dir())，會得到一串變數名稱，如果針對個別變數去看他的值，不能看出這是在跑檔案時他本身的資訊。
 > 這邊特別去print __name__這個變數，這個變數會在很多Python裡面看到，以`if __name__ == __main__`的形式。
 
-{% codeblock dir() lang:python %}
+```python
 print(dir())
 
 >>> ['__annotations__', '__builtins__', '__doc__', '__loader__', '__name__', '__package__', '__spec__']
@@ -258,8 +252,8 @@ print(dir())
 print(__name__)
 
 >>> __main__
+```
 
-{% endcodeblock %}
 
 
 ### divmod()
@@ -267,17 +261,16 @@ print(__name__)
 處理division除法的函式，可搭配下方語法糖做合併閱讀。
 divmod()會回傳quotient, remainder，而語法糖都只回傳數值。
 
-{% codeblock dir() lang:python %}
-
+```python
 print(divmod(1,2))            ---> (0, 1)
 print(divmod(4,2))				---> (2, 0)
 print(divmod(4,3))				---> (1, 1)
 print(divmod(12.5,2))			---> (6.0, 0.5)
 print(divmod(12.5,1.5))			---> (8.0, 0.5)
 print(divmod(125.543,10.2))   ---> (12.0, 3.143000000000015)
-{% endcodeblock %}
+```
 
-{% codeblock Sugansyntax lang:python %}
+```python
 import math
 
 print(5/2)				--> 2.5
@@ -287,8 +280,8 @@ print(math.floor(5/2)) --> 2
 print(-2/3)				--> -0.6666666666666666
 print(-2//3)				--> -1
 print(-2%3)				--> 1
+```
 
-{% endcodeblock %}
 
 ## F*
 
@@ -296,7 +289,7 @@ print(-2%3)				--> 1
 
 filter()顧名思義會做濾除的動作，依照判斷式來回傳一個iterator。
 
-{% codeblock filter() lang:python %}
+```python
 a = [1,2,3,4,5,6,7,8]
 
 filted = filter(lambda x: x<5 ,a)
@@ -309,7 +302,7 @@ for i in filted:
 2
 3
 4
-{% endcodeblock %}
+```
 
 ## I*
 
@@ -318,12 +311,11 @@ for i in filted:
 當我們需要使用者輸入參數時，input可以擷取使用者在Terminal裡輸入的內容。
 這是非常常使用的函數，畢竟我們不想要隨時hard coding我們的程式，每次都要進入程式碼修改參數。
 
-{% codeblock input() lang:python %}
-
+```python
 name = input("What's you name? ")
 print(f"Hello {name}")
+```
 
-{% endcodeblock %}
 
 
 ### int()
@@ -337,8 +329,7 @@ print(f"Hello {name}")
 Len為length縮寫，回傳物件的長度。
 物件可以是一個list, tuple, string 或是dictionary.
 
-{% codeblock len() lang:python %}
-
+```python
 dictionary = {"a": "Anal","b":"Breast","c":"Cunt","d":"Dick"}
 country = ['Chicago','Edinburgh','Yourkshire']
 ages = (12,14,20)
@@ -350,8 +341,7 @@ length of country: {len(country)}
 length of ages: {len(ages)}
 length of name: {len(name)}
 """)
-
-{% endcodeblock %}
+```
 
 
 ### list()
@@ -359,7 +349,7 @@ length of name: {len(name)}
 List的功用很廣，這邊舉幾個例子，主要是可以把一些可迭代物件轉換成list的形式。
 
 以上一個例子來說
-```
+```python
 dictionary = {"a": "Anal","b":"Breast","c":"Cunt","d":"Dick"}
 country = ['Chicago','Edinburgh','Yorkshire']
 ages = (12,14,20)
@@ -389,7 +379,7 @@ Map就我經驗來說，他是非常好用，但不常用，屬於比較進階�
 
 以一個例子來說，對於一個list如果需要取整數，勢必要用int取整數值，此時我們可以藉由map將大量數值一併作轉換。
 但要注意的是map回傳的並不是list而是迭代器，所以再用list轉換。
-```
+```python
 print(list(map(int,[1.23,2.24,3.96,4.4,5.95387])))
 >>> [1, 2, 3, 4, 5]
 ```
@@ -398,7 +388,7 @@ print(list(map(int,[1.23,2.24,3.96,4.4,5.95387])))
 
 Maximum 顧名思義取最大值
 
-```
+```python
 max([1,2,3,4,5])
 
 >>> 5
@@ -407,7 +397,7 @@ max([1,2,3,4,5])
 ### min()
 
 Minimum 顧名思義取最小值
-```
+```python
 min([1,2,3,4,5])
 
 >>> 1
@@ -418,7 +408,7 @@ min([1,2,3,4,5])
 
 當我們處理到迭代器(iterator)時，next可以迭代到下一個值。
 
-```
+```python
 a = iter([1,2,3,4,5])
 print(a)
 
@@ -447,7 +437,7 @@ Open 是常常使用來打開檔案的方式，在參數裡面可以選擇打開
 ![Someone made this online. Please PM for credit.](rwa.png)
 
 藉由下面的範例我們可以更清楚知道使用方法，在一份sample文件裡面:
-```
+```python
 This is the first line.
 Second line is about nothing.
 Third line is the end.
@@ -458,8 +448,7 @@ Third line is the end.
 可以在範例裡面看到，讀取檔案有很多種方式，而開啟檔案的f會是一個迭代器，如果要將檔案內容取出當變數，則是要另外給`var = f.readlines()`, 那麼變數就會是 `var = ['This is the first line.\n', 'Second line is about nothing.\n', 'Third line is the end.\n']`
 
 
-{% codeblock open('r') lang:python %}
-
+```python
 with open('sample.txt','r') as f:
     # print(f.readline())
     # print(f.readlines())
@@ -472,16 +461,16 @@ with open('sample.txt','r') as f:
     # print(f)
     # print(next(f))
     # print(next(f))
+```
 
 
-{% endcodeblock %}
 
 
 當然我們有時候要寫入檔案，此時就要注意選擇的模式會將你的游標放在哪裡，如果是w，游標會在開頭，也就是會將原本內容覆寫過去，如果是a，游標則會在最末端，以添加方式寫進檔案。
 
 > 要注意的是要換行必須手動給換行符`'\n'`
 
-```
+```python
 with open('sample.txt','r') as f:
 	for line in context:
 		f.write(line)
@@ -501,7 +490,7 @@ Print或者任何印出文字的方式，在任何程式語言裡面是Debug相�
 ### range()
 
 Range是一個不變的數列，很常使用在於for loop當中，比如說我要印出1~10，我可以輕易的使用:
-```
+```python
 for i in range(1,11,1):
 	print(i)
 ```
@@ -514,7 +503,7 @@ for i in range(1,11,1):
 
 round的意思是取整數，所以是進位的意思，在第二個參數可以給要到第幾位。
 
-```
+```python
 print(round(2.4))			--> 2
 print(round(2.7))			--> 3
 print(round(1.23245,2))	--> 1.23
@@ -524,7 +513,6 @@ print(round(-2.3))		--> -2
 print(round(-2.7))		--> -3
 print(round(-2.43583,2))	--> -2.44
 print(round(-2.43583,4))	--> -2.4358
-
 ```
 
 ## S*
@@ -533,7 +521,7 @@ print(round(-2.43583,4))	--> -2.4358
 
 set是數一數二常用的函式之一，他會把一個可迭代的物件(list,tuple)，回傳一個set，而set裡面不會有重複的值。
 
-```
+```python
 a = [1,1,1,2,3,4,5,6,6,4,6,7]
 
 print(set(a))			--> {1, 2, 3, 4, 5, 6, 7}
@@ -544,7 +532,7 @@ print(list(set(a)))	--> [1, 2, 3, 4, 5, 6, 7]
 
 排序迭代物件。
 
-{% codeblock sorted() lang:python %}
+```python
 a = [1,1,1,2,3,4,5,6,6,4,6,7]
 
 print(sorted(a))
@@ -552,8 +540,7 @@ print(sorted(a,reverse=True))
 
 >>>[1, 1, 1, 2, 3, 4, 4, 5, 6, 6, 6, 7]
 >>>[7, 6, 6, 6, 5, 4, 4, 3, 2, 1, 1, 1]
-
-{% endcodeblock %}
+```
 
 
 ### str()
@@ -561,7 +548,7 @@ print(sorted(a,reverse=True))
 string()回傳字串版本的物件，這情況會使用在分析數字時，有時候以字串形式判斷或者要將字串與數字做合併。
 不過自從使用[f-string](https://tylerastro.github.io/2021/08/28/Strings/#more)之後，這方法就比較少用了。
 
-```
+```python
 print('I am '+ str(24) + ' years old')
 >>> I am 24 years old
 ```
@@ -571,7 +558,7 @@ print('I am '+ str(24) + ' years old')
 
 回傳迭代物件的總和。
 
-```
+```python
 a = [1,1,1,2,3,4,5,6,6,4,6,7]
 sum(a)
 
@@ -590,7 +577,7 @@ super是一個比較難的概念，多半不會用到，但如果你是進階的
 
 
 底下這個例子可以看看利用super承接Parent class的功能以及屬性。
-{% codeblock super() lang:python %}
+```python
 class MLB():
     def __init__(self):
         self.level = 'MLB'
@@ -612,7 +599,7 @@ class AL(MLB):
 al = AL()
 print(al.level)
 al.TeamNumber()
-{% endcodeblock %}
+```
 
 
 ## T*
@@ -634,7 +621,7 @@ type會回傳物件的類別，有時候不確定物件類別，這是好用的�
 zip也是前三常用好用的函式之一，可以將兩個迭代物件做平行合併。這樣講也許有點抽象，不過我們先看一個例子來了解一下，晚些就知道他的強大。
 
 
-{% codeblock zip() lang:python %}
+```python
 score = [89,76,83]
 name = ['John', 'Fecco', 'Ryan']
 
@@ -645,7 +632,7 @@ for i in zip(score,name):
 >>>(89, 'John')
 (76, 'Fecco')
 (83, 'Ryan')
-{% endcodeblock %}
+```
 
 
 

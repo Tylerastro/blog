@@ -19,9 +19,11 @@ export default async function LocaleLayout(props: {
 
   return (
     <>
-      <TableOfContents />
+      {/* <TableOfContents /> */}
       <ScrollProgressBar />
-      {children}
+      <main className="flex-1 mx-auto w-[90svw] sm:w-[50svw] mt-20">
+        {children}
+      </main>
     </>
   );
 }

@@ -86,8 +86,7 @@ DATE的格式為`YYYYMMDD`，再丟網址時，可以再透過`--yes-playlist`�
 
 多數情況下面這條指令可以解決，若有多個影片也只是新增文字檔案裡面而已。
 
-`yt-dlp --no-abort-on-error -f "bv*+ba/b" --batch-file url.txt --no-overwrites --write-thumbnail --write-all-thumbnailsb
-`
+`yt-dlp --no-abort-on-error -f "bv*+ba/b" --batch-file url.txt --no-overwrites --write-thumbnail --write-all-thumbnailsb`
 
 ---
 

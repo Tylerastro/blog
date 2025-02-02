@@ -1,9 +1,9 @@
-import getPostMetadata from "@/utils/getPostMetaData";
+import getPostsMetadata from "@/utils/getPostMetaData";
 import { BlogPostsListProps } from "@/types/posts";
-import Timeline from "@/components/posts/Timeline";
+import PostList from "@/components/posts/PostList";
 
 export default async function BlogPostsList({ locale }: BlogPostsListProps) {
-  const posts = getPostMetadata("markdown");
+  const posts = getPostsMetadata();
 
   if (!posts.length) {
     return (
@@ -14,18 +14,12 @@ export default async function BlogPostsList({ locale }: BlogPostsListProps) {
   }
 
   return (
-    <main className="grid grid-cols-5 ">
-      <section className="px-4 py-10 md:py-12 lg:py-16 col-span-3">
+    <main className="">
+      <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
         <h1 className="mb-8 text-center text-4xl font-bold">{"title"}</h1>
-        <div className="flex flex-col gap-8 items-center justify-center">
-          <Timeline posts={posts} />
+        <div className="flex flex-col  gap-8 items-center justify-center">
+          <PostList posts={posts} />
         </div>
-      </section>
-      <section className="sticky top-32 md:block px-4 py-10 md:py-12 lg:py-16 col-span-2">
-        <h1 className="mb-8 text-center text-4xl font-bold">{"Categories"}</h1>
-        <div className="flex flex-col gap-8 items-center justify-center"></div>
-        <h1 className="mb-8 text-center text-4xl font-bold">{"Tags"}</h1>
-        <div></div>
       </section>
     </main>
   );

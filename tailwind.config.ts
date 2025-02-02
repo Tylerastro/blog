@@ -1,4 +1,3 @@
-import { Edu_NSW_ACT_Foundation } from "next/font/google";
 import type { Config } from "tailwindcss";
 
 const config: Config = {

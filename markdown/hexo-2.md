@@ -5,6 +5,7 @@ tags:
 categories:
   - Notes
 date: 2023-04-02 18:57:27
+preview: 在上一篇[Github.io個人網站架設](https://tylerastro.github.io/2021/07/27/Github-io個人網站架設/)中提到在config裡面設定的部分，在Github對於權限更改，廢除使用username以及password的方式，而改使用token作為驗證方式。
 ---
 
 

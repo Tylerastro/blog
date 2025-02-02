@@ -5,6 +5,7 @@ tags:
   - Python
 categories:
   - 27 Master Journey
+preview: 這是這系列的第二篇文章，第一篇文章[Built-in Functions](https://tylerastro.github.io/2022/01/16/Built-inFunctions/)從Python內建函數開始。
 ---
 
 
