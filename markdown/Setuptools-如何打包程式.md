@@ -15,11 +15,11 @@ preview: 為了讓後面流程順暢，我們先把需要的套件先安裝好�
 
 
 
-{% codeblock Prerequisites lang:bash %}
+```bash
 pip install twine
 pip install --upgrade setuptools
 pip install build
-{% endcodeblock %}
+```
 
 <!--more-->
 
@@ -31,7 +31,7 @@ setup.py我們在底下給一個範本，等下會使用setuptools夠過這個se
 
 在main裡，放著就是主要package的內容，我這邊只有一個scripts.py來作為範例，而裡面的__init__.py會讓資料夾被python讀成是一個package，所以一定要產生一個__init__.py放在裡面，內容可以為空就好。
 
-{% codeblock Structure lang:bash %}
+```bash
 My project
 	|_____setup.py
 	|_____pyproject.toml
@@ -39,10 +39,10 @@ My project
 	|_____main
 		   |_____scripts.py
 		   |_____ __init__.py
-{% endcodeblock %}
+```
 
 
-{% codeblock Setup setting example lang:python %}
+```python
 from setuptools import setup
 setup(name='mypackage',
 version='0.1',
@@ -52,7 +52,7 @@ author='Tyler',
 author_email='author@email.com',
 license='MIT',
 packages=['main']) 
-{% endcodeblock %}
+```
 
 在此刻你已經可以使用`python setup.py install`來做local全域安裝，也就是在python裡，你可以隨時做import，就如同import numpy as np一樣。
 
@@ -76,7 +76,7 @@ packages=['main'])
 那我們在setup.py裡面設定如下，然後__init__.py保持空白
 
 
-{% codeblock Setupsetting lang:python %}
+```python
 from setuptools import setup
 import setuptools
 
@@ -102,7 +102,7 @@ classifiers=[							# PYPI上的分類，可以見https://pypi.org/classifiers/
 	],
 license='MIT',
 packages= setuptools.find_packages())
-{% endcodeblock %}
+```
 
 我們在terminal輸入`python -m build`
 

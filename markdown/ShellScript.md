@@ -130,9 +130,9 @@ Implicitly則是用數字來表示權限等級，並且依照ugo的順序。
 ### find
 
 如同英文，尋找目標檔案。
-`find . -empty` 會找尋當前底下所有空白檔案。<br>
-`find . -name "*.fits" -exec rm -rf {} \;` 找尋底下所有副檔名為*fits*的檔案，並且執行`rm -rf`，也就是刪除檔案。<br>
-`find / -type d`找尋家目錄底下所有為目錄的位置。<br>
+`find . -empty` 會找尋當前底下所有空白檔案。<br/>
+`find . -name "*.fits" -exec rm -rf {} \;` 找尋底下所有副檔名為*fits*的檔案，並且執行`rm -rf`，也就是刪除檔案。<br/>
+`find / -type d`找尋家目錄底下所有為目錄的位置。<br/>
 `find . -size 2k`找尋檔案大小等於2kb。size可以使用`+-`來表示大於小於，e.g., `-size +20M -size -5G`在20MB到5GB這範圍。 
 
 ### tree
@@ -292,19 +292,19 @@ function greet() {
 
 ## Control operators
 
-1. ; semi-colon會讓前一個指令結束後，接著跑下一個指令。 `command1 ; command2`
-2. & 會讓指令在背景處理。 `command1 &`
-3. && 意同and, 如果前一個指令完成，那麼第二個指令才會運作。 `command1 && command2`
-4. || 意同or, 如果前一個指令失敗，那麼第二個指令才會運作。 `command1 || command2`
-5. |  這會將第一個指令的輸出傳到下一個指令當作輸入，形成pipeline，又稱pipe operator. `command1 | command2`
+1. `;` semi-colon會讓前一個指令結束後，接著跑下一個指令。 `command1 ; command2`
+2. `&` 會讓指令在背景處理。 `command1 &`
+3. `&&` 意同and, 如果前一個指令完成，那麼第二個指令才會運作。 `command1 && command2`
+4. `||` 意同or, 如果前一個指令失敗，那麼第二個指令才會運作。 `command1 || command2`
+5. `|`  這會將第一個指令的輸出傳到下一個指令當作輸入，形成pipeline，又稱pipe operator. `command1 | command2`
 
 ## Redirection operators
 
-1. < 給予command input `command < file`，檔案會以讀取模式打開。
-2. <> 如同<，但檔案會以讀取寫入打開。
-3. \> 將指令回傳值輸出到檔案中。 `command > log.txt`
-4. \>| 如同\>，但會覆寫檔案。
-5. \>\>如同\>，但會以附加方式寫進檔案。
+1. `<` 給予command input `command < file`，檔案會以讀取模式打開。
+2. `<>` 如同`<`，但檔案會以讀取寫入打開。
+3. `>` 將指令回傳值輸出到檔案中。 `command > log.txt`
+4. `>|` 如同`>`，但會覆寫檔案。
+5. `>>`如同`>`，但會以附加方式寫進檔案。
 
 
 # Summary

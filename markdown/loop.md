@@ -31,21 +31,21 @@ preview: 這是這系列的第二篇文章，第一篇文章[Built-in Functions]
 
 最常見起手式就是`for i in range()`，因為range會回傳一個迭代物件，裡面就像是計數器一樣(0,1,2,3,4...)，代表著這個迴圈要跑幾次一樣。
 
-{% codeblock HelloWorld lang:python %}
+```python
 # 寫3次Hello world
 for i in range(3):
 	print("Hello world")
-{% endcodeblock %}
+```
 
 
 舉更常見的例子就是要對物件內的值做迭代處理：
 
-{% codeblock List Iterator lang:python %}
+```python
 animal = ['horse','turtle','mouse','donkey','lion','dragon']
 
 for i in animal:
 	print(i)
-{% endcodeblock %}
+```
 
 而如果再做共同開發，其實不僅是協作開發，自己的程式碼也應該寫的explicitly。
 什麼叫寫的explicitly呢？ 這其實跟寫作文的風格一樣，風格含有個人的主觀想法，但大方向上應該要有個準則。
@@ -55,7 +55,7 @@ for i in animal:
 
 
 從下面這例子，你認為哪種方式在下週你回頭看，可以看得比較快呢？
-{% codeblock Readability lang:python %}
+```python
 animals = ['horse','turtle','mouse','donkey','lion','dragon']
 weights = [83,2,0.4,64,140,999]
 
@@ -66,7 +66,7 @@ for i, j in zip(animals,weights):
 # 明確變數內容
 for animal, weight in zip(animals,weights):
 	print(animal, weight)
-{% endcodeblock %}
+```
 
 
 另外在資料處理如果有用到pandas，pd.DataFrame()有個內建的iterrows()，如果要對每一列做迭代可以寫成：
@@ -85,13 +85,13 @@ for animal, weight in zip(animals,weights):
 最常見讓迴圈持續不停的方法就是`while True`，由於預設是true，如果沒有特別設計就不會跳出迴圈。
 
 
-{% codeblock while Loop lang:python %}
+```python
 i = 0
 while i < 5:
 	print("Hello World")
 	i = i+1
 
-{% endcodeblock %}
+```
 
 
 
@@ -106,7 +106,7 @@ while i < 5:
 可以是往後才要開發，所以先pass，不然程式無法編譯。
 可以是本身遇到這個情況就是選擇繼續，而不做任何改變。
 
-{% codeblock pass lang:python %}
+```python
 animals = ['horse','turtle','mouse','donkey','lion','dragon']
 
 for animal in animals:
@@ -118,13 +118,13 @@ for animal in animals:
         print('squeak')
     else:
         pass
-{% endcodeblock %}
+```
 
 ## continue
 
 中文直翻為繼續，但不要與pass搞混了，continue會**跳過**這次迴圈，直接進入下次迴圈。
 
-{% codeblock continue lang:python %}
+```python
 animals = ['horse','turtle','mouse','donkey','lion','dragon']
 
 for animal in animals:
@@ -144,15 +144,14 @@ for animal in animals:
 >>>neigh
 squeak
 roar~ roar~ roar~
-
-{% endcodeblock %}
+```
 
 
 ## break
 
 break會打破迴圈，直接**終止**迴圈。
 
-{% codeblock C Sample lang:c %}
+```python
 animals = ['horse','turtle','mouse','donkey','lion','dragon']
 
 for animal in animals:
@@ -171,7 +170,7 @@ for animal in animals:
 
 >>>
 neigh
-{% endcodeblock %}
+```
 
 
 # 同場加映CS50 Mario More comfortable
@@ -185,7 +184,7 @@ neigh
 
 這次的作業是將使用者輸入一個數字，然後做出類似馬力歐裡面磚塊的圖樣，並且做鏡像。
 
-{% codeblock while Loop lang:c %}
+```c
 #include <stdio.h>
 #include <cs50.h>
 
@@ -239,6 +238,6 @@ int main(void)
     pyramid(height);
 }
 
-{% endcodeblock %}
+```
 
 

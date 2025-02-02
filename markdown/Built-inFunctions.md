@@ -639,6 +639,6 @@ for i in zip(score,name):
 
 # References
 
-[Python 3.10.1 Documentation](https://docs.python.org/3/library/functions.html#aiter)<br>
-[別再用 print 來 Debug 啦！來用 Python Debugger 吧！](https://www.icoding.co/2020/07/print-debug-python-debugger)<br>
-[Python 繼承 543](https://dboyliao.medium.com/python-繼承-543-bc3d8ef51d6d)<br>
+[Python 3.10.1 Documentation](https://docs.python.org/3/library/functions.html#aiter)<br/>
+[別再用 print 來 Debug 啦！來用 Python Debugger 吧！](https://www.icoding.co/2020/07/print-debug-python-debugger)<br/>
+[Python 繼承 543](https://dboyliao.medium.com/python-繼承-543-bc3d8ef51d6d)<br/>

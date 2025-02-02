@@ -12,15 +12,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     h1: ({ children }) => (
       <h2 className="text-4xl font-bold py-4">{children}</h2>
     ),
-    img: (props) => (
-      <Image
-        sizes="100vw"
-        width={1000}
-        height={500}
-        style={{ width: "100%", height: "auto" }}
-        {...(props as ImageProps)}
-      />
-    ),
+    img: (props) => {
+      console.log(props);
+      return (
+        <Image
+          sizes="100vw"
+          width={1000}
+          height={500}
+          style={{ width: "100%", height: "auto" }}
+          {...(props as ImageProps)}
+        />
+      );
+    },
     pre: (props) => {
       return (
         <CodeBlock
