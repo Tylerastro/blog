@@ -7,10 +7,5 @@ interface BlogPost {
   preview: string;
 }
 
-interface BlogPostsListProps {
-  locale: string;
-  page?: number;
-}
-
-export type { BlogPost, BlogPostsListProps };
+export type { BlogPost };
 export type PostMetadata = BlogPost;
