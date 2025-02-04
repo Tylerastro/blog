@@ -3,9 +3,7 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Cabin } from "next/font/google";
 import { unstable_setRequestLocale } from "next-intl/server";
-import { NextIntlClientProvider } from "next-intl";
 import { cn } from "@/lib/utils";
-import { getMessages } from "next-intl/server";
 import localFont from "next/font/local";
 import "./globals.css";
 import Header from "@/components/ui/header";
@@ -51,17 +49,14 @@ export default async function LocaleLayout(props: {
         className={cn(
           "antialiased bg-background ",
           "font-cabin",
+          "transition-colors",
+          "duration-700",
           roboto_mono.variable,
           local_edu_vic_wa_nt_beginner.variable,
           cabin.variable
         )}
       >
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="dark"
-          enableSystem
-          disableTransitionOnChange
-        >
+        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Header />
           <Toaster />
           <div className="animate-page-transition">{children}</div>

@@ -14,7 +14,7 @@ preview: 在上一篇[Github.io個人網站架設](https://tylerastro.github.io/
 在github裡面的settings，使用Personal token來產生一組金鑰，接著在config裡面改用環境變數帶入金鑰。
 接著更改你的環境變數，如果是使用bash則在.bashrc裡新增`export HEXO="TOKEN"`
 
-```
+```bash
 # Deployment
 ## Docs: https://hexo.io/docs/one-command-deployment
 deploy:

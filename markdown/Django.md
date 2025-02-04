@@ -167,7 +167,7 @@ SASS/SCSS 就是處理 css 的高階語言，有著類似程式語言的寫法�
 
 ## Docker
 
-![Official Docker Logo](Moby-logo.png)
+![Official Docker Logo](/Django/Moby-logo.png)
 
 我是大約碩士畢業後在應地所開發程式接觸到 Docker，當時要處理 MDB 檔案，使用 windows 系統並不好處理，然而要將軟體移植過去又要花費太多精力，所幸發現 Docker 可以讓我將作業系統容器化，達到類似虛擬機的效果。
 
@@ -347,7 +347,7 @@ Flask 以及 Django 都是 Python 使用者常用的框架，兩者各有優缺�
 雖然會跳出我們沒有做 migration 等警告，不過不影響我們啟動，以後作業會開著伺服器，每次存檔就會更新，藉此對伺服器做調整以及 debug。
 
 如果你要挑選其他的 port 來連接，可以在`runserver`後面加上你要使用的 port，比如說：`python manage.py runserver 8080`或者`python manage.py runserver 0:8080`來聆聽全部的 port。
-![server rocket](runserver.png)
+![server rocket](/Django/runserver.png)
 
 ### Settings
 
@@ -575,7 +575,7 @@ class Observations(models.Model):
 `django-admin startproject deployment` 創建我們的專案資料夾。
 進入資料夾後，我們先`python manage.py runserver`來看看是否成功。正常應該會顯示以下畫面並且資料夾多了一個 db.sqlite3 檔案。
 
-![伺服器啟動頁面](runserver.png)
+![伺服器啟動頁面](/Django/runserver.png)
 
 目前的檔案應該會長得像這樣
 

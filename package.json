@@ -3,10 +3,11 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "bash scripts/movePostFile.sh && next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "clean": "rm -vrf contents/* && rm -vrf public/*"
   },
   "dependencies": {
     "@mdx-js/loader": "^3.1.0",

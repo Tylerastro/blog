@@ -39,7 +39,9 @@ export function getPostMetadata(fileName: string) {
   const files = fs.readdirSync(folder);
   const Post = files.find((file) => file === fileName);
 
-  const fileContents = fs.readFileSync(`${BASEPATH}/${Post}`, "utf8");
+  const fileContents = fs.readFileSync(`${BASEPATH}/${Post}`, {
+    encoding: "utf8",
+  });
   const matterResult = matter(fileContents);
 
   return {

@@ -19,13 +19,13 @@ preview: 前陣子，被一位學長問到，為什麼要看Vtuber而不看真�
 直播文化我最有印象的是在大約十年前，twitch還沒興起時，當時主流實況都在justin.tv，雜談，表演，唱歌等等都在上面，遊戲實況則會在twitch，當時中文圈最著名莫過於LNG，好多當時流行語都是從當中出來的，更別說往後的打lol有禮貌運動等等，在我高中時真的是無人不知無人不曉。
 可惜過沒多久，justin.tv就被併入twitch底下，現在想起來，確實justin就有如沒有管制的場所，不時會有一些很~~色情~~奇怪的實況出現。
 
-![](LNG.png)
+![](/vtuber/LNG.png)
 
 -------
 
 然而在日本，這種文化的流行就必須從niconico說起，也是在約莫10幾年前，niconico就已經是紅遍一方的平台，在我印象裡當時Youtube還沒有那麼多的受眾，當然niconico最大的問題在於演算法、雲端資源等等在當時都不夠充足，可以說是與justin差不多的混沌。
 
-![](niconico.png)
+![](/vtuber/niconico.png)
 
 -------
 
@@ -46,7 +46,7 @@ Vtuber其實就是Virtual Youtuber，與實況主不一樣的是在於多套了�
 
 在自媒體的興起時代~~末代~~，打對觀眾群是格外重要，自己的主題或風格切中不了特定群眾，訂閱數勢必無法提升，相比於過往靠遊戲技術或者靠賣肉走紅的頻道，我不認為Vtuber是可以單靠色色的人物走紅，雖然人物的精緻或好看程度會影響第一次點進來的機率，但能不能留住觀眾還是取決於雜談以及企劃能力。
 
-![Image from X](pikamee.jpg)
+![Image from X](/vtuber/pikamee.jpg)
 
 那麼Vtuber差別在哪呢？我認為有幾個因素使得Vtuber可以獨樹一格，第一個是外表。
 日本漫畫文化並不只有在亞洲流行，在歐美也是佔有廣大受眾，甚至有人發表為什麼日本動漫畫角色會受歡迎，原因竟是人物都是從貓為基底畫出來的！有誰會不喜歡可愛的外表呢？
@@ -79,15 +79,15 @@ Vtuber其實就是Virtual Youtuber，與實況主不一樣的是在於多套了�
 - 偶像團體：專職唱歌跳舞，與觀眾透過社群平台互動
 - Vtuber：平時打遊戲、唱歌，出MV、EP，休息日練唱練跳，不定時演唱會
 
-![Screenshot from Blue Journey](wsa.png)
+![Screenshot from Blue Journey](/vtuber/wsa.png)
 
 到這邊你感受到那個差別了嗎？想像你的好朋友每天跟你打打鬧鬧，但當你看到你的好朋友成功的做出一番成就，在一個舞台上是那麼的耀眼時，身為好朋友的你也會不禁感動，內心不停地為對方喝采吧！我想這就是Vtuber看下來，我感受最強烈的時刻。
 
-![Screenshot from Blue Journey](stccm.png)
+![Screenshot from Blue Journey](/vtuber/stccm.png)
 
 特別是在這世代，越來越難以有所成就，生活也相對掙扎，不再是光靠勤奮打拼就能有一席之地的時代，看到跟自己年紀相仿，付出的努力，而有所回報，帶給了許多人更有動力繼續向前努力。
 
-![Screenshot from Blue Journey](group.png)
+![Screenshot from Blue Journey](/vtuber/group.png)
 
 
 
@@ -97,7 +97,7 @@ Holo的成員大多數不需要特別推了，本身的箱推紅利以及企業�
 
 ###　白玖ウタノ
 
-![Captured from niconico](utano.png)
+![Captured from niconico](/vtuber/utano.png)
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/EhFbTefI5wI?si=Lbchg5pxoBMRXO08&amp;start=1568" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
@@ -133,7 +133,7 @@ UTANO是近期藉由演算法發現的，出配信日期為2022年12月16日，�
 
 ###  宇推くりあ
 
-![](clear.png)
+![](/vtuber/clear.png)
 
 宇推くりあ算是很特別的頻道，主要作為太空、天文推廣頻道，每次SpaceX發射都會進行同步視聽解說，雖然全程都日文我也聽不懂，但可以感受到他是很有熱情的在做推廣。
 

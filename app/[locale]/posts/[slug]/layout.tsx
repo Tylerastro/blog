@@ -21,7 +21,7 @@ export default async function LocaleLayout(props: {
     <>
       {/* <TableOfContents /> */}
       <ScrollProgressBar />
-      <main className="flex-1 mx-auto w-[90svw] sm:w-[50svw] mt-20">
+      <main className="flex-1 mx-auto w-[90svw] sm:w-[50svw] my-20">
         {children}
       </main>
     </>

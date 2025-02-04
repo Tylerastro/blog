@@ -18,7 +18,7 @@ preview: 一個月前拿到後端工程師的職位，在準備Canonical的時�
 
 當我在準備Canonical面試的時候，發現到去衡量一位工程師的程度？或積極程度不單單是看contributions的圖，對於開源專案的PR,MR知道多少也是很重要，尤其是對於像是Canonical這種開源相關的公司。
 
-![The ocntributions diagram of my on GitHub](contributions.png)
+![The ocntributions diagram of my on GitHub](/hacktoberfest/contributions.png)
 
 開源專案對於整個社群有著相當的重要性，試想我們在寫程式的時候，第一行是否都從`import` 一些常用的套件開始，但有想過這些寫好的Library從哪裡來呢？他們大部分都是開源專案在GitHub或GitLab上，任何人可以看到裡面的程式碼，並且做出改善，增強，修復錯誤，這些都是做出好的PR。
 

@@ -1,11 +1,6 @@
 import type { MDXComponents } from "mdx/types";
-import Image, { ImageProps } from "next/image";
+import Image from "next/image";
 import { CodeBlock } from "./components/CodeBlock";
-
-// This file allows you to provide custom React components
-// to be used in MDX files. You can import and use any
-// React component you want, including inline styles,
-// components from other libraries, and more.
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -16,18 +11,18 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       console.log(props);
       return (
         <Image
-          sizes="100vw"
+          src={props.src}
+          unoptimized
           width={1000}
           height={500}
-          style={{ width: "100%", height: "auto" }}
-          {...(props as ImageProps)}
+          {...props}
         />
       );
     },
     pre: (props) => {
       return (
         <CodeBlock
-          code={props.children}
+          code={props.children.props.children}
           language={props.children.props.className}
         />
       );

@@ -14,7 +14,7 @@ date: 2022-07-11 14:12:19
 一台電腦的組成到運行可以想像成有硬體組成(Hardware)，核心(Kernel)，以及殼層(Shell)。
 那麼使用者所接觸到的就是殼層這部分，這一圈可能有CLI(command-line interface)或GUI(Graphical user interface)，就如同我們所使用的terminal或者任何圖形化介面等。
 
-![](shell.png)
+![](/ShellScript/shell.png)
 
 而Shell script就是我們透過殼層與內核溝通的語言，藉由殼層翻譯給內核，內核再去驅動我們硬體做出相對應指令。
 

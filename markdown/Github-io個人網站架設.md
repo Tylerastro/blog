@@ -37,7 +37,7 @@ GitHub是全球最大的程式碼倉庫，你可以存放代碼在上面，或�
 
 1. 建立倉庫(Create your repository)
 
-![Create your repository](Create.png)
+![Create your repository](/Github-io個人網站架設/Create.png)
 在建立倉庫的頁面，記得一定要輸入跟你帳戶(Owner)一樣的名稱，例如我的名稱是`Tylerastro`，那我的倉庫名稱(Repository name)就要是`tylerastro.github.io`
 建立完成後，要改subdomain name都是可以的
 
@@ -47,7 +47,7 @@ GitHub是全球最大的程式碼倉庫，你可以存放代碼在上面，或�
 在左邊選取Pages，進到裡面的設定，在Theme chooser裡面選想要的主題之後，就可以在https://[username].github.io/ 看到你的網站了。
 
 完成後，頁面應該會像這樣，顯示出你的網址，網址裡面就會是你剛剛所選的主題
-![Page setting](Settings.png)
+![Page setting](/Github-io個人網站架設/Settings.png)
 
 # 使用第三方套件管理GitHub Pages
 
@@ -96,7 +96,7 @@ hexo server
 那檔案就會被輸出至你的GitHub repository，之後在你的網站上就可以看到更新完後的版本，上傳完後可能會需要等待一些時間才會看到變動。
 
 
-![Welcom to Hexo](Hexo.png)
+![Welcom to Hexo](/Github-io個人網站架設/Hexo.png)
 
 
 ## 常用指令

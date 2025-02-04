@@ -12,6 +12,5 @@ export default async function parseMarkDown({ content }: { content: string }) {
     .use(rehypeStringify) // Convert AST into serialized HTML
     .process(content);
 
-  console.log(String(file)); // <p>Hello, Next.js!</p>
   return String(file);
 }

@@ -4,6 +4,8 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 import { Copy } from "lucide-react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import { monokai } from "react-syntax-highlighter/dist/esm/styles/hljs";
 
 interface CodeBlockProps {
   code: string;
@@ -36,7 +38,9 @@ export function CodeBlock({ code, language = "plaintext" }: CodeBlockProps) {
   return (
     <div className="relative py-4">
       <pre className="rounded-lg p-4 overflow-x-auto bg-secondary">
-        <code className={`language-${language}`}>{code}</code>
+        <SyntaxHighlighter language={language} style={monokai}>
+          {code}
+        </SyntaxHighlighter>
       </pre>
       <Button
         variant="outline"

@@ -434,7 +434,7 @@ Open 是常常使用來打開檔案的方式，在參數裡面可以選擇打開
 
 通常在打開檔案時，我們會希望資源管理做好，畢竟如果檔案起來，資料讀完，我們想要把檔案關閉把資源拿到該用的地方，所以open常搭配的事with的用法，這樣就不必多寫一行把檔案關閉，也可以避免忘記。
 
-![Someone made this online. Please PM for credit.](rwa.png)
+![Someone made this online. Please PM for credit.](/Built-inFunctions/rwa.png)
 
 藉由下面的範例我們可以更清楚知道使用方法，在一份sample文件裡面:
 ```python

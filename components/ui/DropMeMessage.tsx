@@ -13,7 +13,6 @@ export default function DropMeMessage() {
     e.preventDefault();
     // Here you would typically send the email using a backend service
     // For this example, we'll just log the data and show a success message
-    console.log({ name, email, message });
     // Clear the form
     setName("");
     setEmail("");

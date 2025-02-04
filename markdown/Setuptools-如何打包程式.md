@@ -71,7 +71,7 @@ packages=['main'])
 
 實作一個摩斯密碼翻譯的package，在main底下，有__init__.py以及MorseDecode.py，也是主要功能的來源
 
-![Files](Folder.png)
+![Files](/Setuptools-如何打包程式/Folder.png)
 
 那我們在setup.py裡面設定如下，然後__init__.py保持空白
 
@@ -108,11 +108,11 @@ packages= setuptools.find_packages())
 
 在路徑下會產生對應的dist跟egg資料夾
 
-![build](build.png)
+![build](/Setuptools-如何打包程式/build.png)
 
 之後我們在terminal輸入`python -m twine upload dist/*`上傳至PYPI上面，同時也會要求我們輸入使用者名稱與密碼。隨後就會看到上傳完成的訊息。
 
-![upload](upload.png)
+![upload](/Setuptools-如何打包程式/upload.png)
 
 我們就可以在PYPI上看到我們的專案囉！
 
@@ -122,7 +122,7 @@ packages= setuptools.find_packages())
 
 我們可以試著嘗試安裝回來使用看看，在terminal輸入`pip install Morse-Translator==0.1`
 
-![result](result.png)
+![result](/Setuptools-如何打包程式/result.png)
 
 的確！我們安裝成功了，程式也可以運作。
 如果往後要更新，記得把原本的dist以及egg資料夾刪除，並且更新setup.py裡面的版本，再重新做build以及上傳，因為PYPI不允許覆蓋更新。
