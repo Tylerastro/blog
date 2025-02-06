@@ -6,7 +6,7 @@ import { unstable_setRequestLocale } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/ui/header";
+import Header from "@/components/ui/Header";
 import { Roboto_Mono } from "next/font/google";
 import Footer from "@/components/ui/footer";
 

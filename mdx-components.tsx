@@ -1,14 +1,21 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { CodeBlock } from "./components/CodeBlock";
+import YouTubePlayer from "./components/YouTubePlayer";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => (
       <h2 className="text-4xl font-bold py-4">{children}</h2>
     ),
+    h2: ({ children }) => (
+      <h3 className="text-3xl font-bold py-4">{children}</h3>
+    ),
+    h3: ({ children }) => (
+      <h4 className="text-2xl font-semibold py-4 border-b">{children}</h4>
+    ),
+    p: ({ children }) => <p className="py-2 my-2">{children}</p>,
     img: (props) => {
-      console.log(props);
       return (
         <Image
           src={props.src}
@@ -27,7 +34,16 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         />
       );
     },
-
+    blockquote: ({ children }) => (
+      <blockquote className="border-l-4 border-l-indigo-600 pl-4 py-2 my-2">
+        {children}
+      </blockquote>
+    ),
+    hr: () => <hr className="my-4" />,
+    YouTubePlayer: ({ children }) => {
+      console.log(children);
+      return children;
+    },
     ...components,
   };
 }

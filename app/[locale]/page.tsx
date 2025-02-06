@@ -1,6 +1,7 @@
 import Intro from "./intro";
 import DropMeMessage from "@/components/ui/DropMeMessage";
 import Projects from "./projects";
+import YouTubePlayer from "@/components/YouTubePlayer";
 
 export default async function Home({
   params,

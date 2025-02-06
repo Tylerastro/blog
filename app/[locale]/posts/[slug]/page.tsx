@@ -1,4 +1,5 @@
 import PostInfo from "@/components/posts/PostInfo";
+import YouTubePlayer from "@/components/YouTubePlayer";
 import { getPostMetadata } from "@/utils/getPostMetaData";
 
 export default async function BlogPostPage({
@@ -27,7 +28,6 @@ export default async function BlogPostPage({
     );
   } catch (error) {
     console.error("Error loading post:", error);
-    // You might want to add proper error handling here
     return <div>Post not found</div>;
   }
 }

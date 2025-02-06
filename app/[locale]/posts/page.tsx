@@ -10,8 +10,13 @@ export default async function BlogPostsList({
   searchParams: Promise<{ page: string }>;
 }) {
   const posts = getPostsMetadata();
+  posts.sort((a, b) => {
+    const dateA = new Date(a.created_date);
+    const dateB = new Date(b.created_date);
+    return dateB.getTime() - dateA.getTime();
+  });
 
-  const postsPerPage = 6; // Adjust this number as needed
+  const postsPerPage = 7; // Adjust this number as needed
   const currentPage = Number((await searchParams).page) || 1;
   const totalPages = Math.ceil(posts.length / postsPerPage);
 
