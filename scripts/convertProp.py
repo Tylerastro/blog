@@ -1,5 +1,7 @@
 from glob import glob
 
+from bs4 import BeautifulSoup
+
 PROPS = {
     'frameborder': 'frameBorder',
     'allowfullscreen': 'allowFullScreen',
@@ -12,12 +14,12 @@ def convertProp(file):
         content = f.readlines()
         for idx, line in enumerate(content):
             if 'iframe' in line:
-                line = line.replace('\n', '')
-                for key, value in PROPS.items():
-                    if key in line:
-                        line = line.replace(key, value)
-                line = line.replace('iframe', 'iframe className="wrapper"', 1)
-                content[idx] = f'<YouTubePlayer>{line}</YouTubePlayer>'
+                soup = BeautifulSoup(line, "html.parser")
+                # find src
+                src = soup.find("iframe").get("src")
+                url = src.split('https://www.youtube.com/embed/')[1]
+                line = f'<YouTube id="{url}" />'
+                content[idx] = line
 
     with open(file, "w") as f:
         f.write(" ".join(content))

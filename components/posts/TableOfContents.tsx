@@ -45,7 +45,7 @@ export function TableOfContents() {
   };
 
   return (
-    <nav className="fixed right-3 top-1/4 w-64 p-4 bg-muted dark:bg-muted opacity-55 rounded-lg shadow-lg overflow-auto max-h-[70vh]">
+    <nav className="fixed right-3 top-1/4 w-64 p-4   opacity-55 rounded-lg shadow-lg overflow-auto max-h-[70vh]">
       <ul className="space-y-2">
         {toc.map((item) => (
           <li

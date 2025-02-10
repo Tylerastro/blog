@@ -1,7 +1,7 @@
 import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { CodeBlock } from "./components/CodeBlock";
-import YouTubePlayer from "./components/YouTubePlayer";
+import { MediumBlockquote } from "./components/posts/BlockQuote";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -35,15 +35,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     blockquote: ({ children }) => (
-      <blockquote className="border-l-4 border-l-indigo-600 pl-4 py-2 my-2">
-        {children}
-      </blockquote>
+      <MediumBlockquote>{children}</MediumBlockquote>
     ),
     hr: () => <hr className="my-4" />,
-    YouTubePlayer: ({ children }) => {
-      console.log(children);
-      return children;
-    },
     ...components,
   };
 }

@@ -23,7 +23,10 @@ export default async function BlogPostPage({
           tags={matterResult.tags}
           categories={matterResult.categories}
         />
-        <BlogPost title={matterResult.title} />
+        <BlogPost
+          title={matterResult.title}
+          components={{ YouTube: YouTubePlayer }}
+        />
       </>
     );
   } catch (error) {

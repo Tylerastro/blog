@@ -95,7 +95,7 @@ Vtuber其實就是Virtual Youtuber，與實況主不一樣的是在於多套了�
 
 Holo的成員大多數不需要特別推了，本身的箱推紅利以及企業知名度已經帶來很大流量，雖然海外組相對吃比較少，但也是基本盤很穩固，這邊小推幾位我覺的很不錯也有特色的頻道。
 
-###　白玖ウタノ
+### 白玖ウタノ
 
 ![Captured from niconico](/vtuber/utano.png)
 
@@ -109,7 +109,7 @@ UTANO是近期藉由演算法發現的，出配信日期為2022年12月16日，�
 
 目前UTANO目標在今年達到10萬訂閱，相當看好未來的成長，期待有Live演出。
 
-###　綾音Ring
+### 綾音Ring
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/eOUnygxWZwM?si=oZhvcT8Np8AU_iG5&amp;start=10118" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
