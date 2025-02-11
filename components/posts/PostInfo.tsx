@@ -14,7 +14,7 @@ export default function PostInfo({
   categories,
 }: PostInfoProps) {
   return (
-    <div className="max-w-2xl mx-auto rounded-lg shadow-md overflow-hidden">
+    <div className="max-w-2xl mx-auto rounded-lg overflow-hidden">
       <div className="p-6 flex flex-col items-center">
         <h1 className="text-3xl text-center font-bold text-gray-900 dark:text-white mb-4">
           {title}
