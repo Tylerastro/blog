@@ -1,14 +1,19 @@
 import getPostsMetadata from "@/utils/getPostMetaData";
 import PostList from "@/components/posts/PostList";
 import { redirect } from "next/navigation";
+import { getDictionary } from "@/utils/getDictionary";
 
 export default async function BlogPostsList({
-  locale,
+  params,
   searchParams,
 }: {
-  locale: string;
+  params: Promise<{ lang: "en-US" | "zh-TW" }>;
   searchParams: Promise<{ page: string }>;
 }) {
+  const lang = (await params).lang;
+  const dict = await getDictionary(lang);
+  console.log(lang);
+
   const posts = getPostsMetadata();
   posts.sort((a, b) => {
     const dateA = new Date(a.created_date);
@@ -40,7 +45,9 @@ export default async function BlogPostsList({
   return (
     <main className="">
       <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
-        <h1 className="mb-8 text-center text-4xl font-bold">{"title"}</h1>
+        <h1 className="mb-8 text-center text-4xl font-bold">
+          {dict.Blog.title}
+        </h1>
         <div className="flex flex-col gap-8 items-center justify-center">
           <PostList posts={paginatedPosts} />
 

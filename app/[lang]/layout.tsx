@@ -32,19 +32,17 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function LocaleLayout(props: {
+export default async function LocaleLayout({
+  children,
+  params,
+}: Readonly<{
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
-}) {
-  const params = await props.params;
+  params: { lang: "en-US" | "zh-TW" };
+}>) {
+  const { lang } = await params;
 
-  const { locale } = params;
-
-  const { children } = props;
-
-  unstable_setRequestLocale(locale);
   return (
-    <html lang={locale} suppressHydrationWarning>
+    <html lang={lang} suppressHydrationWarning>
       <body
         className={cn(
           "antialiased bg-background ",

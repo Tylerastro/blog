@@ -1,9 +1,18 @@
 import "server-only";
 
 const dictionaries = {
-  "en-US": () => import("@/lib/en.json").then((module) => module.default),
-  "zh-TW": () => import("@/lib/zh.json").then((module) => module.default),
+  "en-US": () => import("@/messages/en.json").then((module) => module.default),
+  "zh-TW": () => import("@/messages/zh.json").then((module) => module.default),
 };
 
-export const getDictionary = async (locale: "en-US" | "zh-TW") =>
-  dictionaries[locale]();
+interface Blog {
+  title: string;
+}
+
+export interface Dictionary {
+  Blog: Blog;
+}
+
+export const getDictionary = async (
+  locale: "en-US" | "zh-TW"
+): Promise<Dictionary> => (await dictionaries[locale]()) as Dictionary;

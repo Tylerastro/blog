@@ -10,6 +10,9 @@
     "position4": "一名天文學家",
     "position5": "和一名物理學家"
   },
+  "Blog": {
+    "title": "文章"
+  },
   "IndexPage": {
     "description": "Dies ist ein Beispiel, das die Verwendung von <code>next-intl</code> mit dem Next.js App Router demonstriert. Bei Ändern der Sprache rechts oben ändert sich der Inhalt dieser Seite.",
     "title": "next-intl Beispiel"
