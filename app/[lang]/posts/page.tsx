@@ -12,7 +12,6 @@ export default async function BlogPostsList({
 }) {
   const lang = (await params).lang;
   const dict = await getDictionary(lang);
-  console.log(lang);
 
   const posts = getPostsMetadata();
   posts.sort((a, b) => {

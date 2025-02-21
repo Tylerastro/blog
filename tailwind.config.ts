@@ -1,3 +1,4 @@
+import { link } from "fs";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -17,6 +18,7 @@ const config: Config = {
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        link: "hsl(var(--link))",
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",

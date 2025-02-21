@@ -19,20 +19,20 @@ export default function PostList({ posts }: PostListProps) {
       {posts.map((post) => (
         <article
           key={post.title}
-          className="border-b py-3 w-full border-gray-200 pb-8 last:border-b-0"
+          className="border-b py-3 w-full border-gray-200 pb-8 last:border-b-0 hover:scale-105 transition-all duration-500"
         >
           <Link href={`/posts/${post.slug}`} className="block group">
-            <h2 className="text-2xl font-bold text-primary-foreground group-hover:text-blue-600 transition-colors duration-200">
+            <h2 className="text-2xl font-bold text-primary-foreground  transition-colors duration-200">
               {post.title}
             </h2>
             <time
               dateTime={post.created_date}
-              className="text-sm text-gray-500 mb-2 block"
+              className="text-sm text-muted-foreground mb-2 block"
             >
               {formatDate(post.created_date)}
             </time>
-            <p className="text-gray-600">{post.preview}</p>
-            <span className="inline-block mt-4 text-blue-600 font-medium group-hover:underline">
+            <p className="text-secondary-foreground/80">{post.preview}</p>
+            <span className="inline-block mt-4 text-link font-medium">
               Read more
             </span>
           </Link>
