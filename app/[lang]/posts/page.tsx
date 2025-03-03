@@ -59,7 +59,7 @@ export default async function BlogPostsList({
                   href={`/posts?page=${pageNum}`}
                   className={`px-4 py-2 border rounded-md ${
                     currentPage === pageNum
-                      ? "bg-blue-500 text-white"
+                      ? "bg-primary-foreground text-white"
                       : "hover:bg-gray-100 dark:hover:bg-gray-800"
                   }`}
                 >

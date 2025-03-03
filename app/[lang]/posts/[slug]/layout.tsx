@@ -1,6 +1,7 @@
 import ScrollProgressBar from "@/components/ProgressBar";
 import type { Metadata } from "next";
 import { TableOfContents } from "@/components/posts/TableOfContents";
+import TocContainer from "@/components/posts/TocContainer";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -19,7 +20,7 @@ export default async function LocaleLayout(props: {
 
   return (
     <>
-      {/* <TableOfContents /> */}
+      <TocContainer />
       <ScrollProgressBar />
       <main className="flex-1 mx-auto w-[90svw] sm:w-[50svw] my-20">
         {children}

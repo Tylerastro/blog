@@ -7,13 +7,29 @@ import InlineCode from "./components/InlineCode";
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => (
-      <h2 className="text-4xl font-bold py-4">{children}</h2>
+      <h2 className="text-4xl font-bold py-4" id={children}>
+        {children}
+      </h2>
     ),
     h2: ({ children }) => (
-      <h3 className="text-3xl font-bold py-4">{children}</h3>
+      <h3 className="text-3xl font-bold py-4" id={children}>
+        {children}
+      </h3>
     ),
     h3: ({ children }) => (
-      <h4 className="text-2xl font-semibold py-4 border-b">{children}</h4>
+      <h4 className="text-2xl font-semibold py-4 border-b" id={children}>
+        {children}
+      </h4>
+    ),
+    h4: ({ children }) => (
+      <h5 className="text-xl font-semibold py-4 border-b" id={children}>
+        {children}
+      </h5>
+    ),
+    h5: ({ children }) => (
+      <h6 className="text-lg font-semibold py-4 border-b" id={children}>
+        {children}
+      </h6>
     ),
     p: ({ children }) => {
       return <p className="py-2 my-2">{children}</p>;

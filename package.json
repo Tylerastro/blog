@@ -11,6 +11,7 @@
     "clean": "rm -vrf contents/* && rm -vrf public/*"
   },
   "dependencies": {
+    "@gsap/react": "^2.1.2",
     "@mdx-js/loader": "^3.1.0",
     "@mdx-js/react": "^3.1.0",
     "@microflash/rehype-starry-night": "^7.2.0",

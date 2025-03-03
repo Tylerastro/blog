@@ -31,7 +31,7 @@ export default function ScrollProgressBar() {
       aria-valuemax={100}
     >
       <div
-        className="h-full bg-blue-600 dark:bg-blue-400 transition-all duration-300 ease-out"
+        className="h-full bg-muted transition-all duration-300 ease-out"
         style={{ width: `${scrollProgress * 100}%` }}
       />
     </div>

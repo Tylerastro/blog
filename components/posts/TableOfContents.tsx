@@ -1,11 +1,10 @@
-"use client";
-
 import React, { useState, useEffect } from "react";
 
 interface TOCItem {
   id: string;
   text: string;
   level: number;
+  key: string;
 }
 
 export function TableOfContents() {
@@ -13,12 +12,41 @@ export function TableOfContents() {
   const [activeId, setActiveId] = useState<string>("");
 
   useEffect(() => {
-    const headings = Array.from(document.querySelectorAll("h2, h3, h4"));
-    const tocItems = headings.map((heading) => ({
-      id: heading.id,
-      text: heading.textContent || "",
-      level: parseInt(heading.tagName.charAt(1)),
-    }));
+    const headings = Array.from(
+      document.querySelectorAll("h2, h3, h4, h5, h6")
+    );
+    // Create a hierarchical structure for keys
+    const tocItems: TOCItem[] = [];
+    const headingTexts: string[] = ["", "", "", "", "", ""]; // Index 0 is unused, 1-5 for h2-h6
+
+    headings.forEach((heading) => {
+      const level = parseInt(heading.tagName.charAt(1));
+      const levelIndex = level - 2; // Adjust to 0-based index for our array (h2 -> 0)
+      const headingText = heading.textContent || "";
+
+      // Update the text at current level
+      headingTexts[levelIndex] = headingText;
+
+      // Clear all deeper levels when we encounter a higher-level heading
+      for (let i = levelIndex + 1; i < headingTexts.length; i++) {
+        headingTexts[i] = "";
+      }
+
+      // Generate hierarchical key by combining all relevant heading texts
+      const hierarchicalKey = headingTexts
+        .slice(0, levelIndex + 1)
+        .filter((text) => text !== "")
+        .join(" > ");
+
+      tocItems.push({
+        id: heading.id,
+        text: headingText,
+        level: level,
+        key: hierarchicalKey,
+      });
+    });
+    console.log(tocItems);
+
     setToc(tocItems);
 
     const observer = new IntersectionObserver(
@@ -45,21 +73,30 @@ export function TableOfContents() {
   };
 
   return (
-    <nav className="fixed right-3 top-1/4 w-64 p-4   opacity-55 rounded-lg shadow-lg overflow-auto max-h-[70vh]">
+    <nav className="relative hidden md:block w-full p-4 opacity-85 overflow-auto max-h-[70vh]">
       <ul className="space-y-2">
         {toc.map((item) => (
           <li
-            key={item.id}
+            key={item.key}
             className={`cursor-pointer transition-colors duration-200 ease-in-out
               ${item.level === 2 ? "pl-0" : item.level === 3 ? "pl-4" : "pl-8"}
               ${
                 activeId === item.id
-                  ? "text-blue-300 font-semibold"
-                  : "text-muted-foreground dark:text-muted-foreground hover:text-blue-500 dark:hover:text-blue-400"
+                  ? "text-primary font-semibold"
+                  : "text-muted-foreground hover:text-primary/80"
               }`}
             onClick={() => handleClick(item.id)}
           >
-            {item.text}
+            <a
+              href={`#${item.id}`}
+              onClick={(e) => {
+                e.preventDefault();
+                handleClick(item.id);
+              }}
+              className="block w-full truncate"
+            >
+              {item.text}
+            </a>
           </li>
         ))}
       </ul>
