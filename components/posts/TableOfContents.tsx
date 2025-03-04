@@ -38,6 +38,9 @@ export function TableOfContents() {
         .filter((text) => text !== "")
         .join(" > ");
 
+      // set elemnt id to the hierarchical key
+      heading.id = hierarchicalKey;
+
       tocItems.push({
         id: heading.id,
         text: headingText,
@@ -45,7 +48,6 @@ export function TableOfContents() {
         key: hierarchicalKey,
       });
     });
-    console.log(tocItems);
 
     setToc(tocItems);
 

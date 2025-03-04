@@ -15,14 +15,15 @@ interface PostListProps {
 
 export default function PostList({ posts }: PostListProps) {
   return (
-    <div className="flex flex-col items-center w-full sm:w-[90svw] md:w-[80svw] max-w-3xl mx-auto">
+    <div className="flex flex-col items-center w-full sm:w-[90svw] md:w-[80svw] max-w-3xl mx-auto group">
       {posts.map((post) => (
         <article
           key={post.title}
-          className="border-b py-3 w-full border-gray-200 pb-8 last:border-b-0 hover:scale-105 transition-all duration-500"
+          className="border-b py-3 w-full border-gray-200 pb-8 last:border-b-0 transition-all duration-500 
+          group-hover:opacity-50 group-hover:scale-95 hover:!opacity-100 hover:!scale-105"
         >
-          <Link href={`/posts/${post.slug}`} className="block group">
-            <h2 className="text-2xl font-bold text-primary-foreground  transition-colors duration-200">
+          <Link href={`/posts/${post.slug}`} className="block">
+            <h2 className="text-2xl font-bold text-primary-foreground transition-colors duration-200">
               {post.title}
             </h2>
             <time

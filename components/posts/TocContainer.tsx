@@ -19,11 +19,13 @@ export default function TocContainer() {
       scrollTrigger: {
         trigger: "#post-title",
         start: "bottom top",
-        pin: true,
+        end: "bottom 50%+=100px",
+        toggleActions: "play none none reverse",
       },
-      ease: "power2.out",
+      ease: "power3.inout",
     });
   });
+
   return (
     <div
       id="table-of-contents"
