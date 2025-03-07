@@ -55,10 +55,8 @@ export default async function LocaleLayout({
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
-          <Header />
           <Toaster />
           <div className="animate-page-transition">{children}</div>
-          <Footer />
         </ThemeProvider>
       </body>
     </html>

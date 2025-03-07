@@ -1,7 +1,7 @@
 import Intro from "./intro";
 import DropMeMessage from "@/components/ui/DropMeMessage";
 import Projects from "./projects";
-import YouTubePlayer from "@/components/YouTubePlayer";
+import AboutMe from "@/components/landingPage/AboutMe";
 
 export default async function Home({
   params,
@@ -11,9 +11,7 @@ export default async function Home({
   const lang = (await params).lang;
   return (
     <main className="flex-1">
-      <Intro />
-      <Projects />
-      <DropMeMessage />
+      <AboutMe />
     </main>
   );
 }
