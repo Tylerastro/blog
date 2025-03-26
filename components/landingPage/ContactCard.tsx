@@ -1,13 +1,23 @@
 import { Github, Linkedin, Mail } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
-export function ContactCard() {
+interface ContactCardProps {
+  lang?: string;
+}
+
+export function ContactCard({ lang = "en-US" }: ContactCardProps) {
   return (
     <Card className="cyberpunk-card flex-[1]">
       <div className="card-reflection"></div>
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-bold text-cyan-100">
-          Contact Me
+          <Link
+            href={`/${lang}/contact`}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Contact Me
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="cyberpunk-card-content">

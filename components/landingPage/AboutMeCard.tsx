@@ -1,5 +1,9 @@
+"use client";
+
+import { useEffect, useState } from "react";
 import { User } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
 interface AboutMeCardProps {
   name: string;
@@ -7,7 +11,7 @@ interface AboutMeCardProps {
   description: string;
   location: string;
   status: string;
-  time: string;
+  lang?: string;
 }
 
 export function AboutMeCard({
@@ -16,14 +20,29 @@ export function AboutMeCard({
   description,
   location,
   status,
-  time,
+  lang = "en-US",
 }: AboutMeCardProps) {
+  const [time, setTime] = useState(new Date().toLocaleTimeString());
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setTime(new Date().toLocaleTimeString());
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
   return (
     <Card className="cyberpunk-card flex-[3]">
       <div className="card-reflection"></div>
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-bold text-cyan-100">
-          About Me
+          <Link
+            href={`/${lang}/about`}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            About Me
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="cyberpunk-card-content">

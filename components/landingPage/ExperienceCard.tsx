@@ -1,5 +1,6 @@
 import { Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Link from "next/link";
 
 interface Job {
   role: string;
@@ -11,18 +12,25 @@ interface Job {
 interface ExperienceCardProps {
   jobs: Job[];
   yearsOfExperience: string;
+  lang?: string;
 }
 
 export function ExperienceCard({
   jobs,
   yearsOfExperience,
+  lang = "en-US",
 }: ExperienceCardProps) {
   return (
     <Card className="cyberpunk-card flex-[1]">
       <div className="card-reflection"></div>
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-bold text-cyan-100">
-          Experience
+          <Link
+            href={`/${lang}/experience`}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Experience
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="cyberpunk-card-content">

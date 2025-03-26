@@ -1,6 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
 import { AboutMeCard } from "@/components/landingPage/AboutMeCard";
 import { ContactCard } from "@/components/landingPage/ContactCard";
 import { ChatCard } from "@/components/landingPage/ChatCard";
@@ -9,16 +6,9 @@ import { ExperienceCard } from "@/components/landingPage/ExperienceCard";
 import { ProjectsCard } from "@/components/landingPage/ProjectsCard";
 import styles from "./page.module.css";
 
-export default function Home({ params }: { params: { lang: string } }) {
-  const [time, setTime] = useState(new Date().toLocaleTimeString());
-
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setTime(new Date().toLocaleTimeString());
-    }, 1000);
-
-    return () => clearInterval(timer);
-  }, []);
+export default async function Home({ params }: { params: { lang: string } }) {
+  // Await params to access its properties
+  const { lang } = await params;
 
   const technologies = [
     "React",
@@ -82,17 +72,18 @@ export default function Home({ params }: { params: { lang: string } }) {
             description="I build web applications with modern technologies. Passionate about clean code, performance optimization, and creating intuitive user experiences."
             location="San Francisco"
             status="Available"
-            time={time}
+            lang={lang}
           />
-          <ContactCard />
+          <ContactCard lang={lang} />
         </div>
 
         {/* Middle Column: Photo with Chat + Tech Stack */}
         <div className={styles.cyberpunkColumn}>
-          <ChatCard />
+          <ChatCard lang={lang} />
           <TechStackCard
             technologies={technologies}
             proficiencyPercentage={75}
+            lang={lang}
           />
         </div>
 
@@ -101,8 +92,9 @@ export default function Home({ params }: { params: { lang: string } }) {
           <ExperienceCard
             jobs={jobs}
             yearsOfExperience="5+ years professional experience"
+            lang={lang}
           />
-          <ProjectsCard projects={projects} />
+          <ProjectsCard projects={projects} lang={lang} />
         </div>
       </div>
     </main>

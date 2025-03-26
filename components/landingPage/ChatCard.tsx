@@ -1,10 +1,17 @@
+"use client";
+
 import { Send, User } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import Link from "next/link";
 
-export function ChatCard() {
+interface ChatCardProps {
+  lang?: string;
+}
+
+export function ChatCard({ lang = "en-US" }: ChatCardProps) {
   const [message, setMessage] = useState("");
 
   return (
@@ -12,7 +19,12 @@ export function ChatCard() {
       <div className="card-reflection"></div>
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-bold text-cyan-100">
-          Ask Me Anything
+          <Link
+            href={`/${lang}/chat`}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Ask Me Anything
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="cyberpunk-card-content">

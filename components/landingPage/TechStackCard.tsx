@@ -1,21 +1,29 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface TechStackCardProps {
   technologies: string[];
   proficiencyPercentage: number;
+  lang?: string;
 }
 
 export function TechStackCard({
   technologies,
   proficiencyPercentage,
+  lang = "en-US",
 }: TechStackCardProps) {
   return (
     <Card className="cyberpunk-card flex-[1]">
       <div className="card-reflection"></div>
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-bold text-cyan-100">
-          Tech Stack
+          <Link
+            href={`/${lang}/tech-stack`}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Tech Stack
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="cyberpunk-card-content">

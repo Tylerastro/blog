@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import Link from "next/link";
 
 interface Project {
   title: string;
@@ -10,15 +11,21 @@ interface Project {
 
 interface ProjectsCardProps {
   projects: Project[];
+  lang?: string;
 }
 
-export function ProjectsCard({ projects }: ProjectsCardProps) {
+export function ProjectsCard({ projects, lang = "en-US" }: ProjectsCardProps) {
   return (
     <Card className="cyberpunk-card flex-[1]">
       <div className="card-reflection"></div>
       <CardHeader className="pb-2">
         <CardTitle className="text-xl font-bold text-cyan-100">
-          Projects
+          <Link
+            href={`/${lang}/projects`}
+            className="hover:text-cyan-300 transition-colors cursor-pointer"
+          >
+            Projects
+          </Link>
         </CardTitle>
       </CardHeader>
       <CardContent className="cyberpunk-card-content">
