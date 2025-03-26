@@ -5,6 +5,12 @@
 body {
   /* font-family: Arial, Helvetica, sans-serif; */
   font-family: var(--font-roboto-mono);
+  height: 100%;
+  overflow: hidden;
+}
+
+html {
+  height: 100%;
 }
 
 @layer utilities {
@@ -127,4 +133,171 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Text shadow effects inspired by CSS3D */
+.text-shadow {
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+}
+
+.text-shadow-lg {
+  text-shadow: 0 0 15px rgba(0, 255, 255, 0.8);
+}
+
+.text-shadow-sm {
+  text-shadow: 0 0 5px rgba(0, 255, 255, 0.4);
+}
+
+/* Glow effects for badges and cards */
+.shadow-glow {
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.5);
+  transition: box-shadow 0.3s ease;
+}
+
+.shadow-glow:hover {
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.8);
+}
+
+/* Pulse animation for status indicator */
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 255, 255, 0.7);
+  }
+
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 5px rgba(0, 255, 255, 0);
+  }
+
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(0, 255, 255, 0);
+  }
+}
+
+.pulse-animation {
+  animation: pulse 2s infinite;
+}
+
+/* Card reflection effect */
+@keyframes card-reflection {
+  0% {
+    left: -100%;
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.3;
+  }
+
+  80% {
+    opacity: 0.3;
+  }
+
+  100% {
+    left: 200%;
+    opacity: 0;
+  }
+}
+
+.card-reflection::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 50%;
+  height: 100%;
+  background: linear-gradient(to right,
+      rgba(255, 255, 255, 0) 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-25deg);
+  animation: card-reflection 6s ease-in-out infinite;
+}
+
+/* Cyberpunk portfolio card layout */
+.cyberpunk-card-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+}
+
+@media (min-width: 768px) {
+  .cyberpunk-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    min-height: calc(100vh - 3rem);
+  }
+}
+
+.cyberpunk-card {
+  background: rgba(0, 127, 127, 0.1);
+  border: 1px solid rgba(0, 255, 255, 0.5);
+  border-radius: 0.5rem;
+  backdrop-filter: blur(8px);
+  box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+  position: relative;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+
+.cyberpunk-card:hover {
+  box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+}
+
+.cyberpunk-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  overflow: hidden;
+}
+
+/* Card column layout */
+.cyberpunk-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  height: auto;
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 255, 255, 0.5) rgba(0, 0, 0, 0.2);
+}
+
+.cyberpunk-column::-webkit-scrollbar {
+  width: 6px;
+}
+
+.cyberpunk-column::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.cyberpunk-column::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 255, 255, 0.5);
+  border-radius: 3px;
+}
+
+@media (min-width: 768px) {
+  .cyberpunk-column {
+    max-height: calc(100vh - 4rem);
+  }
+}
+
+/* Card height ratios */
+.cyberpunk-column>div[class*="flex-[3]"] {
+  flex: 3 1 auto;
+}
+
+.cyberpunk-column>div[class*="flex-[2]"] {
+  flex: 2 1 auto;
+}
+
+.cyberpunk-column>div[class*="flex-[1]"] {
+  flex: 1 1 auto;
 }
