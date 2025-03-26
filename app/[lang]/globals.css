@@ -6,7 +6,8 @@ body {
   /* font-family: Arial, Helvetica, sans-serif; */
   font-family: var(--font-roboto-mono);
   height: 100%;
-  overflow: hidden;
+  /* overflow: hidden; */
+  /* Removed to allow scrolling on other pages */
 }
 
 html {
