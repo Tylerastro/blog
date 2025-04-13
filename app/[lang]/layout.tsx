@@ -2,14 +2,11 @@ import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Cabin } from "next/font/google";
-import { unstable_setRequestLocale } from "next-intl/server";
 import { cn } from "@/lib/utils";
 import localFont from "next/font/local";
 import "./globals.css";
-import Header from "@/components/ui/Header";
 import { Roboto_Mono } from "next/font/google";
-import Footer from "@/components/ui/footer";
-
+import { NavBar } from "@/components/NavBar";
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
   display: "swap",
@@ -56,6 +53,7 @@ export default async function LocaleLayout({
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
           <Toaster />
+          <NavBar />
           <div className="animate-page-transition">{children}</div>
         </ThemeProvider>
       </body>
