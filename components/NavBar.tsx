@@ -26,12 +26,16 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
       label: "About",
     },
     {
-      href: "/services",
-      label: "Services",
+      href: "/posts",
+      label: "Blog",
     },
     {
       href: "/contact",
       label: "Contact",
+    },
+    {
+      href: "/projects",
+      label: "Projects",
     },
   ];
 
@@ -53,7 +57,10 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
         <div className="flex items-center justify-between px-4 py-3">
           <div className="flex items-center">
             <Link href="/" className="flex items-center space-x-2">
-              <span className="text-lg font-bold">Logo</span>
+              <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
+                <span className="text-xs font-bold">TL</span>
+              </div>
+              <span className="text-lg font-bold">Tyler</span>
             </Link>
           </div>
 
@@ -68,7 +75,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 {link.label}
               </Link>
             ))}
-            <Button size="sm">Login</Button>
+            <Button size="sm">Let's Talk</Button>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -104,7 +111,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
               ))}
               <div className="pt-2">
                 <Button className="w-full" size="sm">
-                  Login
+                  Let's Talk
                 </Button>
               </div>
             </div>

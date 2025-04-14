@@ -7,6 +7,7 @@ import localFont from "next/font/local";
 import "./globals.css";
 import { Roboto_Mono } from "next/font/google";
 import { NavBar } from "@/components/NavBar";
+import { BackToTop } from "@/components/BackToTop";
 const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
   display: "swap",
@@ -55,6 +56,7 @@ export default async function LocaleLayout({
           <Toaster />
           <NavBar />
           <div className="animate-page-transition">{children}</div>
+          <BackToTop />
         </ThemeProvider>
       </body>
     </html>
