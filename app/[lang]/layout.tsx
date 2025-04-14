@@ -3,7 +3,6 @@ import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
 import { Cabin } from "next/font/google";
 import { cn } from "@/lib/utils";
-import localFont from "next/font/local";
 import "./globals.css";
 import { Roboto_Mono } from "next/font/google";
 import { NavBar } from "@/components/NavBar";
@@ -13,11 +12,6 @@ const roboto_mono = Roboto_Mono({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-roboto-mono",
-});
-const local_edu_vic_wa_nt_beginner = localFont({
-  src: "./fonts/EduAUVICWANTDots-VariableFont_wght.ttf",
-  weight: "200",
-  variable: "--font-edu-vic-wa-nt-beginner",
 });
 const cabin = Cabin({
   subsets: ["latin"],
@@ -49,7 +43,6 @@ export default async function LocaleLayout({
           "transition-colors",
           "duration-700",
           roboto_mono.variable,
-          local_edu_vic_wa_nt_beginner.variable,
           cabin.variable
         )}
       >
