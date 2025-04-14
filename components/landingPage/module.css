@@ -1,0 +1,64 @@
+.post-table-item {
+    animation: flip .5s ease-out forwards;
+    backface-visibility: visible;
+    transform-style: preserve-3d;
+    transform-origin: center;
+    opacity: 0;
+    animation-fill-mode: forwards;
+}
+
+@keyframes flip {
+    0% {
+        opacity: 1;
+        transform: rotateX(0deg);
+    }
+
+    10% {
+        opacity: 1;
+        transform: rotateX(90deg);
+    }
+
+    20% {
+        opacity: 1;
+        transform: rotateX(180deg);
+    }
+
+    30% {
+        opacity: 1;
+        transform: rotateX(270deg);
+    }
+
+    40% {
+        opacity: 1;
+        transform: rotateX(360deg);
+    }
+
+    50% {
+        opacity: 1;
+        transform: rotateX(450deg);
+    }
+
+    60% {
+        opacity: 1;
+        transform: rotateX(540deg);
+    }
+
+    70% {
+        opacity: 1;
+        transform: rotateX(630deg);
+    }
+
+    80% {
+        opacity: 1;
+        transform: rotateX(720deg);
+    }
+
+    90% {
+        opacity: 1;
+        transform: rotateX(810deg);
+    }
+
+    100% {
+        opacity: 1;
+    }
+}

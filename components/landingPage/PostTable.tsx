@@ -1,13 +1,38 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import "./module.css";
 
-// Sample data - replace with your actual data
 const projects = [
-  { id: 1, name: "E-Commerce Platform", status: "Completed" },
-  { id: 2, name: "Inventory Management", status: "In Progress" },
-  { id: 3, name: "Mobile Application", status: "Planning" },
-  { id: 4, name: "Dashboard Redesign", status: "Completed" },
-  { id: 5, name: "API Integration", status: "In Progress" },
+  {
+    id: 1,
+    name: "E-Commerce Platform",
+    status: "Completed",
+    date: "Jan 15, 2023",
+  },
+  {
+    id: 2,
+    name: "Inventory Management",
+    status: "In Progress",
+    date: "Mar 22, 2023",
+  },
+  {
+    id: 3,
+    name: "Mobile Application",
+    status: "Planning",
+    date: "Apr 10, 2023",
+  },
+  {
+    id: 4,
+    name: "Dashboard Redesign",
+    status: "Completed",
+    date: "Jul 05, 2023",
+  },
+  {
+    id: 5,
+    name: "API Integration",
+    status: "In Progress",
+    date: "Oct 18, 2023",
+  },
 ];
 
 const blogs = [
@@ -18,49 +43,97 @@ const blogs = [
   { id: 5, title: "Web Performance Tips", date: "Sep 18, 2023" },
 ];
 
+interface ListItem {
+  id: number;
+  name?: string;
+  title?: string;
+  status?: string;
+  date?: string;
+  [key: string]: any;
+}
+
+interface TabContentProps {
+  items: ListItem[];
+  tabValue: string;
+  className?: string;
+  labelField?: string;
+  badgeText?: string;
+  hasDarkBackground?: boolean;
+}
+
+const TabContent = ({
+  items,
+  tabValue,
+  className = "",
+  labelField = "name",
+  badgeText,
+  hasDarkBackground = false,
+}: TabContentProps) => {
+  const backgroundClass = hasDarkBackground ? "bg-slate-500 text-white" : "";
+
+  return (
+    <TabsContent value={tabValue} className="mt-0">
+      <ul className={`space-y-2 border rounded-lg p-4 shadow-sm ${className}`}>
+        {items.map((item, index) => (
+          <li
+            key={item.id}
+            className={`flex justify-between items-center border-b pb-2 last:border-0 origin-top p-3 rounded-md post-table-item ${backgroundClass}`}
+            style={{
+              animationDelay: `${index * 300}ms`,
+            }}
+          >
+            <div>
+              <span className="font-medium">{item[labelField]}</span>
+              {item.date && (
+                <span className={`ml-2 text-sm text-gray-300/45`}>
+                  ({item.date})
+                </span>
+              )}
+            </div>
+            {item.status && (
+              <span className={`text-sm text-gray-300/45`}>{item.status}</span>
+            )}
+          </li>
+        ))}
+      </ul>
+    </TabsContent>
+  );
+};
+
 export default function PostTable() {
   return (
     <div className="w-full max-w-4xl mx-auto">
       <Tabs defaultValue="projects" className="w-full">
         <div className="flex justify-center mb-6">
-          <TabsList className="grid w-[300px] grid-cols-2">
-            <TabsTrigger value="projects">Projects</TabsTrigger>
-            <TabsTrigger value="blogs">Blogs</TabsTrigger>
+          <TabsList className="grid w-[400px] grid-cols-2 bg-transparent">
+            <TabsTrigger
+              value="projects"
+              className="text-lg data-[state=active]:bg-transparent data-[state=active]:text-primary  transition-all hover:scale-105 hover:shadow-md"
+            >
+              Projects
+            </TabsTrigger>
+            <TabsTrigger
+              value="blogs"
+              className="text-lg data-[state=active]:bg-transparent data-[state=active]:text-primary  transition-all hover:scale-105 hover:shadow-md"
+            >
+              Blogs
+            </TabsTrigger>
           </TabsList>
         </div>
 
-        <div className="bg-white dark:bg-gray-800 rounded-md shadow p-4">
-          <TabsContent value="projects" className="mt-0">
-            <ul className="space-y-2">
-              {projects.map((project) => (
-                <li
-                  key={project.id}
-                  className="flex justify-between items-center border-b pb-2 last:border-0"
-                >
-                  <span className="font-medium">{project.name}</span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {project.status}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
+        <div className="rounded-md p-4">
+          <TabContent
+            items={projects}
+            tabValue="projects"
+            hasDarkBackground={true}
+          />
 
-          <TabsContent value="blogs" className="mt-0">
-            <ul className="space-y-2">
-              {blogs.map((blog) => (
-                <li
-                  key={blog.id}
-                  className="flex justify-between items-center border-b pb-2 last:border-0"
-                >
-                  <span className="font-medium">{blog.title}</span>
-                  <span className="text-sm text-gray-500 dark:text-gray-400">
-                    {blog.date}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </TabsContent>
+          <TabContent
+            items={blogs}
+            tabValue="blogs"
+            labelField="title"
+            badgeText="Blog"
+          />
         </div>
       </Tabs>
     </div>
