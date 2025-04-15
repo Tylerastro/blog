@@ -1,24 +1,11 @@
 import type { Metadata } from "next";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "@/components/ui/toaster";
-import { Cabin } from "next/font/google";
 import { cn } from "@/lib/utils";
 import "./globals.css";
-import { Roboto_Mono } from "next/font/google";
 import { NavBar } from "@/components/NavBar";
 import { BackToTop } from "@/components/BackToTop";
-
-const roboto_mono = Roboto_Mono({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-roboto-mono",
-});
-const cabin = Cabin({
-  subsets: ["latin"],
-  display: "swap",
-  variable: "--font-cabin",
-  weight: "500",
-});
+import { roboto_mono, cabin } from "./fonts";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -42,8 +29,8 @@ export default async function LocaleLayout({
           "font-cabin",
           "transition-colors",
           "duration-700",
-          roboto_mono.variable,
-          cabin.variable
+          roboto_mono.className,
+          cabin.className
         )}
       >
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
