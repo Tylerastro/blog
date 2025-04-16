@@ -1,18 +1,22 @@
 import PostTable from "@/components/landingPage/PostTable";
+import { BlackHole } from "@/components/BlackHole";
 
 export default async function Home({ params }: { params: { lang: string } }) {
   const { lang } = await params;
 
   return (
-    <main className="bg-gray-100 snap-mandatory snap-y h-screen overflow-y-scroll scroll-smooth">
-      <section className="h-[100svh] flex flex-col snap-center">
-        <div className="h-[60%] flex items-center justify-center mt-16">
-          <h2 className="text-xl font-medium text-primary-foreground">
+    <main className="bg-black-100 snap-mandatory snap-y h-screen overflow-y-scroll scroll-smooth">
+      <section className="h-[100svh] flex flex-col snap-center relative overflow-hidden">
+        <div className="absolute inset-0 opacity-90 w-full h-full">
+          <BlackHole />
+        </div>
+        <div className="h-[60%] flex items-center justify-center mt-16 relative z-10">
+          <h2 className="text-xl font-medium text-white drop-shadow-lg">
             Every day tips
           </h2>
         </div>
-        <div className="h-[40%] flex items-center justify-center">
-          <h1 className="text-3xl font-bold text-primary-foreground">
+        <div className="h-[40%] flex items-center justify-center relative z-10">
+          <h1 className="text-3xl font-bold text-white drop-shadow-lg">
             Tyler Lin
           </h1>
         </div>

@@ -39,7 +39,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
   return (
     <header
       className={cn(
-        "fixed left-1/2 top-4 w-full -translate-x-1/2 px-4 md:w-3/4",
+        "fixed left-1/2 top-4 w-full -translate-x-1/2 px-4 md:w-3/4 z-50",
         className
       )}
       {...props}
