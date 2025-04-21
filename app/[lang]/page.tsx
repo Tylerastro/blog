@@ -1,5 +1,5 @@
 import PostTable from "@/components/landingPage/PostTable";
-import { BlackHole } from "@/components/BlackHole";
+import BlackHole from "@/components/BlackHole";
 
 export default async function Home({ params }: { params: { lang: string } }) {
   const { lang } = await params;

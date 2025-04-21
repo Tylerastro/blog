@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useMemo } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, shaderMaterial } from "@react-three/drei";
 import * as THREE from "three";
@@ -72,6 +72,14 @@ function BlackHolePlane() {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
+  const uniforms = useMemo(
+    () => ({
+      iTime: { value: 0 },
+      iResolution: { value: new THREE.Vector2(1, 1) },
+    }),
+    []
+  );
+
   useFrame(({ clock, size }) => {
     if (materialRef.current) {
       materialRef.current.uniforms.iTime.value = clock.getElapsedTime();
@@ -89,10 +97,7 @@ function BlackHolePlane() {
         ref={materialRef}
         fragmentShader={fragmentShader}
         vertexShader={vertexShader}
-        uniforms={{
-          iTime: { value: 0 },
-          iResolution: { value: new THREE.Vector2(1, 1) },
-        }}
+        uniforms={uniforms}
       />
     </mesh>
   );
@@ -102,7 +107,7 @@ interface BlackHoleProps {
   className?: string;
 }
 
-export function BlackHole({ className = "" }: BlackHoleProps) {
+export default function BlackHole({ className = "" }: BlackHoleProps) {
   return (
     <Canvas className={`w-full h-full ${className}`}>
       <OrbitControls />

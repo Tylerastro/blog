@@ -2,6 +2,16 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu";
 
 interface NavBarProps extends React.HTMLAttributes<HTMLElement> {
   links?: {
@@ -19,10 +29,6 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
     {
       href: "/about",
       label: "About",
-    },
-    {
-      href: "/posts",
-      label: "Blog",
     },
     {
       href: "/contact",
@@ -45,7 +51,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
       {...props}
     >
       <div className="mx-auto max-w-screen-md px-4">
-        <div className="relative overflow-hidden rounded-full backdrop-blur-md shadow-lg">
+        <div className="relative rounded-full backdrop-blur-md shadow-lg">
           <div className="flex items-center justify-between px-4 py-3">
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
@@ -56,7 +62,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
               </Link>
             </div>
 
-            <nav className="hidden md:flex md:items-center md:space-x-4">
+            <nav className="relative hidden md:flex md:items-center md:space-x-4">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -66,6 +72,57 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                   {link.label}
                 </Link>
               ))}
+              <NavigationMenu>
+                <NavigationMenuList>
+                  <NavigationMenuItem>
+                    <NavigationMenuTrigger className="text-lg">
+                      Blog
+                    </NavigationMenuTrigger>
+                    <NavigationMenuContent className="min-w-[180px]">
+                      <ul className="flex flex-col gap-1 p-2">
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href="/posts"
+                              className="block px-3 py-2 rounded hover:bg-accent focus:bg-accent focus:outline-none"
+                              tabIndex={0}
+                              aria-label="All Posts"
+                            >
+                              All Posts
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href="/posts/tags"
+                              className="block px-3 py-2 rounded hover:bg-accent focus:bg-accent focus:outline-none"
+                              tabIndex={0}
+                              aria-label="Tags"
+                            >
+                              Tags
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                        <li>
+                          <NavigationMenuLink asChild>
+                            <Link
+                              href="/posts/categories"
+                              className="block px-3 py-2 rounded hover:bg-accent focus:bg-accent focus:outline-none"
+                              tabIndex={0}
+                              aria-label="Categories"
+                            >
+                              Categories
+                            </Link>
+                          </NavigationMenuLink>
+                        </li>
+                      </ul>
+                    </NavigationMenuContent>
+                  </NavigationMenuItem>
+                </NavigationMenuList>
+                <NavigationMenuIndicator />
+                <NavigationMenuViewport />
+              </NavigationMenu>
             </nav>
             <Button size="sm">Let's Talk</Button>
           </div>

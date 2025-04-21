@@ -20,8 +20,8 @@ export default async function BlogPostPage({
         <PostInfo
           date={matterResult.created_date}
           title={matterResult.title}
-          tags={matterResult.tags}
-          categories={matterResult.categories}
+          tags={matterResult.tags ?? []}
+          categories={matterResult.categories ?? []}
         />
         <BlogPost
           title={matterResult.title}
