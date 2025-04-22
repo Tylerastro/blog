@@ -56,21 +56,25 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
                 <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
-                  <span className="text-xs font-bold">TL</span>
+                  <span className="text-xs">TL</span>
                 </div>
-                <span className="text-lg font-bold">Tyler</span>
+                <span className="text-lg">Tyler</span>
               </Link>
             </div>
 
             <nav className="relative gap-4 hidden md:flex md:items-center md:space-x-8">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-lg transition-colors hover:text-secondary-foreground"
-                >
-                  {link.label}
-                </Link>
+                <div key={link.href} className="text-hover-container">
+                  <div className="text-hover-effect">
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-lg transition-colors hover:text-secondary-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
+                </div>
               ))}
               <NavigationMenu>
                 <NavigationMenuList>

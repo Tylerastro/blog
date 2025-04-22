@@ -17,6 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
+import { noto_emoji } from "@/app/[lang]/fonts";
 
 interface TagSlugPageProps {
   params: { slug: string };
@@ -100,7 +101,9 @@ const TagSlugPage = async ({ params, searchParams }: TagSlugPageProps) => {
           </Breadcrumb>
         </div>
         <h1 className="mb-8 text-center text-4xl font-bold">
-          Posts tagged with <span className="text-blue-600">{tag.name}</span>
+          <span className={`${noto_emoji.className} text-4xl`}>🏷️</span>
+          &nbsp;
+          <span className="">{tag.name}</span>
         </h1>
         <div className="flex flex-col gap-8 items-center justify-center">
           {paginatedPosts.length === 0 ? (

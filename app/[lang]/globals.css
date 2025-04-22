@@ -99,3 +99,52 @@ html {
   user-select: none;
   /* Standard syntax */
 }
+
+
+/* Text hover effect styles */
+.text-hover-container {
+  display: inline-block;
+  padding: 5px;
+}
+
+.text-hover-effect {
+  position: relative;
+  font-weight: bold;
+  cursor: pointer;
+  display: inline-block;
+}
+
+/* Top line (top-left to top-right) */
+.text-hover-effect::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+  transform-origin: left;
+}
+
+/* Bottom line (bottom-right to bottom-left) */
+.text-hover-effect::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 0;
+  height: 2px;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+  transform-origin: right;
+}
+
+/* Hover effects */
+.text-hover-effect:hover::before {
+  width: 100%;
+}
+
+.text-hover-effect:hover::after {
+  width: 100%;
+}
