@@ -1,4 +1,5 @@
 import { Calendar, Tag, FolderOpen } from "lucide-react";
+import Link from "next/link";
 
 interface PostInfoProps {
   date: string;
@@ -36,12 +37,15 @@ export default function PostInfo({
           <div className="flex flex-wrap items-center">
             <Tag className="w-5 h-5 mr-2 text-blue-500" />
             {tags.map((tag, index) => (
-              <span
+              <Link
                 key={index}
-                className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300"
+                href={`/posts/tags/${encodeURIComponent(tag.toLowerCase())}`}
+                className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                tabIndex={0}
+                aria-label={`View posts tagged with ${tag}`}
               >
                 {tag}
-              </span>
+              </Link>
             ))}
           </div>
           <div className="flex flex-wrap items-center">
