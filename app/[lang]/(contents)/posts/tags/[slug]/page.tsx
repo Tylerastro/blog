@@ -27,7 +27,9 @@ interface TagSlugPageProps {
 const postsPerPage = 7;
 
 const TagSlugPage = async ({ params, searchParams }: TagSlugPageProps) => {
-  const tag = getTagBySlug(params.slug);
+  // Decode the slug to handle Chinese and other non-ASCII characters
+  const decodedSlug = decodeURIComponent(params.slug);
+  const tag = getTagBySlug(decodedSlug);
   if (!tag) {
     return (
       <main className="max-w-3xl mx-auto px-4 py-8">
