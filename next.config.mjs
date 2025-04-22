@@ -5,9 +5,11 @@ import rehypeStarryNight from 'rehype-starry-night'
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // Optionally, add any other Next.js config below
+  
   turbopack: {
       resolveExtensions: [
         ".md",
@@ -19,9 +21,23 @@ const nextConfig = {
         ".mjs",
         ".json",
       ],
+      rules: {
+        "*.glsl": {
+          loaders: ["raw-loader"],
+          as: "*.js",
+        },
+      },
   },
-}
- 
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.(glsl|vs|fs|vert|frag)$/,
+      use: "raw-loader",
+      exclude: /node_modules/,
+    });
+    return config;
+  },
+};
+
 const withMDX = createMDX({
   options: {
      rehypePlugins: [
@@ -36,3 +52,5 @@ rehypeStarryNight
  
 // Merge MDX config with Next.js config
 export default withMDX(nextConfig)
+
+

@@ -45,14 +45,14 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
   return (
     <header
       className={cn(
-        "fixed left-1/2 top-4 w-full -translate-x-1/2 px-4 md:w-3/4 z-50",
+        "fixed left-1/2 top-4 w-full -translate-x-1/2 px-8 md:w-11/12 max-w-screen-xl z-50",
         className
       )}
       {...props}
     >
-      <div className="mx-auto max-w-screen-md px-4">
+      <div className="mx-auto max-w-screen-xl px-8">
         <div className="relative rounded-full backdrop-blur-md shadow-lg">
-          <div className="flex items-center justify-between px-4 py-3">
+          <div className="flex items-center justify-between px-8 py-4">
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
                 <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
@@ -62,7 +62,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
               </Link>
             </div>
 
-            <nav className="relative hidden md:flex md:items-center md:space-x-4">
+            <nav className="relative gap-4 hidden md:flex md:items-center md:space-x-8">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
@@ -79,12 +79,12 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                       Blog
                     </NavigationMenuTrigger>
                     <NavigationMenuContent className="min-w-[180px]">
-                      <ul className="flex flex-col gap-1 p-2">
+                      <ul className="flex flex-col gap-3 p-2">
                         <li>
                           <NavigationMenuLink asChild>
                             <Link
                               href="/posts"
-                              className="block px-3 py-2 rounded hover:bg-accent focus:bg-accent focus:outline-none"
+                              className="block px-3 py-2 rounded focus:outline-none"
                               tabIndex={0}
                               aria-label="All Posts"
                             >
@@ -96,7 +96,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                           <NavigationMenuLink asChild>
                             <Link
                               href="/posts/tags"
-                              className="block px-3 py-2 rounded hover:bg-accent focus:bg-accent focus:outline-none"
+                              className="block px-3 py-2 rounded focus:outline-none"
                               tabIndex={0}
                               aria-label="Tags"
                             >
@@ -108,7 +108,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                           <NavigationMenuLink asChild>
                             <Link
                               href="/posts/categories"
-                              className="block px-3 py-2 rounded hover:bg-accent focus:bg-accent focus:outline-none"
+                              className="block px-3 py-2 rounded focus:outline-none"
                               tabIndex={0}
                               aria-label="Categories"
                             >
@@ -124,7 +124,9 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 <NavigationMenuViewport />
               </NavigationMenu>
             </nav>
-            <Button size="sm">Let's Talk</Button>
+            <Button size="sm" className="ml-8">
+              Let's Talk
+            </Button>
           </div>
         </div>
       </div>

@@ -21,14 +21,14 @@ export default async function Home({ params }: { params: { lang: string } }) {
           </h1>
         </div>
       </section>
-      <section className="h-[100svh] bg-secondary rounded-t-3xl -mt-2 py-12 snap-center">
+      {/* <section className="h-[100svh] bg-secondary rounded-t-3xl -mt-2 py-12 snap-center">
         <div className="mt-12">
           <PostTable />
         </div>
       </section>
       <section className="h-[100svh] snap-center">
         <h1>Section 3</h1>
-      </section>
+      </section> */}
     </main>
   );
 }
