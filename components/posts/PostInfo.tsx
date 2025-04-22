@@ -48,7 +48,7 @@ export default function PostInfo({
               </Link>
             ))}
           </div>
-          <div className="flex flex-wrap items-center">
+          {/* <div className="flex flex-wrap items-center">
             <FolderOpen className="w-5 h-5 mr-2 text-green-500" />
             {categories.map((category, index) => (
               <span
@@ -58,7 +58,7 @@ export default function PostInfo({
                 {category}
               </span>
             ))}
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

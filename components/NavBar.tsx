@@ -20,6 +20,49 @@ interface NavBarProps extends React.HTMLAttributes<HTMLElement> {
   }[];
 }
 
+// Blog dropdown links with descriptions
+type BlogLink = {
+  title: string;
+  href: string;
+  description: string;
+};
+
+const blogLinks: BlogLink[] = [
+  {
+    title: "All Posts",
+    href: "/posts",
+    description: "Browse all blog posts and tutorials.",
+  },
+  {
+    title: "Tags",
+    href: "/posts/tags",
+    description: "Explore posts by tag.",
+  },
+];
+
+// ListItem component for the Blog dropdown
+const ListItem: React.FC<{
+  title: string;
+  href: string;
+  children: React.ReactNode;
+}> = ({ title, href, children }) => (
+  <li className="m-0">
+    <NavigationMenuLink asChild>
+      <Link
+        href={href}
+        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/50 focus:bg-accent/70 focus:text-accent-foreground text-left"
+        tabIndex={0}
+        aria-label={title}
+      >
+        <div className="text-base font-medium text-primary-foreground">
+          {title}
+        </div>
+        <p className="line-clamp-2 text-sm text-muted-foreground">{children}</p>
+      </Link>
+    </NavigationMenuLink>
+  </li>
+);
+
 export function NavBar({ className, links = [], ...props }: NavBarProps) {
   const defaultLinks = [
     {
@@ -31,12 +74,12 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
       label: "About",
     },
     {
-      href: "/contact",
-      label: "Contact",
-    },
-    {
       href: "/projects",
       label: "Projects",
+    },
+    {
+      href: "/contact",
+      label: "Contact",
     },
   ];
 
@@ -63,7 +106,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
             </div>
 
             <nav className="relative gap-4 hidden md:flex md:items-center md:space-x-8">
-              {navLinks.map((link) => (
+              {navLinks.slice(0, 2).map((link) => (
                 <div key={link.href} className="text-hover-container">
                   <div className="text-hover-effect">
                     <Link
@@ -82,44 +125,17 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                     <NavigationMenuTrigger className="text-lg">
                       Blog
                     </NavigationMenuTrigger>
-                    <NavigationMenuContent className="min-w-[180px]">
-                      <ul className="flex flex-col gap-3 p-2">
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              href="/posts"
-                              className="block px-3 py-2 rounded focus:outline-none"
-                              tabIndex={0}
-                              aria-label="All Posts"
-                            >
-                              All Posts
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              href="/posts/tags"
-                              className="block px-3 py-2 rounded focus:outline-none"
-                              tabIndex={0}
-                              aria-label="Tags"
-                            >
-                              Tags
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
-                        <li>
-                          <NavigationMenuLink asChild>
-                            <Link
-                              href="/posts/categories"
-                              className="block px-3 py-2 rounded focus:outline-none"
-                              tabIndex={0}
-                              aria-label="Categories"
-                            >
-                              Categories
-                            </Link>
-                          </NavigationMenuLink>
-                        </li>
+                    <NavigationMenuContent>
+                      <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px]">
+                        {blogLinks.map((item) => (
+                          <ListItem
+                            key={item.title}
+                            title={item.title}
+                            href={item.href}
+                          >
+                            {item.description}
+                          </ListItem>
+                        ))}
                       </ul>
                     </NavigationMenuContent>
                   </NavigationMenuItem>
@@ -127,6 +143,19 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 <NavigationMenuIndicator />
                 <NavigationMenuViewport />
               </NavigationMenu>
+              {navLinks.slice(2).map((link) => (
+                <div key={link.href} className="text-hover-container">
+                  <div className="text-hover-effect">
+                    <Link
+                      key={link.href}
+                      href={link.href}
+                      className="text-lg transition-colors hover:text-secondary-foreground"
+                    >
+                      {link.label}
+                    </Link>
+                  </div>
+                </div>
+              ))}
             </nav>
             <Button size="sm" className="ml-8">
               Let's Talk
