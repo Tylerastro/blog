@@ -13,8 +13,6 @@ html {
   scroll-behavior: smooth;
 }
 
-
-
 @layer utilities {
   .text-balance {
     text-wrap: balance;
@@ -99,7 +97,6 @@ html {
   user-select: none;
   /* Standard syntax */
 }
-
 
 /* Text hover effect styles */
 .text-hover-container {

@@ -20,13 +20,15 @@ import {
 import { noto_emoji } from "@/app/[lang]/fonts";
 
 interface TagSlugPageProps {
-  params: { slug: string };
-  searchParams: { page?: string };
+  params: Promise<{ slug: string }>;
+  searchParams: Promise<{ page?: string }>;
 }
 
 const postsPerPage = 7;
 
-const TagSlugPage = async ({ params, searchParams }: TagSlugPageProps) => {
+const TagSlugPage = async (props: TagSlugPageProps) => {
+  const searchParams = await props.searchParams;
+  const params = await props.params;
   // Decode the slug to handle Chinese and other non-ASCII characters
   const decodedSlug = decodeURIComponent(params.slug);
   const tag = getTagBySlug(decodedSlug);
@@ -63,7 +65,7 @@ const TagSlugPage = async ({ params, searchParams }: TagSlugPageProps) => {
   );
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8">
+    <main className="max-w-3xl mx-auto px-4 py-8 ">
       <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
         {/* Breadcrumb Navigation */}
         <div className="mb-8">
@@ -86,8 +88,8 @@ const TagSlugPage = async ({ params, searchParams }: TagSlugPageProps) => {
                   <DropdownMenuTrigger className="flex items-center gap-1 focus:outline-none">
                     Tags <ChevronDown className="w-4 h-4" />
                   </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start">
-                    <DropdownMenuItem asChild>
+                  <DropdownMenuContent align="start" className="w-fit">
+                    <DropdownMenuItem>
                       <Link href="/posts/tags">All Tags</Link>
                     </DropdownMenuItem>
                   </DropdownMenuContent>
