@@ -26,33 +26,30 @@ const TagCloudPage = async () => {
 
   console.log(tags);
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8">
-      <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
-        <h1 className="text-3xl font-bold mb-8 text-center">Tag Cloud</h1>
-        <div className="flex flex-wrap gap-4">
-          {tags.map((tag) => {
-            const s = scale(tag.count);
-            const fontSize =
-              MIN_FONT_SIZE + (MAX_FONT_SIZE - MIN_FONT_SIZE) * s;
-            const opacity = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * s;
-            return (
-              <Link
-                key={tag.slug}
-                href={`./tags/${tag.slug}`}
-                tabIndex={0}
-                aria-label={`View posts tagged ${tag.name}`}
-                className="transition-all focus:outline-none focus:ring-2 rounded"
-                style={{ fontSize: `${fontSize}rem`, opacity }}
-              >
-                <span className="px-2 py-1 rounded cursor-pointer select-none">
-                  {tag.name}
-                </span>
-              </Link>
-            );
-          })}
-        </div>
-      </section>
-    </main>
+    <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
+      <h1 className="text-3xl font-bold mb-8 text-center">Tag Cloud</h1>
+      <div className="flex flex-wrap gap-4">
+        {tags.map((tag) => {
+          const s = scale(tag.count);
+          const fontSize = MIN_FONT_SIZE + (MAX_FONT_SIZE - MIN_FONT_SIZE) * s;
+          const opacity = MIN_OPACITY + (MAX_OPACITY - MIN_OPACITY) * s;
+          return (
+            <Link
+              key={tag.slug}
+              href={`./tags/${tag.slug}`}
+              tabIndex={0}
+              aria-label={`View posts tagged ${tag.name}`}
+              className="transition-all focus:outline-none focus:ring-2 rounded"
+              style={{ fontSize: `${fontSize}rem`, opacity }}
+            >
+              <span className="px-2 py-1 rounded cursor-pointer select-none">
+                {tag.name}
+              </span>
+            </Link>
+          );
+        })}
+      </div>
+    </section>
   );
 };
 

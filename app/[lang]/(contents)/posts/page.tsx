@@ -42,34 +42,30 @@ export default async function BlogPostsList({
   }
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8">
-      <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
-        <h1 className="mb-8 text-center text-4xl font-bold">
-          {dict.Blog.title}
-        </h1>
-        <div className="flex flex-col gap-8 items-center justify-center">
-          <PostList posts={paginatedPosts} />
+    <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
+      <h1 className="mb-8 text-center text-4xl font-bold">{dict.Blog.title}</h1>
+      <div className="flex flex-col gap-8 items-center justify-center">
+        <PostList posts={paginatedPosts} />
 
-          {/* Pagination Controls */}
-          <div className="flex gap-2 justify-center mt-8">
-            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-              (pageNum) => (
-                <a
-                  key={pageNum}
-                  href={`/posts?page=${pageNum}`}
-                  className={`px-4 py-2 border rounded-md ${
-                    currentPage === pageNum
-                      ? "bg-primary-foreground text-white"
-                      : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                  }`}
-                >
-                  {pageNum}
-                </a>
-              )
-            )}
-          </div>
+        {/* Pagination Controls */}
+        <div className="flex gap-2 justify-center mt-8">
+          {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+            (pageNum) => (
+              <a
+                key={pageNum}
+                href={`/posts?page=${pageNum}`}
+                className={`px-4 py-2 border rounded-md ${
+                  currentPage === pageNum
+                    ? "bg-primary-foreground text-white"
+                    : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                }`}
+              >
+                {pageNum}
+              </a>
+            )
+          )}
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
   );
 }

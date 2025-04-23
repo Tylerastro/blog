@@ -34,7 +34,7 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
   const tag = getTagBySlug(decodedSlug);
   if (!tag) {
     return (
-      <main className="max-w-3xl mx-auto px-4 py-8">
+      <>
         <h1 className="text-3xl font-bold mb-6">Tag Not Found</h1>
         <Link
           href="../"
@@ -44,7 +44,7 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
         >
           Back to tag cloud
         </Link>
-      </main>
+      </>
     );
   }
 
@@ -65,84 +65,82 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
   );
 
   return (
-    <main className="max-w-3xl mx-auto px-4 py-8 ">
-      <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
-        {/* Breadcrumb Navigation */}
-        <div className="mb-8">
-          <Breadcrumb>
-            <BreadcrumbList>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/">Home</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash className="w-4 h-4" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbLink href="/posts">Posts</BreadcrumbLink>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash className="w-4 h-4" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <DropdownMenu>
-                  <DropdownMenuTrigger className="flex items-center gap-1 focus:outline-none">
-                    Tags <ChevronDown className="w-4 h-4" />
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="start" className="w-fit">
-                    <DropdownMenuItem>
-                      <Link href="/posts/tags">All Tags</Link>
-                    </DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              </BreadcrumbItem>
-              <BreadcrumbSeparator>
-                <Slash className="w-4 h-4" />
-              </BreadcrumbSeparator>
-              <BreadcrumbItem>
-                <BreadcrumbPage>{tag.name}</BreadcrumbPage>
-              </BreadcrumbItem>
-            </BreadcrumbList>
-          </Breadcrumb>
-        </div>
-        <h1 className="mb-8 text-center text-4xl font-bold">
-          <span className={`${noto_emoji.className} text-4xl`}>🏷️</span>
-          &nbsp;
-          <span className="">{tag.name}</span>
-        </h1>
-        <div className="flex flex-col gap-8 items-center justify-center">
-          {paginatedPosts.length === 0 ? (
-            <p className="text-lg text-gray-600 dark:text-gray-400">
-              No posts found for this tag.
-            </p>
-          ) : (
-            <PostList posts={paginatedPosts} />
-          )}
+    <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
+      {/* Breadcrumb Navigation */}
+      <div className="mb-8">
+        <Breadcrumb>
+          <BreadcrumbList>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator>
+              <Slash className="w-4 h-4" />
+            </BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbLink href="/posts">Posts</BreadcrumbLink>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator>
+              <Slash className="w-4 h-4" />
+            </BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <DropdownMenu>
+                <DropdownMenuTrigger className="flex items-center gap-1 focus:outline-none">
+                  Tags <ChevronDown className="w-4 h-4" />
+                </DropdownMenuTrigger>
+                <DropdownMenuContent align="start" className="w-fit">
+                  <DropdownMenuItem>
+                    <Link href="/posts/tags">All Tags</Link>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+            </BreadcrumbItem>
+            <BreadcrumbSeparator>
+              <Slash className="w-4 h-4" />
+            </BreadcrumbSeparator>
+            <BreadcrumbItem>
+              <BreadcrumbPage>{tag.name}</BreadcrumbPage>
+            </BreadcrumbItem>
+          </BreadcrumbList>
+        </Breadcrumb>
+      </div>
+      <h1 className="mb-8 text-center text-4xl font-bold">
+        <span className={`${noto_emoji.className} text-4xl`}>🏷️</span>
+        &nbsp;
+        <span className="">{tag.name}</span>
+      </h1>
+      <div className="flex flex-col gap-8 items-center justify-center">
+        {paginatedPosts.length === 0 ? (
+          <p className="text-lg text-gray-600 dark:text-gray-400">
+            No posts found for this tag.
+          </p>
+        ) : (
+          <PostList posts={paginatedPosts} />
+        )}
 
-          {/* Pagination Controls */}
-          {totalPages > 1 && (
-            <div className="flex gap-2 justify-center mt-8">
-              {Array.from({ length: totalPages }, (_, i) => i + 1).map(
-                (pageNum) => (
-                  <Link
-                    key={pageNum}
-                    href={`?page=${pageNum}`}
-                    className={`px-4 py-2 border rounded-md ${
-                      currentPage === pageNum
-                        ? "bg-primary-foreground text-white"
-                        : "hover:bg-gray-100 dark:hover:bg-gray-800"
-                    }`}
-                    tabIndex={0}
-                    aria-label={`Go to page ${pageNum}`}
-                  >
-                    {pageNum}
-                  </Link>
-                )
-              )}
-            </div>
-          )}
-        </div>
-      </section>
-    </main>
+        {/* Pagination Controls */}
+        {totalPages > 1 && (
+          <div className="flex gap-2 justify-center mt-8">
+            {Array.from({ length: totalPages }, (_, i) => i + 1).map(
+              (pageNum) => (
+                <Link
+                  key={pageNum}
+                  href={`?page=${pageNum}`}
+                  className={`px-4 py-2 border rounded-md ${
+                    currentPage === pageNum
+                      ? "bg-primary-foreground text-white"
+                      : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                  }`}
+                  tabIndex={0}
+                  aria-label={`Go to page ${pageNum}`}
+                >
+                  {pageNum}
+                </Link>
+              )
+            )}
+          </div>
+        )}
+      </div>
+    </section>
   );
 };
 

@@ -50,7 +50,7 @@ const ListItem: React.FC<{
     <NavigationMenuLink asChild>
       <Link
         href={href}
-        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent/50 focus:bg-accent/70 focus:text-accent-foreground text-left"
+        className="block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-link/20 focus:bg-accent focus:text-accent-foreground text-left"
         tabIndex={0}
         aria-label={title}
       >
@@ -88,7 +88,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
   return (
     <header
       className={cn(
-        "fixed left-1/2 top-4 w-full -translate-x-1/2 px-8 md:w-11/12 max-w-screen-xl z-50",
+        "fixed left-1/2 top-0 w-full -translate-x-1/2 px-8 md:w-11/12 max-w-screen-xl z-50",
         className
       )}
       {...props}

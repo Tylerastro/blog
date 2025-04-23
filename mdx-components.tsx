@@ -74,6 +74,49 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </a>
       );
     },
+    ul: ({ children }) => <ul className="github-task-list my-2">{children}</ul>,
+    li: ({ children }) => {
+      // Handle [x] and [ ] for checkboxes
+      let isCheckbox = false;
+      let checked = false;
+      let label = children;
+
+      // If children is a string or array with string first
+      if (typeof children === "string") {
+        const match = children.match(/^\[( |x|X)\] ?(.*)$/);
+        if (match) {
+          isCheckbox = true;
+          checked = match[1].toLowerCase() === "x";
+          label = match[2];
+        }
+      } else if (Array.isArray(children) && typeof children[0] === "string") {
+        const match = children[0].match(/^\[( |x|X)\] ?(.*)$/);
+        if (match) {
+          isCheckbox = true;
+          checked = match[1].toLowerCase() === "x";
+          // Remove the marker from the first child, keep the rest
+          label = [match[2], ...children.slice(1)];
+        }
+      }
+
+      if (isCheckbox) {
+        return (
+          <li>
+            <input
+              type="checkbox"
+              checked={checked}
+              disabled
+              tabIndex={-1}
+              aria-checked={checked}
+              className=""
+            />
+            <label className="select-none">{label}</label>
+          </li>
+        );
+      }
+
+      return <li>{children}</li>;
+    },
     ...components,
   };
 }
