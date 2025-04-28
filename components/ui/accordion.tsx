@@ -1,12 +1,12 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import * as AccordionPrimitive from "@radix-ui/react-accordion"
-import { ChevronDownIcon } from "@radix-ui/react-icons"
+import * as React from "react";
+import * as AccordionPrimitive from "@radix-ui/react-accordion";
+import { ChevronDownIcon } from "@radix-ui/react-icons";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
-const Accordion = AccordionPrimitive.Root
+const Accordion = AccordionPrimitive.Root;
 
 const AccordionItem = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Item>,
@@ -17,28 +17,60 @@ const AccordionItem = React.forwardRef<
     className={cn("border-b", className)}
     {...props}
   />
-))
-AccordionItem.displayName = "AccordionItem"
+));
+AccordionItem.displayName = "AccordionItem";
 
 const AccordionTrigger = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Trigger>,
   React.ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
->(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
-      ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-        className
-      )}
-      {...props}
-    >
-      {children}
-      <ChevronDownIcon className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
-))
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName
+>(({ className, children, ...props }, ref) => {
+  const scrollPositionRef = React.useRef<number>(0);
+  const animationDuration = 2900; // ms, match with transition duration
+
+  const handleOpen = React.useCallback(
+    (event: React.MouseEvent | React.KeyboardEvent) => {
+      // Only act on click or Enter/Space keydown
+      if (
+        event.type === "click" ||
+        (event.type === "keydown" &&
+          ((event as React.KeyboardEvent).key === "Enter" ||
+            (event as React.KeyboardEvent).key === " "))
+      ) {
+        // Find the trigger element and check if it's opening
+        const trigger = event.currentTarget as HTMLElement;
+        const isOpening = trigger.getAttribute("aria-expanded") === "false";
+        if (isOpening) {
+          scrollPositionRef.current = window.scrollY;
+          setTimeout(() => {
+            window.scrollTo({ top: scrollPositionRef.current });
+          }, animationDuration);
+        }
+      }
+    },
+    []
+  );
+
+  return (
+    <AccordionPrimitive.Header className="flex">
+      <AccordionPrimitive.Trigger
+        ref={ref}
+        className={cn(
+          "flex flex-1 items-center justify-between py-4 text-sm font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
+          className
+        )}
+        tabIndex={0}
+        aria-label="Toggle accordion section"
+        onClick={handleOpen}
+        onKeyDown={handleOpen}
+        {...props}
+      >
+        {children}
+        <ChevronDownIcon className="h-4 w-4 shrink-0 text-muted-foreground transition-transform duration-200" />
+      </AccordionPrimitive.Trigger>
+    </AccordionPrimitive.Header>
+  );
+});
+AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
 
 const AccordionContent = React.forwardRef<
   React.ElementRef<typeof AccordionPrimitive.Content>,
@@ -51,7 +83,7 @@ const AccordionContent = React.forwardRef<
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>
   </AccordionPrimitive.Content>
-))
-AccordionContent.displayName = AccordionPrimitive.Content.displayName
+));
+AccordionContent.displayName = AccordionPrimitive.Content.displayName;
 
-export { Accordion, AccordionItem, AccordionTrigger, AccordionContent }
+export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };

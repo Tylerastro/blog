@@ -179,3 +179,141 @@ html {
   cursor: pointer;
   user-select: text;
 }
+
+.uiverse-badge-btn {
+  width: 150px;
+  height: 50px;
+  color: #568fa6;
+  position: relative;
+  overflow: hidden;
+  font-size: 14px;
+  letter-spacing: 1px;
+  font-weight: 500;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 3px;
+}
+
+.uiverse-badge-btn:before,
+.uiverse-badge-btn:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  background-color: #44d8a4;
+  transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.uiverse-badge-btn:before {
+  right: 0;
+  top: 0;
+  transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.uiverse-badge-btn:after {
+  left: 0;
+  bottom: 0;
+}
+
+.uiverse-badge-btn span {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin: 0;
+  padding: 0;
+  z-index: 1;
+}
+
+.uiverse-badge-btn span:before,
+.uiverse-badge-btn span:after {
+  content: "";
+  position: absolute;
+  width: 2px;
+  height: 0;
+  background-color: #44d8a4;
+  transition: all 0.3s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.uiverse-badge-btn span:before {
+  right: 0;
+  top: 0;
+  transition: all 0.5s cubic-bezier(0.35, 0.1, 0.25, 1);
+}
+
+.uiverse-badge-btn span:after {
+  left: 0;
+  bottom: 0;
+}
+
+.uiverse-badge-btn p {
+  padding: 0;
+  margin: 0;
+  transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.uiverse-badge-btn p:before,
+.uiverse-badge-btn p:after {
+  position: absolute;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.35, 0.1, 0.25, 1);
+  z-index: 1;
+  left: 0;
+}
+
+.uiverse-badge-btn p:before {
+  /* content: attr(data-title); */
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.uiverse-badge-btn p:after {
+  content: attr(data-text);
+  top: 150%;
+  color: #44d8a4;
+}
+
+.uiverse-badge-btn:hover:before,
+.uiverse-badge-btn:hover:after {
+  width: 100%;
+}
+
+.uiverse-badge-btn:hover span {
+  z-index: 1;
+
+}
+
+.uiverse-badge-btn:hover span:before,
+.uiverse-badge-btn:hover span:after {
+  height: 100%;
+}
+
+
+.uiverse-badge-btn:hover p:before {
+  top: -50%;
+  transform: rotate(5deg);
+}
+
+.uiverse-badge-btn:hover p:after {
+  top: 50%;
+  z-index: 0;
+  transform: translateY(-50%);
+}
+
+.uiverse-badge-btn:active {
+  outline: none;
+  border: none;
+}
+
+.uiverse-badge-btn:focus {
+  outline: 0;
+}
