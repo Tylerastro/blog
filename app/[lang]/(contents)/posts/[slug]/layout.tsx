@@ -1,6 +1,5 @@
 import ScrollProgressBar from "@/components/ProgressBar";
 import type { Metadata } from "next";
-import { TableOfContents } from "@/components/posts/TableOfContents";
 import TocContainer from "@/components/posts/TocContainer";
 
 export const metadata: Metadata = {
