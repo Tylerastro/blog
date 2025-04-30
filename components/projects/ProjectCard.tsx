@@ -10,10 +10,11 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Calendar, ExternalLink, Github } from "lucide-react";
+import { Calendar, ExternalLink, Github, BookText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/app/[lang]/(contents)/projects/projects";
+import { cn } from "@/lib/utils";
 
 export default function ProjectCard({ project }: { project: Project }) {
   const fallbackImageUrl =
@@ -21,8 +22,16 @@ export default function ProjectCard({ project }: { project: Project }) {
   const imageUrl =
     project.image && project.image.trim() ? project.image : fallbackImageUrl;
 
+  const { terminated, post } = project;
+
   return (
-    <Card className="overflow-hidden flex flex-col h-full transition-all hover:shadow-lg">
+    <Card
+      className={cn(
+        "overflow-hidden flex flex-col h-full transition-all hover:shadow-lg",
+        terminated &&
+          "grayscale opacity-75 hover:shadow-none cursor-not-allowed"
+      )}
+    >
       <div className="relative h-48 w-full overflow-hidden">
         <Image
           src={imageUrl}
@@ -30,6 +39,14 @@ export default function ProjectCard({ project }: { project: Project }) {
           fill
           className="object-cover transition-transform hover:scale-105"
         />
+        {terminated && (
+          <Badge
+            variant="destructive"
+            className="absolute top-2 right-2 text-sm px-3 py-1"
+          >
+            Terminated
+          </Badge>
+        )}
       </div>
       <CardHeader>
         <div className="flex justify-between items-start">
@@ -57,7 +74,12 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
       </CardContent>
       <CardFooter className="mt-auto pt-4">
-        <div className="flex gap-2 w-full">
+        <div
+          className={cn(
+            "flex gap-2 w-full",
+            terminated && "pointer-events-none"
+          )}
+        >
           {project.githubUrl && (
             <Button variant="outline" size="sm" asChild className="flex-1">
               <Link
@@ -79,6 +101,14 @@ export default function ProjectCard({ project }: { project: Project }) {
               >
                 <ExternalLink className="h-4 w-4 mr-2" />
                 Demo
+              </Link>
+            </Button>
+          )}
+          {post && (
+            <Button variant="secondary" size="sm" asChild className="flex-1">
+              <Link href={post} target="_blank" rel="noopener noreferrer">
+                <BookText className="h-4 w-4 mr-2" />
+                Post
               </Link>
             </Button>
           )}

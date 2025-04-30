@@ -8,6 +8,8 @@ export type Project = {
   demoUrl?: string;
   githubUrl?: string;
   tags: string[];
+  terminated?: boolean;
+  post?: string;
 };
 
 export const projects: Project[] = [
@@ -22,6 +24,8 @@ export const projects: Project[] = [
     demoUrl: "https://www.lets-sing-together.com/en-US",
     githubUrl: "",
     tags: ["Next.js", "Tailwind CSS", "Vercel", "TypeScript"],
+    terminated: false,
+    post: "",
   },
   {
     id: "2",
@@ -35,5 +39,7 @@ export const projects: Project[] = [
     githubUrl:
       "https://github.com/Tylerastro/Folium_Astronomy_Institutes?tab=readme-ov-file",
     tags: ["Python", "Folium"],
+    terminated: false,
+    post: "",
   },
 ];
