@@ -1,0 +1,46 @@
+@keyframes fadeInTranslate {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.cardFadeIn {
+    animation: fadeInTranslate linear forwards;
+    animation-timeline: view();
+    animation-range-start: entry 10%;
+    /* Start animation when 10% of the element enters */
+    animation-range-end: cover 40%;
+    /* End animation when 40% of the element is covered */
+
+    /* Fallback for browsers that don't support view() */
+    opacity: 0;
+    transform: translateY(20px);
+}
+
+/* Apply animation only if view() is supported */
+@supports (animation-timeline: view()) {
+    .cardFadeIn {
+        opacity: 1;
+        /* Reset opacity for supported browsers */
+        transform: translateY(0);
+        /* Reset transform for supported browsers */
+        animation: fadeInTranslate linear forwards;
+        animation-timeline: view();
+        animation-range-start: entry 10%;
+        animation-range-end: cover 40%;
+    }
+}
+
+/* Add a simple fade-in for browsers without view() timeline support */
+@supports not (animation-timeline: view()) {
+    .cardFadeIn {
+        animation: fadeInTranslate 0.5s ease-out forwards;
+        /* Trigger animation slightly later manually if needed, requires JS intersection observer for better effect */
+    }
+}

@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { projects } from "./projects";
 import ProjectCard from "@/components/projects/ProjectCard";
+import styles from "./projects.module.css"; // Import the CSS module
 
 // Get unique categories from projects
 const categories = [
@@ -50,7 +51,9 @@ export default function ProjectsPage() {
         <TabsContent value={activeCategory} className="mt-0">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {filteredProjects.map((project) => (
-              <ProjectCard key={project.id} project={project} />
+              <div key={project.id} className={styles.cardFadeIn}>
+                <ProjectCard project={project} />
+              </div>
             ))}
           </div>
         </TabsContent>
