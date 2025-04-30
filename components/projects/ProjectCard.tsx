@@ -20,6 +20,7 @@ export default function ProjectCard({ project }: { project: Project }) {
     "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const imageUrl =
     project.image && project.image.trim() ? project.image : fallbackImageUrl;
+
   return (
     <Card className="overflow-hidden flex flex-col h-full transition-all hover:shadow-lg">
       <div className="relative h-48 w-full overflow-hidden">
@@ -49,7 +50,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         </CardDescription>
         <div className="flex flex-wrap gap-2 mt-4">
           {project.tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="text-xs">
+            <Badge key={tag} variant="outline" className="text-xs select-none">
               {tag}
             </Badge>
           ))}
