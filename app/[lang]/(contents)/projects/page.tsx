@@ -16,10 +16,12 @@ export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState("all");
 
   // Filter projects based on active category
-  const filteredProjects =
-    activeCategory === "all"
-      ? projects
-      : projects.filter((project) => project.category === activeCategory);
+  const filteredProjects = projects
+    .filter(
+      (project) =>
+        activeCategory === "all" || project.category === activeCategory
+    )
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 
   return (
     <main className="min-h-screen p-4 md:p-8 mx-auto max-w-7xl">

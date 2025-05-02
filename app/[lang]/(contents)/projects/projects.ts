@@ -42,4 +42,26 @@ export const projects: Project[] = [
     terminated: false,
     post: "",
   },
+  {
+    id: "3",
+    title: "Target and Observation Management(TOM)",
+    description:
+      "This is a web application for astronomers to manage their targets and observations.",
+    category: "web",
+    image: "",
+    date: "2024-03-02",
+    demoUrl: "https://tom.astro.ncu.edu.tw",
+    githubUrl: "",
+    tags: [
+      "Python",
+      "Django",
+      "PostgreSQL",
+      "Docker",
+      "Nginx",
+      "Next.js",
+      "TypeScript",
+    ],
+    terminated: false,
+    post: "/posts/Django",
+  },
 ];
