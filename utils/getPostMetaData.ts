@@ -21,9 +21,14 @@ export default function getPostsMetadata() {
       slug: filename.replace(".md", ""),
       content: matterResult.content,
       preview: matterResult.data.preview,
+      draft: matterResult.data.draft || false,
     };
   });
-  return posts;
+
+  // Filter out posts with draft = true
+  const publishedPosts = posts.filter((post) => !post.draft);
+
+  return publishedPosts;
 }
 
 export function getPostMetadata(fileName: string) {
