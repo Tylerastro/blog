@@ -7,12 +7,12 @@ export default async function Home({ params }: { params: { lang: string } }) {
   return (
     <main className="bg-black-100 snap-mandatory snap-y h-screen overflow-y-scroll scroll-smooth">
       <section className="h-[100svh] flex flex-col snap-center relative overflow-hidden">
-        <div className="absolute inset-0 opacity-90 w-full h-full">
+        <div className="absolute inset-0 flex items-center justify-center">
           <BlackHole />
         </div>
         <div className="h-[60%] flex items-center justify-center mt-16 relative z-10">
           <h2 className="text-xl font-medium text-white drop-shadow-lg">
-            Every day tips
+            {/* Every day tips */}
           </h2>
         </div>
         <div className="h-[40%] flex items-center justify-center relative z-10">

@@ -13,7 +13,7 @@ function BlackHolePlane() {
   const uniforms = useMemo(
     () => ({
       iTime: { value: 0 },
-      iResolution: { value: new THREE.Vector2(1, 1) },
+      iResolution: { value: new THREE.Vector2(5, 5) },
     }),
     []
   );
@@ -30,7 +30,7 @@ function BlackHolePlane() {
 
   return (
     <mesh ref={meshRef}>
-      <planeGeometry args={[15, 10]} />
+      <planeGeometry args={[10, 10]} />
       <shaderMaterial
         ref={materialRef}
         fragmentShader={fragmentShader}
@@ -47,7 +47,10 @@ interface BlackHoleProps {
 
 export default function BlackHole({ className = "" }: BlackHoleProps) {
   return (
-    <Canvas className={`w-full h-full ${className}`}>
+    <Canvas
+      className="w-full h-full"
+      camera={{ position: [0, 0, 5], aspect: 1, near: 0.1, far: 100 }}
+    >
       <BlackHolePlane />
     </Canvas>
   );

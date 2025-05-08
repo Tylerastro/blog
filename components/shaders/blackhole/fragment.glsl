@@ -9,7 +9,8 @@ vec2 r = iResolution.xy;
 vec2 p = (F + F - r) / r.y / 0.7;
 vec2 d = vec2(-1.0, 1.0);
 vec2 b = p - i * d;
-vec2 c = p * mat2(1.0, 1.0, d.x/(0.1 + i/dot(b,b)), d.y/(0.1 + i/dot(b,b)));
+float K_inv = 1.0 / (0.1 + i/dot(b,b));
+vec2 c = p * mat2(1.0, 0.0, 0.0, K_inv);
 a = dot(c, c);
 vec2 v = c * mat2(cos(0.5*log(a) + iTime*i), sin(0.5*log(a) + iTime*i), 
                     -sin(0.5*log(a) + iTime*i), cos(0.5*log(a) + iTime*i))/i;
