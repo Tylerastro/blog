@@ -48,17 +48,12 @@ export default function PostInfo({
               </Link>
             ))}
           </div>
-          {/* <div className="flex flex-wrap items-center">
-            <FolderOpen className="w-5 h-5 mr-2 text-green-500" />
-            {categories.map((category, index) => (
-              <span
-                key={index}
-                className="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300"
-              >
-                {category}
-              </span>
-            ))}
-          </div> */}
+        </div>
+        <div className="flex flex-wrap items-center py-2 my-2">
+          <FolderOpen className="w-5 h-5 mr-2 text-green-500" />
+          <span className="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
+            Link to En version on Medium
+          </span>
         </div>
       </div>
     </div>

@@ -20,7 +20,8 @@ export default function ProjectCard({ project }: { project: Project }) {
   const imageUrl =
     project.image && project.image.trim() ? project.image : fallbackImageUrl;
 
-  const { terminated, post } = project;
+  const { terminated, post, videoUrl } = project;
+  const hasVideo = videoUrl && videoUrl.trim().length > 0;
 
   return (
     <Card
@@ -31,12 +32,26 @@ export default function ProjectCard({ project }: { project: Project }) {
       )}
     >
       <div className="relative h-48 w-full overflow-hidden">
-        <Image
-          src={imageUrl}
-          alt={project.title}
-          fill
-          className="object-cover transition-transform hover:scale-105"
-        />
+        {hasVideo ? (
+          <div className="h-full w-full">
+            <video
+              className="h-full w-full object-cover"
+              controls
+              preload="none"
+              poster={project.image || fallbackImageUrl}
+            >
+              <source src={videoUrl} type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        ) : (
+          <Image
+            src={imageUrl}
+            alt={project.title}
+            fill
+            className="object-cover transition-transform hover:scale-105"
+          />
+        )}
         {terminated && (
           <Badge
             variant="destructive"
@@ -49,7 +64,9 @@ export default function ProjectCard({ project }: { project: Project }) {
       <CardHeader>
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl">{project.title}</CardTitle>
-          <Badge className="capitalize">{project.category}</Badge>
+          <Badge variant="secondary" className="capitalize">
+            {project.category}
+          </Badge>
         </div>
         <div className="flex items-center text-sm text-muted-foreground">
           <Calendar className="h-4 w-4 mr-1" />
@@ -91,7 +108,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             </Button>
           )}
           {project.demoUrl && (
-            <Button size="sm" asChild className="flex-1">
+            <Button variant="outline" size="sm" asChild className="flex-1">
               <Link
                 href={project.demoUrl}
                 target="_blank"
@@ -103,7 +120,7 @@ export default function ProjectCard({ project }: { project: Project }) {
             </Button>
           )}
           {post && (
-            <Button variant="secondary" size="sm" asChild className="flex-1">
+            <Button variant="outline" size="sm" asChild className="flex-1">
               <Link href={post} target="_blank" rel="noopener noreferrer">
                 <BookText className="h-4 w-4 mr-2" />
                 Post

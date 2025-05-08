@@ -35,11 +35,6 @@
 .cardFadeIn {
     animation: fadeInTranslate linear forwards;
     animation-timeline: view();
-    animation-range-start: entry 10%;
-    /* Start animation when 10% of the element enters */
-    animation-range-end: cover 40%;
-    /* End animation when 40% of the element is covered */
-
     /* Fallback for browsers that don't support view() */
     opacity: 0;
     transform: translateY(20px);
@@ -54,8 +49,8 @@
         /* Reset transform for supported browsers */
         animation: fadeInTranslate linear forwards;
         animation-timeline: view();
-        animation-range-start: entry 10%;
-        animation-range-end: cover 40%;
+        animation-range-start: entry 20%;
+        animation-range-end: cover 30%;
     }
 }
 

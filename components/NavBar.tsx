@@ -122,7 +122,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-lg">
+                    <NavigationMenuTrigger className="text-lg cursor-se-resize">
                       Blog
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>

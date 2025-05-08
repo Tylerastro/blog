@@ -4,6 +4,7 @@ export type Project = {
   description: string;
   category: string;
   image?: string;
+  videoUrl?: string;
   date: string;
   demoUrl?: string;
   githubUrl?: string;
