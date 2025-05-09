@@ -2,7 +2,7 @@ import type { MDXComponents } from "mdx/types";
 import Image from "next/image";
 import { CodeBlock } from "./components/CodeBlock";
 import { MediumBlockquote } from "./components/posts/BlockQuote";
-import InlineCode from "./components/InlineCode";
+import InlineCode from "./components/inlineCode";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -74,7 +74,12 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         </a>
       );
     },
-    ul: ({ children }) => <ul className="github-task-list my-2">{children}</ul>,
+    ul: ({ children }) => {
+      return <ul className="github-task-list my-2">{children}</ul>;
+    },
+    ol: ({ children }) => {
+      return <ol className="my-2 list-decimal pl-5">{children}</ol>;
+    },
     li: ({ children }) => {
       // Handle [x] and [ ] for checkboxes
       let isCheckbox = false;
@@ -97,6 +102,8 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           // Remove the marker from the first child, keep the rest
           label = [match[2], ...children.slice(1)];
         }
+      } else {
+        return <li className="py-1">{children}</li>;
       }
 
       if (isCheckbox) {

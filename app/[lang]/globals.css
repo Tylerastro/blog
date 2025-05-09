@@ -89,6 +89,12 @@ html {
   }
 }
 
+ol {
+  list-style-type: decimal;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .prevent-select {
   -webkit-user-select: none;
   /* Safari */
@@ -145,6 +151,8 @@ html {
 .text-hover-effect:hover::after {
   width: 100%;
 }
+
+
 
 /* GitHub-style task list */
 .github-task-list {

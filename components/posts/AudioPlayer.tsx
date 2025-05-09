@@ -27,7 +27,9 @@ export function AudioPlayer({ filePath, className }: AudioPlayerProps) {
 
     // Event listeners
     const setAudioData = () => {
-      setDuration(audio.duration);
+      if (audio.duration) {
+        setDuration(audio.duration);
+      }
     };
 
     const setAudioTime = () => {
@@ -44,13 +46,18 @@ export function AudioPlayer({ filePath, className }: AudioPlayerProps) {
     audio.addEventListener("timeupdate", setAudioTime);
     audio.addEventListener("ended", handleEnded);
 
+    // Check if audio is already loaded
+    if (audio.readyState >= 2) {
+      setAudioData();
+    }
+
     // Cleanup
     return () => {
       audio.removeEventListener("loadedmetadata", setAudioData);
       audio.removeEventListener("timeupdate", setAudioTime);
       audio.removeEventListener("ended", handleEnded);
     };
-  }, []);
+  }, [volume]);
 
   // Format time in MM:SS
   const formatTime = (time: number) => {
@@ -115,7 +122,7 @@ export function AudioPlayer({ filePath, className }: AudioPlayerProps) {
       <div className="flex items-center gap-4">
         <button
           onClick={togglePlay}
-          className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-100 hover:bg-slate-200"
+          className="flex h-10 w-10 items-center justify-center rounded-full bg-link hover:bg-link/80 transition-colors duration-200"
           aria-label={isPlaying ? "Pause" : "Play"}
         >
           {isPlaying ? (

@@ -50,5 +50,6 @@ export function getPostMetadata(fileName: string) {
     categories: matterResult.data.categories,
     mediumLink: matterResult.data.medium,
     audioLink: matterResult.data.audio,
+    filename: fileName.replace(".md", ""),
   };
 }

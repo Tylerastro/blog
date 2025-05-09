@@ -3,6 +3,7 @@ import Link from "next/link";
 import { AudioPlayer } from "./AudioPlayer";
 
 interface PostInfoProps {
+  filename: string;
   date: string;
   title: string;
   tags: string[];
@@ -12,6 +13,7 @@ interface PostInfoProps {
 }
 
 export default function PostInfo({
+  filename,
   date,
   title,
   tags,
@@ -73,7 +75,7 @@ export default function PostInfo({
       <div className="flex items-center justify-center">
         {audioLink && (
           <AudioPlayer
-            filePath={`/blogs/${audioLink}`}
+            filePath={`/blogs/${filename}/${audioLink}`}
             className="w-full max-w-md"
           />
         )}

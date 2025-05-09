@@ -18,6 +18,7 @@ export default async function BlogPostPage({
     return (
       <>
         <PostInfo
+          filename={matterResult.filename}
           date={matterResult.created_date}
           title={matterResult.title}
           tags={matterResult.tags ?? []}
