@@ -1,11 +1,14 @@
-import { Calendar, Tag, FolderOpen } from "lucide-react";
+import { Calendar, Tag, ExternalLink } from "lucide-react";
 import Link from "next/link";
+import { AudioPlayer } from "./AudioPlayer";
 
 interface PostInfoProps {
   date: string;
   title: string;
   tags: string[];
   categories: string[];
+  mediumLink: string;
+  audioLink: string;
 }
 
 export default function PostInfo({
@@ -13,6 +16,8 @@ export default function PostInfo({
   title,
   tags,
   categories,
+  mediumLink,
+  audioLink,
 }: PostInfoProps) {
   return (
     <div className="max-w-2xl mx-auto rounded-lg overflow-hidden">
@@ -49,12 +54,29 @@ export default function PostInfo({
             ))}
           </div>
         </div>
-        <div className="flex flex-wrap items-center py-2 my-2">
-          <FolderOpen className="w-5 h-5 mr-2 text-green-500" />
-          <span className="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300">
-            Link to En version on Medium
-          </span>
-        </div>
+        {categories.includes("medium") && (
+          <div className="flex flex-wrap items-center py-2 my-2">
+            <ExternalLink className="w-5 h-5 mr-2 text-green-500" />
+            <Link
+              href={mediumLink}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-green-100 text-green-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-green-900 dark:text-green-300 hover:bg-green-200 dark:hover:bg-green-800 transition-colors"
+              tabIndex={0}
+              aria-label="View English version on Medium"
+            >
+              Link to En version on Medium
+            </Link>
+          </div>
+        )}
+      </div>
+      <div className="flex items-center justify-center">
+        {audioLink && (
+          <AudioPlayer
+            filePath={`/blogs/${audioLink}`}
+            className="w-full max-w-md"
+          />
+        )}
       </div>
     </div>
   );

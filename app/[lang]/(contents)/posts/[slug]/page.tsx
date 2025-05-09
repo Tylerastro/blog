@@ -22,6 +22,8 @@ export default async function BlogPostPage({
           title={matterResult.title}
           tags={matterResult.tags ?? []}
           categories={matterResult.categories ?? []}
+          mediumLink={matterResult.mediumLink}
+          audioLink={matterResult.audioLink}
         />
         <BlogPost
           title={matterResult.title}

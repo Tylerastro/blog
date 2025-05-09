@@ -19,7 +19,7 @@ export function middleware(request: NextRequest) {
 
   // Check if the request is for an image or other asset
   if (
-    pathname.match(/\.(png|jpg|JPG|jpeg|gif|svg|webp)$/) ||
+    pathname.match(/\.(png|jpg|JPG|jpeg|gif|svg|webp|mp3|wav)$/) ||
     pathname.startsWith("/_next")
   ) {
     return NextResponse.next();

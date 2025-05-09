@@ -13,10 +13,10 @@ function BlackHolePlane() {
 
   // Add Leva controls for color and alpha values
   const { uR, uG, uB, uA } = useControls("Black Hole", {
-    uR: { value: 1.0, min: -5, max: 5, step: 0.01 },
-    uG: { value: 1.0, min: -5, max: 5, step: 0.01 },
-    uB: { value: 1.0, min: -5, max: 5, step: 0.01 },
-    uA: { value: 1.0, min: -5, max: 5, step: 0.01 },
+    uR: { value: 1.47, min: -5, max: 5, step: 0.01 },
+    uG: { value: 2.13, min: -5, max: 5, step: 0.01 },
+    uB: { value: 2.7, min: -5, max: 5, step: 0.01 },
+    uA: { value: 2.73, min: -5, max: 5, step: 0.01 },
   });
 
   // Create uniforms only once, no dependencies on control values

@@ -22,6 +22,8 @@ export default function getPostsMetadata() {
       content: matterResult.content,
       preview: matterResult.data.preview,
       draft: matterResult.data.draft || false,
+      mediumLink: matterResult.data.medium,
+      audioLink: matterResult.data.audio,
     };
   });
 
@@ -46,5 +48,7 @@ export function getPostMetadata(fileName: string) {
     created_date: matterResult.data.date,
     tags: matterResult.data.tags,
     categories: matterResult.data.categories,
+    mediumLink: matterResult.data.medium,
+    audioLink: matterResult.data.audio,
   };
 }

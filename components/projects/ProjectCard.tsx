@@ -64,7 +64,7 @@ export default function ProjectCard({ project }: { project: Project }) {
       <CardHeader>
         <div className="flex justify-between items-start">
           <CardTitle className="text-xl">{project.title}</CardTitle>
-          <Badge variant="secondary" className="capitalize">
+          <Badge variant="secondary" className="capitalize select-none">
             {project.category}
           </Badge>
         </div>
