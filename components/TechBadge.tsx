@@ -16,12 +16,12 @@ export default function TechBadge({ name, icon, className }: TechBadgeProps) {
       tabIndex={0}
       aria-label={name}
       className={cn(
-        "uiverse-badge-btn relative flex items-center bg-link/10 justify-center outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black",
+        "uiverse-badge-btn relative rounded-lg flex items-center bg-primary-foreground/65 justify-center outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black",
         className
       )}
     >
       <span />
-      <p className="flex items-center justify-center w-full h-full relative z-10">
+      <p className="flex items-center justify-center w-full h-full relative z-10 text-primary/90">
         {icon ? (
           <Image
             src={icon}

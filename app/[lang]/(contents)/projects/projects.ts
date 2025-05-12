@@ -65,4 +65,17 @@ export const projects: Project[] = [
     terminated: false,
     post: "/posts/Django",
   },
+  {
+    id: "4",
+    title: "Utanoko Track",
+    description:
+      "The web application scrape comment timestamps and link to the video.",
+    category: "web",
+    image: "",
+    date: "2025-05-11",
+    demoUrl: "https://utanotrack.fans",
+    githubUrl: "",
+    tags: ["Next.js", "TypeScript", "Selenium", "Youtube API"],
+    terminated: false,
+  },
 ];

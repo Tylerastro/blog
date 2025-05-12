@@ -1,4 +1,3 @@
-import { link } from "fs";
 import type { Config } from "tailwindcss";
 
 const config: Config = {
@@ -46,6 +45,10 @@ const config: Config = {
         destructive: {
           DEFAULT: "hsl(var(--destructive))",
           foreground: "hsl(var(--destructive-foreground))",
+        },
+        badge: {
+          DEFAULT: "hsl(var(--badge))",
+          foreground: "hsl(var(--badge-foreground))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",

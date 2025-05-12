@@ -4,18 +4,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import {
-  Cpu,
-  Database,
-  Cloud,
-  Globe,
-  Code2,
-  Server,
-  Container,
-  DatabaseIcon,
-} from "lucide-react";
-import Image from "next/image";
 import TechBadge from "@/components/TechBadge";
+import Link from "next/link";
 
 const skills = [
   {
@@ -76,6 +66,7 @@ type PublicationType = {
   journal: string;
   year: number;
   volume?: string;
+  link: string;
 };
 
 const publications: PublicationType[] = [
@@ -85,6 +76,7 @@ const publications: PublicationType[] = [
     authors: ["Lin, Han-Tang", "Pan, Yen-Chen", "Abdurro'uf"],
     journal: "Volume 531, Issue 1, pp.1988-1997",
     year: 2024,
+    link: "https://ui.adsabs.harvard.edu/abs/2024MNRAS.531.1988L/abstract",
   },
   {
     title:
@@ -109,6 +101,7 @@ const publications: PublicationType[] = [
     ],
     journal: "Volume 163, Number 4 (2022/03)",
     year: 2022,
+    link: "https://ui.adsabs.harvard.edu/abs/2022AJ....163..164L/abstract",
   },
 ];
 
@@ -118,18 +111,21 @@ const Publication = ({
   journal,
   year,
   volume,
+  link,
 }: PublicationType) => (
-  <li
-    tabIndex={0}
-    aria-label={`Publication: ${title} by ${authors.join(", ")}`}
-    className="leading-relaxed"
-  >
-    <span className="font-medium">{authors.join(", ")}</span>
-    <span> ({year}). </span>
-    <span className="italic">"{title}." </span>
-    <span>{journal}</span>
-    {volume && <span>, {volume}</span>}
-  </li>
+  <Link href={link} target="_blank">
+    <li
+      tabIndex={0}
+      aria-label={`Publication: ${title} by ${authors.join(", ")}`}
+      className="leading-relaxed transition-all duration-300 hover:translate-x-1 group-hover:opacity-50 hover:!opacity-100"
+    >
+      <span className="font-medium">{authors.join(", ")}</span>
+      <span> ({year}). </span>
+      <span className="italic">"{title}." </span>
+      <span>{journal}</span>
+      {volume && <span>, {volume}</span>}
+    </li>
+  </Link>
 );
 
 export const AboutAccordion = () => {
@@ -167,7 +163,7 @@ export const AboutAccordion = () => {
       <AccordionItem value="projects">
         <AccordionTrigger className="text-xl">Publications</AccordionTrigger>
         <AccordionContent>
-          <ul className="list-disc pl-5 space-y-2">
+          <ul className="list-disc pl-5 space-y-2 group">
             {publications.map((pub) => (
               <Publication key={pub.title} {...pub} />
             ))}

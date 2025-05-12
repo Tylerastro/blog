@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CodeBlock } from "./components/CodeBlock";
 import { MediumBlockquote } from "./components/posts/BlockQuote";
 import InlineCode from "./components/inlineCode";
+import React from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
@@ -75,7 +76,32 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     ul: ({ children }) => {
-      return <ul className="github-task-list my-2">{children}</ul>;
+      // Check if any of the list items are checkboxes
+      const hasCheckboxes = React.Children.toArray(children).some((child) => {
+        if (!React.isValidElement(child)) return false;
+
+        // TypeScript fix: Cast the child to ReactElement with any props type
+        const childElement = child as React.ReactElement<any>;
+        const content = childElement.props.children;
+
+        if (typeof content === "string") {
+          return content.match(/^\[( |x|X)\] ?(.*)$/) !== null;
+        } else if (Array.isArray(content) && typeof content[0] === "string") {
+          return content[0].match(/^\[( |x|X)\] ?(.*)$/) !== null;
+        }
+
+        return false;
+      });
+
+      return (
+        <ul
+          className={
+            hasCheckboxes ? "github-task-list my-2" : "my-2 list-disc pl-3 ml-3"
+          }
+        >
+          {children}
+        </ul>
+      );
     },
     ol: ({ children }) => {
       return <ol className="my-2 list-decimal pl-5">{children}</ol>;

@@ -17,6 +17,21 @@ function getLocale(request: NextRequest) {
 export function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
+  // Check if this is an image request and not already in /blog/ path
+  if (
+    !pathname.startsWith("/blog/") &&
+    !pathname.startsWith("/_next/") &&
+    !pathname.startsWith("/api/") &&
+    pathname.match(/\.(png|jpg|jpeg|gif|webp)$/i)
+  ) {
+    // Create the new path with /blog/ prefix
+    const newPath = `/blogs${pathname}`;
+    console.log(`Redirecting ${pathname} to ${newPath}`);
+
+    // Redirect to the /blog/ prefixed path
+    return NextResponse.redirect(new URL(newPath, request.url));
+  }
+
   // Check if the request is for an image or other asset
   if (
     pathname.match(/\.(png|jpg|JPG|jpeg|gif|svg|webp|mp3|wav)$/) ||
@@ -45,6 +60,7 @@ export const config = {
     // - _next/static (static files)
     // - _next/image (image optimization files)
     // - favicon.ico (favicon file)
-    "/((?!api|_next/static|_next/image|favicon.ico).*)",
+    // - blog (blog paths)
+    "/((?!api|_next/static|_next/image|favicon.ico|blog).*)",
   ],
 };

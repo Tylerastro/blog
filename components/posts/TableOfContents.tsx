@@ -75,7 +75,7 @@ export function TableOfContents() {
   };
 
   return (
-    <nav className="relative hidden md:block w-full p-4 opacity-85 max-h-[70vh] overflow-auto ">
+    <nav className="relative w-full p-4 opacity-85 max-h-[70vh] overflow-auto rounded-lg">
       <ul className="space-y-2">
         {toc.map((item) => (
           <li

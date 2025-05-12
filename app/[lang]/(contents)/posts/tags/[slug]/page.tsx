@@ -69,7 +69,7 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
       {/* Breadcrumb Navigation */}
       <div className="mb-8">
         <Breadcrumb>
-          <BreadcrumbList>
+          <BreadcrumbList className="list-none">
             <BreadcrumbItem>
               <BreadcrumbLink href="/">Home</BreadcrumbLink>
             </BreadcrumbItem>

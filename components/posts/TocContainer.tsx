@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { TableOfContents } from "./TableOfContents";
 import { gsap } from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -30,7 +30,7 @@ export default function TocContainer() {
     <div
       id="table-of-contents"
       ref={tocRef}
-      className="fixed right-6 top-24 z-10 max-w-[250px]"
+      className="fixed right-6 top-24 z-10 max-w-[250px] hidden lg:block"
     >
       <TableOfContents />
     </div>

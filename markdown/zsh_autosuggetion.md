@@ -13,7 +13,7 @@ tags:
 
 [Not remembering history past session#645](https://github.com/zsh-users/zsh-autosuggestions/issues/645)
 
-## Issue
+# Issue
 
 在設定新電腦時遇到zsh-autosuggestion無法讀到其他tab或過往紀錄。
 查詢過issue後，zsh預設不會跨tab搜尋歷史，解決方法是在zshrc(bashrc)底下新增這段
