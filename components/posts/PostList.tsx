@@ -27,7 +27,7 @@ export default function PostList({ posts }: PostListProps) {
               {post.title}
             </h2>
             <time
-              dateTime={post.created_date}
+              dateTime={post.created_date.toString()}
               className="text-sm text-muted-foreground mb-2 block"
             >
               {formatDate(post.created_date)}

@@ -84,8 +84,8 @@ export function TableOfContents() {
               ${item.level === 2 ? "pl-0" : item.level === 3 ? "pl-4" : "pl-8"}
               ${
                 activeId === item.id
-                  ? "text-primary font-semibold"
-                  : "text-muted-foreground hover:text-primary/80"
+                  ? "text-link font-semibold"
+                  : "text-muted-foreground hover:text-link"
               }`}
             onClick={() => handleClick(item.id)}
           >
