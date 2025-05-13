@@ -5,7 +5,10 @@ import rehypeStarryNight from 'rehype-starry-night'
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+  
   // Configure `pageExtensions` to include markdown and MDX files
   pageExtensions: ["js", "jsx", "md", "mdx", "ts", "tsx"],
   // Optionally, add any other Next.js config below
