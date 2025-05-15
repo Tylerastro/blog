@@ -153,7 +153,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 ))}
             </nav>
             <ChatModal>
-              <Button size="sm" className="ml-8">
+              <Button size="lg" className="ml-8">
                 Let's Talk
               </Button>
             </ChatModal>

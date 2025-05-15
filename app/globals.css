@@ -3,8 +3,6 @@
 @tailwind utilities;
 
 body {
-  /* font-family: Arial, Helvetica, sans-serif; */
-  font-family: var(--font-roboto-mono);
   height: 100%;
 }
 
@@ -96,16 +94,6 @@ ol {
   padding-bottom: 0.5rem;
 }
 
-.prevent-select {
-  -webkit-user-select: none;
-  /* Safari */
-  -ms-user-select: none;
-  /* IE 10 and IE 11 */
-  user-select: none;
-  /* Standard syntax */
-}
-
-/* Text hover effect styles */
 .text-hover-container {
   display: inline-block;
   padding: 5px;

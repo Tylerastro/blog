@@ -7,7 +7,7 @@ interface TagBadgeProps {
 
 export default function TagBadge({ text, color = "default" }: TagBadgeProps) {
   const baseClasses =
-    "inline-flex prevent-select items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset";
+    "inline-flex select-none items-center rounded-full px-2 py-1 text-xs font-medium ring-1 ring-inset";
 
   const colorClasses = {
     default: "bg-gray-50 text-gray-600 ring-gray-500/10",
