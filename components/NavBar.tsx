@@ -12,6 +12,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
+import ContactDropdown from "@/components/contact/contact-dropdown";
 
 interface NavBarProps extends React.HTMLAttributes<HTMLElement> {
   links?: {
@@ -66,20 +67,12 @@ const ListItem: React.FC<{
 export function NavBar({ className, links = [], ...props }: NavBarProps) {
   const defaultLinks = [
     {
-      href: "/",
-      label: "Home",
-    },
-    {
       href: "/about",
       label: "About",
     },
     {
       href: "/projects",
       label: "Projects",
-    },
-    {
-      href: "/contact",
-      label: "Contact",
     },
   ];
 
@@ -106,7 +99,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
             </div>
 
             <nav className="relative gap-4 hidden md:flex md:items-center md:space-x-8">
-              {navLinks.slice(0, 2).map((link) => (
+              {navLinks.slice(0, 1).map((link) => (
                 <div key={link.href} className="text-hover-container">
                   <div className="text-hover-effect">
                     <Link
@@ -143,19 +136,21 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 <NavigationMenuIndicator />
                 <NavigationMenuViewport />
               </NavigationMenu>
-              {navLinks.slice(2).map((link) => (
-                <div key={link.href} className="text-hover-container">
-                  <div className="text-hover-effect">
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="text-lg transition-colors hover:text-secondary-foreground"
-                    >
-                      {link.label}
-                    </Link>
+              {navLinks
+                .slice(1)
+                .map((link: { href: string; label: string }) => (
+                  <div key={link.href} className="text-hover-container">
+                    <div className="text-hover-effect">
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        className="text-lg transition-colors hover:text-secondary-foreground"
+                      >
+                        {link.label}
+                      </Link>
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
             </nav>
             <Button size="sm" className="ml-8">
               Let's Talk

@@ -1,6 +1,5 @@
 "use client";
 import Link from "next/link";
-import { useTranslations } from "next-intl";
 import Image from "next/image";
 import gsap from "gsap";
 import { useEffect, useRef } from "react";
@@ -13,7 +12,6 @@ export default function RecentPosts({
   posts: BlogPost[];
   locale: string;
 }) {
-  const t = useTranslations("Blog");
   const formatDate = (dateString: string) => {
     try {
       return new Date(dateString).toLocaleDateString(locale, {

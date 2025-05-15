@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, ExternalLink, Github, BookText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Project } from "@/app/[lang]/(contents)/projects/projects";
+import { Project } from "@/app/(contents)/projects/projects";
 import { cn } from "@/lib/utils";
 
 export default function ProjectCard({ project }: { project: Project }) {

@@ -1,7 +1,7 @@
 "use client";
 
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { Github, Linkedin, Mail, FileCode, Link } from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 export function SocialLinks() {
@@ -56,6 +56,11 @@ export function SocialLinks() {
         onClick={handleCopyEmail}
       >
         <Mail className="h-5 w-5" />
+      </Button>
+      <Button variant="outline" size="icon" aria-label="View CV" asChild>
+        <a href="/Tyler_CV.pdf" target="_blank" rel="noopener noreferrer">
+          <FileCode className="h-5 w-5" />
+        </a>
       </Button>
     </div>
   );

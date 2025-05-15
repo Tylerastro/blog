@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { noto_emoji } from "@/app/[lang]/fonts";
+import { noto_emoji } from "@/app/fonts";
 
 interface TagSlugPageProps {
   params: Promise<{ slug: string }>;

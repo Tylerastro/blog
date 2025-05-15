@@ -38,9 +38,6 @@ export default function PostList({ posts }: PostListProps) {
             >
               {post.preview}
             </p>
-            <span className="inline-block mt-4 text-link font-medium">
-              Read more
-            </span>
           </Link>
         </article>
       ))}
