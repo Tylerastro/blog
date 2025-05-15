@@ -25,7 +25,6 @@ const TagCloudPage = async () => {
     return (count - min) / (max - min);
   };
 
-  console.log(tags);
   return (
     <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
       <h1 className="text-3xl font-bold mb-8 text-center">Tags</h1>
