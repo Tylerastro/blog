@@ -5,7 +5,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { NavBar } from "@/components/NavBar";
 import { BackToTop } from "@/components/BackToTop";
-import { roboto_mono, cabin } from "./fonts";
+import { Outfit, Author } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -14,26 +14,21 @@ export const metadata: Metadata = {
 
 export default async function LocaleLayout({
   children,
-  params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: "en-US" | "zh-TW" };
 }>) {
-  const { lang } = await params;
-
   return (
-    <html lang={lang} suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning>
       <body
         className={cn(
           "antialiased bg-background ",
-          "font-cabin",
+          Author.className,
+          Outfit.className,
           "transition-colors",
-          "duration-700",
-          roboto_mono.className,
-          cabin.className
+          "duration-700"
         )}
       >
-        <ThemeProvider attribute="class" defaultTheme="dark" enableSystem>
+        <ThemeProvider attribute="class" defaultTheme="dark">
           <Toaster />
           <NavBar />
           {children}

@@ -12,7 +12,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu";
-import ContactDropdown from "@/components/contact/contact-dropdown";
+import ChatModal from "@/components/chat/chat-modal";
 
 interface NavBarProps extends React.HTMLAttributes<HTMLElement> {
   links?: {
@@ -152,9 +152,11 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                   </div>
                 ))}
             </nav>
-            <Button size="sm" className="ml-8">
-              Let's Talk
-            </Button>
+            <ChatModal>
+              <Button size="sm" className="ml-8">
+                Let's Talk
+              </Button>
+            </ChatModal>
           </div>
         </div>
       </div>

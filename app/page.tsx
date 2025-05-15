@@ -1,4 +1,3 @@
-import PostTable from "@/components/landingPage/PostTable";
 import BlackHole from "@/components/BlackHole";
 
 export default async function Home({
@@ -25,14 +24,6 @@ export default async function Home({
           </h1>
         </div>
       </section>
-      {/* <section className="h-[100svh] bg-secondary rounded-t-3xl -mt-2 py-12 snap-center">
-        <div className="mt-12">
-          <PostTable />
-        </div>
-      </section>
-      <section className="h-[100svh] snap-center">
-        <h1>Section 3</h1>
-      </section> */}
     </main>
   );
 }

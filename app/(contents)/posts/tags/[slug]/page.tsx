@@ -17,7 +17,7 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { noto_emoji } from "@/app/fonts";
+import { notoColorEmoji } from "@/styles/fonts";
 
 interface TagSlugPageProps {
   params: Promise<{ slug: string }>;
@@ -104,7 +104,7 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
         </Breadcrumb>
       </div>
       <h1 className="mb-8 text-center text-4xl font-bold">
-        <span className={`${noto_emoji.className} text-4xl`}>🏷️</span>
+        <span className={`${notoColorEmoji.className} text-4xl`}>🏷️</span>
         &nbsp;
         <span className="">{tag.name}</span>
       </h1>
