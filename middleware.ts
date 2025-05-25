@@ -22,6 +22,7 @@ export function middleware(request: NextRequest) {
     !pathname.startsWith("/blog/") &&
     !pathname.startsWith("/_next/") &&
     !pathname.startsWith("/api/") &&
+    !pathname.startsWith("/projects/") &&
     pathname.match(/\.(png|jpg|jpeg|gif|webp)$/i)
   ) {
     // Create the new path with /blog/ prefix

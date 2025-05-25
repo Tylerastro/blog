@@ -124,7 +124,7 @@ ADD功能更強大，但也就更無法預測結果，因為ADD指令會自動�
 
 
 在2013有討論串討論這項功能，甚至2024年仍然還有相關討論是否自動解壓縮，或是不同的壓縮格式。
-["ADD <url> /" in Dockerfile copy the file instead of decompressing it #2369](https://github.com/moby/moby/issues/2369)
+["ADD in Dockerfile copy the file instead of decompressing it #2369](https://github.com/moby/moby/issues/2369)
 
 
 ## RUN

@@ -13,8 +13,11 @@ import Image from "next/image";
 import Link from "next/link";
 import { Project } from "@/app/(contents)/projects/projects";
 import { cn } from "@/lib/utils";
+import { useRef } from "react";
 
 export default function ProjectCard({ project }: { project: Project }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+
   const fallbackImageUrl =
     "https://images.unsplash.com/photo-1525547719571-a2d4ac8945e2?q=80&w=3164&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D";
   const imageUrl =
@@ -22,6 +25,19 @@ export default function ProjectCard({ project }: { project: Project }) {
 
   const { terminated, post, videoUrl } = project;
   const hasVideo = videoUrl && videoUrl.trim().length > 0;
+
+  const handleMouseEnter = () => {
+    if (videoRef.current && !terminated) {
+      videoRef.current.play().catch(() => {});
+    }
+  };
+
+  const handleMouseLeave = () => {
+    if (videoRef.current) {
+      videoRef.current.pause();
+      videoRef.current.currentTime = 0;
+    }
+  };
 
   return (
     <Card
@@ -31,13 +47,19 @@ export default function ProjectCard({ project }: { project: Project }) {
           "grayscale opacity-75 hover:shadow-none cursor-not-allowed"
       )}
     >
-      <div className="relative h-48 w-full overflow-hidden">
+      <div
+        className="relative h-48 w-full overflow-hidden group"
+        onMouseEnter={handleMouseEnter}
+        onMouseLeave={handleMouseLeave}
+      >
         {hasVideo ? (
-          <div className="h-full w-full">
+          <div className="h-full w-full relative">
             <video
-              className="h-full w-full object-cover"
-              controls
-              preload="none"
+              ref={videoRef}
+              className="h-full w-full object-cover transition-transform group-hover:scale-105"
+              muted
+              loop
+              preload="metadata"
               poster={project.image || fallbackImageUrl}
             >
               <source src={videoUrl} type="video/mp4" />
@@ -55,7 +77,7 @@ export default function ProjectCard({ project }: { project: Project }) {
         {terminated && (
           <Badge
             variant="destructive"
-            className="absolute top-2 right-2 text-sm px-3 py-1"
+            className="absolute top-2 right-2 text-sm px-3 py-1 z-10"
           >
             Terminated
           </Badge>

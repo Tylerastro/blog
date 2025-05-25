@@ -22,13 +22,14 @@ export default function getPostsMetadata() {
       content: matterResult.content,
       preview: matterResult.data.preview,
       draft: matterResult.data.draft || false,
+      password: matterResult.data.password,
       mediumLink: matterResult.data.medium,
       audioLink: matterResult.data.audio,
     };
   });
 
-  // Filter out posts with draft = true
-  const publishedPosts = posts.filter((post) => !post.draft);
+  // Filter out posts with draft = true or password protection
+  const publishedPosts = posts.filter((post) => !post.draft && !post.password);
 
   return publishedPosts;
 }

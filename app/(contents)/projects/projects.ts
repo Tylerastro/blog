@@ -20,7 +20,8 @@ export const projects: Project[] = [
     description:
       "A web application synchroize Youtube music with the lyrics. A good tool to learn Japanese.",
     category: "web",
-    image: "",
+    image: "/projects/images/letsSing.png",
+    videoUrl: "/projects/videos/letsSing.mp4",
     date: "2024-09-30",
     demoUrl: "https://www.lets-sing-together.com/en-US",
     githubUrl: "",
@@ -50,6 +51,7 @@ export const projects: Project[] = [
       "This is a web application for astronomers to manage their targets and observations.",
     category: "web",
     image: "",
+    videoUrl: "/projects/videos/tom-demo.mp4",
     date: "2024-03-02",
     demoUrl: "https://tom.astro.ncu.edu.tw",
     githubUrl: "",
@@ -71,7 +73,8 @@ export const projects: Project[] = [
     description:
       "The web application scrape comment timestamps and link to the video.",
     category: "web",
-    image: "",
+    image: "/projects/images/utanotrack.png",
+    videoUrl: "/projects/videos/Utanotrack.mp4",
     date: "2025-05-11",
     demoUrl: "https://utanotrack.fans",
     githubUrl: "",

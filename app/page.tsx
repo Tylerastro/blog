@@ -13,15 +13,15 @@ export default async function Home({
         <div className="absolute inset-0 flex items-center justify-center">
           <BlackHole />
         </div>
-        <div className="h-[60%] flex items-center justify-center mt-16 relative z-10">
-          <h2 className="text-xl font-medium text-white drop-shadow-lg">
-            {/* Every day tips */}
+      </section>
+      <section className="h-[100svh] flex flex-col snap-center relative overflow-hidden items-center justify-center">
+        <div className="flex flex-col items-center justify-center text-center p-4">
+          <h2 className="text-2xl font-semibold text-white drop-shadow-lg">
+            Still under construction...
           </h2>
-        </div>
-        <div className="h-[40%] flex items-center justify-center relative z-10">
-          <h1 className="text-3xl font-bold text-white drop-shadow-lg">
-            Tyler Lin
-          </h1>
+          <p className="text-lg text-gray-300 mt-2 drop-shadow-lg">
+            Come back soon to see what I've been working on!
+          </p>
         </div>
       </section>
     </main>

@@ -94,7 +94,6 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
                   <span className="text-xs">TL</span>
                 </div>
-                <span className="text-lg">Tyler</span>
               </Link>
             </div>
 

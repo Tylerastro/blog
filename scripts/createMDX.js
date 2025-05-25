@@ -12,6 +12,13 @@ function getPostsMetadata() {
   const posts = mdPosts.map((filename) => {
     const fileContents = fs.readFileSync(`${BASEPATH}/${filename}`, "utf8");
     const matterResult = matter(fileContents);
+    
+    // Skip writing file if password is present in frontmatter
+    if (matterResult.data.password) {
+      console.log(`Skipping ${filename} - password protected`);
+      return null;
+    }
+    
     // Generate MDX file
     const mdxContent = generateMdxContent(
       matterResult.data,
