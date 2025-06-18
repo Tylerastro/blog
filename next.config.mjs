@@ -53,11 +53,11 @@ const nextConfig = {
 const withMDX = createMDX({
   options: {
      rehypePlugins: [
-      rehypeMdxCodeProps
+      rehypeMdxCodeProps,
+      rehypeStarryNight
     ],
     remarkPlugins: [
-remarkMath,
-rehypeStarryNight
+      remarkMath,
     ],
   }  
 })

@@ -46,20 +46,29 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         />
       );
     },
-    pre: (props) => {
+    pre: ({ children, ...props }) => {
+      const codeElement = React.Children.only(
+        children
+      ) as React.ReactElement & {
+        props: { className?: string; children: React.ReactNode };
+      };
+
       return (
-        <CodeBlock
-          code={props.children.props.children}
-          language={props.children.props.className}
-        />
+        <CodeBlock {...props} language={codeElement.props.className || ""}>
+          {codeElement.props.children}
+        </CodeBlock>
       );
     },
     blockquote: ({ children }) => (
       <MediumBlockquote>{children}</MediumBlockquote>
     ),
     hr: () => <hr className="my-4" />,
-    code: (props) => {
-      return <InlineCode code={props.children as string} />;
+    code: ({ className, children }) => {
+      const language = className?.replace("language-", "");
+      if (language) {
+        return <code className={className}>{children}</code>;
+      }
+      return <InlineCode code={children as string} />;
     },
     a: (props) => {
       return (

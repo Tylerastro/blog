@@ -1,3 +1,4 @@
+@import 'https://esm.sh/@wooorm/starry-night@3/style/both.css';
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

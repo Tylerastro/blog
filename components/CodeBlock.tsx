@@ -1,86 +1,65 @@
 "use client";
 
-import { useState } from "react";
-import SyntaxHighlighter from "react-syntax-highlighter";
-import { Copy, Check } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
-import { monokaiSublime } from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { Check, Clipboard } from "lucide-react";
+import React, { useEffect, useState } from "react";
 
 interface CodeBlockProps {
-  code: string;
+  children: React.ReactNode;
   language: string;
-  showLineNumbers?: boolean;
-  className?: string;
-  title?: string;
 }
 
-export function CodeBlock({
-  code,
-  language,
-  showLineNumbers = true,
-  className,
-  title,
-}: CodeBlockProps) {
+const extractTextFromNode = (node: React.ReactNode): string => {
+  if (typeof node === "string") {
+    return node;
+  }
+  if (
+    React.isValidElement<{ children?: React.ReactNode }>(node) &&
+    node.props.children
+  ) {
+    return React.Children.toArray(node.props.children)
+      .map((child) => extractTextFromNode(child))
+      .join("");
+  }
+  return "";
+};
+
+export function CodeBlock({ children, language }: CodeBlockProps) {
   const [isCopied, setIsCopied] = useState(false);
 
-  const copyToClipboard = async () => {
-    await navigator.clipboard.writeText(code);
+  // Extract language from className
+  const lang = language.replace("language-", "");
+
+  const copyToClipboard = () => {
+    if (typeof window === "undefined" || !children) return;
+    const codeString = extractTextFromNode(children);
+    navigator.clipboard.writeText(codeString);
     setIsCopied(true);
-    setTimeout(() => setIsCopied(false), 2000);
   };
 
-  return (
-    <div
-      className={cn(
-        "relative rounded-lg border my-5 overflow-hidden",
-        className
-      )}
-    >
-      <div className="flex items-center justify-between px-4 py-2 bg-zinc-800 border-b border-zinc-700">
-        {/* Mac window traffic light buttons */}
-        <div className="flex items-center gap-1.5">
-          <div className="w-3 h-3 rounded-full bg-red-500" />
-          <div className="w-3 h-3 rounded-full bg-yellow-500" />
-          <div className="w-3 h-3 rounded-full bg-green-500" />
-          {title && (
-            <span className="ml-3 text-xs text-zinc-400 font-mono">
-              {title}
-            </span>
-          )}
-        </div>
+  useEffect(() => {
+    const timer = setTimeout(() => setIsCopied(false), 2000);
+    return () => clearTimeout(timer);
+  }, [isCopied]);
 
-        {/* Copy button */}
-        <Button
-          variant="ghost"
-          size="icon"
+  return (
+    <div className="relative my-4 rounded-xl border border-white/10">
+      <div className="absolute top-0 right-0 flex items-center">
+        {/* <span className="text-xs text-gray-400 select-none">{lang}</span> */}
+        <button
           onClick={copyToClipboard}
-          className="h-8 w-8 text-zinc-400 hover:text-zinc-100 hover:bg-zinc-700"
+          className="p-1.5 rounded-md bg-gray-700/50 hover:bg-gray-600/50 text-gray-400 transition-colors transform -translate-y-1/4 translate-x-1/4"
+          aria-label="Copy code"
         >
           {isCopied ? (
-            <Check className="h-4 w-4 text-green-500" />
+            <Check size={16} className="text-green-500" />
           ) : (
-            <Copy className="h-4 w-4" />
+            <Clipboard size={16} />
           )}
-          <span className="sr-only">{isCopied ? "Copied" : "Copy code"}</span>
-        </Button>
+        </button>
       </div>
-      <div className="relative bg-zinc-900">
-        <pre className="overflow-x-auto p-4">
-          <SyntaxHighlighter
-            language={language}
-            style={monokaiSublime}
-            showLineNumbers={showLineNumbers}
-            wrapLines={true}
-            customStyle={{
-              backgroundColor: "transparent",
-              margin: 0,
-            }}
-          >
-            {code}
-          </SyntaxHighlighter>
-        </pre>
-      </div>
+      <pre className="p-4 rounded-xl bg-gray-900 text-white overflow-x-auto">
+        {children}
+      </pre>
     </div>
   );
 }
