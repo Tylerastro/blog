@@ -124,19 +124,124 @@ ADD功能更強大，但也就更無法預測結果，因為ADD指令會自動�
 
 
 在2013有討論串討論這項功能，甚至2024年仍然還有相關討論是否自動解壓縮，或是不同的壓縮格式。
-["ADD in Dockerfile copy the file instead of decompressing it #2369](https://github.com/moby/moby/issues/2369)
+[ADD in Dockerfile copy the file instead of decompressing it #2369](https://github.com/moby/moby/issues/2369)
+
 
 
 ## RUN
 
-在了解兩種寫指令的形式之後，我們可以開始撰寫`RUN`的指令，`RUN`會在IMAGE上添加新的layer，也就是`RUN`的指令會被保存，並且被快取起來。
+在了解兩種指令撰寫形式（Shell 與 Exec）後，我們可以開始使用 `RUN` 指令來對映像檔進行變更。`RUN` 用於**執行指令並在映像上建立新的層 (layer)**，這些變更會被快取，以加速後續建置流程。
+
+### 指令範例與最佳實踐
+
+例如：
+
+```dockerfile
+RUN apt-get update && apt-get dist-upgrade -y && rm -rf /var/lib/apt/lists/*
+```
+
+這行指令示範了常見的升級作業，並遵循以下最佳實踐：
+
+* **結合 `update` 和 `install`** 以避免快取錯誤。
+* 使用 `&&` 串聯指令，並可搭配 `\` 拆成多行，提高可讀性。
+* 安裝完後**清除快取**以減少映像大小。
+
+### Shell vs Exec 形式
+
+* **Shell 形式**：預設使用 `/bin/sh -c`，支援變數替換、管道指令與 here-document。
+
+  * 可使用反斜線換行，提升可讀性。
+  * 適合需要 shell 功能的場景，例如 `apt-get` 安裝、設定環境變數等。
+* **Exec 形式**：避免 shell 處理，採用 JSON 陣列語法。
+
+  * 不支援變數替換，需顯式呼叫 shell，如：
+
+    ```dockerfile
+    RUN ["sh", "-c", "echo $HOME"]
+    ```
+  * 適用於對執行指令安全性或字串解析較敏感的情境。
+
+### 常見使用情境分類
+
+#### 1. 安裝軟體
+
+```dockerfile
+RUN apt-get update && \
+    apt-get install -y curl git && \
+    rm -rf /var/lib/apt/lists/*
+```
+
+* **結合安裝與清理**，減少映像體積。
+* 可指定版本號提升穩定性，如：`s3cmd=1.1.*`。
+
+#### 2. 建立內部檔案
+
+```dockerfile
+RUN echo "export PATH=\"$PATH:/custom/bin\"" >> /etc/profile.d/custom_path.sh
+```
+
+* 透過 Shell 形式寫入配置，常用於環境變數設定。
+
+#### 3. 執行多行腳本
+
+```dockerfile
+RUN <<EOF
+#!/bin/bash
+set -e
+mkdir -p /app/logs
+echo "初始化完成"
+EOF
+```
+
+* 使用 here-documents 管理複數行邏輯，語意更清晰。
 
 
+#### 4. 使用快取與掛載
 
+```dockerfile
+RUN --mount=type=cache,target=/root/.cache \
+    pip install -r requirements.txt
+```
 
+* 建立快取點以加速重複建置。
 
+### 進階選項
 
+#### --mount
 
+* `type=bind`：掛載主機檔案進建置容器。
+* `type=cache`：建立快取資料夾。
+* `type=tmpfs`：使用記憶體掛載暫存資料。
+* `type=secret`：注入敏感資訊（如私鑰）。
+* `type=ssh`：提供 Git 或 CI/CD 存取權。
 
+#### --network
+
+* `default`：預設網路環境。
+* `none`：完全隔離的無網路模式。
+* `host`：使用主機網路，常見於需要存取內部服務的建置情境。
+
+#### --security
+
+* `sandbox`：預設安全模式。
+* `insecure`：允許需要提權的操作，需明確授權。
+
+### 快取失效策略
+
+* `RUN` 層快取不會自動失效。
+* 可使用 `docker build --no-cache` 強制重建。
+* `COPY` 和 `ADD` 的變動會影響快取是否生效。
+* 使用 `ARG` 傳遞變數時，只要值變動也會導致 `RUN` 快取失效。
+
+### 使用環境變數
+
+* 使用 `ENV` 宣告的變數可用於 `RUN` 指令中：
+
+```dockerfile
+ENV APP_HOME=/app
+RUN mkdir -p $APP_HOME/logs
+```
+
+* 使用 Shell 形式才能正常替換變數；Exec 形式需透過 `sh -c` 手動呼叫 shell。
 
 

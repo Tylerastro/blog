@@ -13,7 +13,7 @@ interface PostListProps {
   posts: PostMetadata[];
 }
 
-export default function PostList({ posts }: PostListProps) {
+export default async function PostList({ posts }: PostListProps) {
   return (
     <div className="flex flex-col items-center w-full sm:w-[90svw] md:w-[80svw] max-w-3xl mx-auto group">
       {posts.map((post) => (
