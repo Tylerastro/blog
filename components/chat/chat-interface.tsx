@@ -1,6 +1,7 @@
 "use client";
 
 import type React from "react";
+import ReactMarkdown from "react-markdown";
 
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
@@ -45,13 +46,23 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
     setIsLoading(true);
 
     try {
-      // In a real implementation, you would use your API key
-      // This is a mock implementation for demonstration purposes
-      const response = await mockLLMResponse(input);
+      const response = await fetch("http://127.0.0.1:8000/api/chat", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ message: input }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+
+      const data = await response.json();
 
       const assistantMessage: Message = {
         role: "assistant",
-        content: response,
+        content: data.response,
       };
 
       setMessages((prev) => [...prev, assistantMessage]);
@@ -66,34 +77,6 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
       setMessages((prev) => [...prev, errorMessage]);
     } finally {
       setIsLoading(false);
-    }
-  };
-
-  // Mock LLM response function - replace with actual AI SDK implementation
-  const mockLLMResponse = async (prompt: string): Promise<string> => {
-    // Simulate network delay
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    // In a real implementation, you would use the AI SDK like this:
-    // const { text } = await generateText({
-    //   model: openai('gpt-4o'),
-    //   prompt: prompt,
-    //   system: "You are a helpful assistant.",
-    // })
-    // return text
-
-    // For demo purposes, return a mock response
-    if (
-      prompt.toLowerCase().includes("hello") ||
-      prompt.toLowerCase().includes("hi")
-    ) {
-      return "Hello! How can I assist you today?";
-    } else if (prompt.toLowerCase().includes("help")) {
-      return "I'm here to help! What do you need assistance with?";
-    } else if (prompt.toLowerCase().includes("thank")) {
-      return "You're welcome! Is there anything else I can help with?";
-    } else {
-      return `I received your message: "${prompt}". How can I help you further?`;
     }
   };
 
@@ -120,10 +103,14 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
                 className={`max-w-[80%] rounded-lg px-4 py-2 ${
                   message.role === "user"
                     ? "bg-primary text-primary-foreground"
-                    : "bg-muted"
+                    : ""
                 }`}
               >
-                {message.content}
+                {message.role === "assistant" ? (
+                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                ) : (
+                  message.content
+                )}
               </div>
             </div>
           ))}

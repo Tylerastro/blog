@@ -1,30 +1,31 @@
-import { AboutAccordion } from "@/components/about/AboutAccordion";
 import { SocialLinks } from "@/components/about/SocialLinks";
+import { Skills } from "@/components/about/Skills";
+import { Education } from "@/components/about/Education";
+import { Publications } from "@/components/about/Publications";
 
-export default function AboutMe() {
+export default async function AboutMe() {
   return (
-    <main className="min-h-screen p-8 mx-auto md:max-w-5xl">
-      {/* Header Section */}
-      <section className="text-center mb-12">
-        <h1 className="mt-6 text-4xl font-bold">Tyler</h1>
-        <p className="mt-2 text-xl text-muted-foreground">Software Engineer</p>
+    <main className="min-h-screen p-8 mx-auto md:max-w-2xl">
+      <header className="text-center mb-16">
+        <h1 className="mt-6 text-5xl font-bold">Tyler</h1>
+        <p className="mt-4 text-xl text-muted-foreground">Software Engineer</p>
         <SocialLinks />
-      </section>
+      </header>
 
-      {/* About Section */}
-      <section className="text-center mb-12">
-        <h2 className="text-3xl font-semibold mb-4">About Me</h2>
-        <p className="text-lg text-muted-foreground">
-          I am a software engineer, an astronomer, and a physicist, strongly
-          believe in by putting each one&apos;s effort, we can make a better
-          world.
-        </p>
-      </section>
+      <div className="space-y-16">
+        <section>
+          <h2 className="text-2xl font-semibold mb-4">About Me</h2>
+          <p className="text-lg leading-relaxed">
+            I am a software engineer, an astronomer, and a physicist, who
+            strongly believes that by putting in our collective effort, we can
+            make the world a better place.
+          </p>
+        </section>
 
-      {/* Details Section */}
-      <section>
-        <AboutAccordion />
-      </section>
+        <Skills />
+        <Publications />
+        <Education />
+      </div>
     </main>
   );
 }
