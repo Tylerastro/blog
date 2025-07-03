@@ -1,0 +1,162 @@
+[
+  {
+    "title": "Built-in Functions",
+    "tags": [
+      "Python"
+    ]
+  },
+  {
+    "title": "Django + Docker -> Deployment with Nginx, Gunicorn and PostgreSQL",
+    "tags": [
+      "Django",
+      "Docker",
+      "Deployment",
+      "Web Development"
+    ]
+  },
+  {
+    "title": "DockerFile",
+    "tags": [
+      "Docker",
+      "Dockerfile"
+    ]
+  },
+  {
+    "title": "Github.io個人網站架設",
+    "tags": [
+      "Hexo"
+    ]
+  },
+  {
+    "title": "MacOS Terminal",
+    "tags": [
+      "MacOS",
+      "iTerm2",
+      "Terminal"
+    ]
+  },
+  {
+    "title": "PEP 765 try finally迷思",
+    "tags": [
+      "Python"
+    ]
+  },
+  {
+    "title": "從寫Package到打包上傳PYPI",
+    "tags": [
+      "Python"
+    ]
+  },
+  {
+    "title": "Shell Script Basics",
+    "tags": [
+      "Shell Script",
+      "Basics"
+    ]
+  },
+  {
+    "title": "Python Handling Strings",
+    "tags": [
+      "Python",
+      "String"
+    ]
+  },
+  {
+    "title": "Tlog#3 It's been a long time",
+    "tags": [
+      "Tlog"
+    ]
+  },
+  {
+    "title": "Vim",
+    "tags": [
+      "Text Editor"
+    ]
+  },
+  {
+    "title": "Hacktoberfest 2023 - from a junior engineer perspective",
+    "tags": [
+      "Hacktoberfest"
+    ]
+  },
+  {
+    "title": "Hexo token update",
+    "tags": [
+      "Basics"
+    ]
+  },
+  {
+    "title": "Loop",
+    "tags": [
+      "Python"
+    ]
+  },
+  {
+    "title": "新兵日記",
+    "tags": [
+      "當兵"
+    ]
+  },
+  {
+    "title": "Tlog#1",
+    "tags": [
+      "Tlog"
+    ]
+  },
+  {
+    "title": "Tlog#2 天文碩士轉職後端工程師",
+    "tags": [
+      "Tlog"
+    ]
+  },
+  {
+    "title": "Vtuber的定位——淺談、反思、我推文化",
+    "tags": [
+      "Vtuber"
+    ]
+  },
+  {
+    "title": "whisper",
+    "tags": [
+      "Python",
+      "Youtube"
+    ]
+  },
+  {
+    "title": "Yt-dlp 存擋不再錯過",
+    "tags": [
+      "Python",
+      "Basics",
+      "Youtube"
+    ]
+  },
+  {
+    "title": "重開/多Session無法吃到zsh-autosuggestions",
+    "tags": [
+      "oh my zsh",
+      "Bug Fix"
+    ]
+  },
+  {
+    "title": "成長環境重要嗎？",
+    "tags": []
+  },
+  {
+    "title": "寫給10年後的你",
+    "tags": []
+  },
+  {
+    "title": "致陪伴我青春的動畫 TIGER×DRAGON！",
+    "tags": [
+      "Animation",
+      "致陪伴我青春的動畫"
+    ]
+  },
+  {
+    "title": "致陪伴我青春的動畫 86 不存在的戰區",
+    "tags": [
+      "Animation",
+      "致陪伴我青春的動畫"
+    ]
+  }
+]

@@ -41,7 +41,11 @@ async def chat(request: ChatRequest):
     chatbot = chatbot_sessions[model_key]
     response = chatbot.get_response(
         request.message, session_id=request.session_id)
-    return {"response": response}
+
+    # Print the retrieved context to the console
+    print("Retrieved Context:", response["context"])
+
+    return {"response": response["answer"], "context": response["context"]}
 
 
 @app.post("/api/chat/clear")

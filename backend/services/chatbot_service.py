@@ -209,4 +209,4 @@ class ChatbotService:
             {"input": message},
             config={"configurable": {"session_id": session_id}}
         )
-        return response["answer"]
+        return response

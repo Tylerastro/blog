@@ -42,3 +42,6 @@ yarn-error.log*
 next-env.d.ts
 contents
 public/blogs
+
+# backend
+__pycache__/

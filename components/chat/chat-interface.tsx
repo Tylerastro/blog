@@ -8,9 +8,17 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Loader2, Send } from "lucide-react";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+
 type Message = {
   role: "user" | "assistant";
   content: string;
+  context?: any[];
 };
 
 export default function ChatInterface({ onClose }: { onClose: () => void }) {
@@ -82,15 +90,7 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
 
   return (
     <div className="flex flex-col h-full">
-      <div className="flex-1 overflow-y-auto p-4 flex flex-col-reverse">
-        <div ref={messagesEndRef} />
-        {isLoading && (
-          <div className="flex justify-start">
-            <div className="max-w-[80%] rounded-lg px-4 py-2 bg-muted">
-              <Loader2 className="h-4 w-4 animate-spin" />
-            </div>
-          </div>
-        )}
+      <div className="flex-1 overflow-y-auto p-4">
         <div className="space-y-4">
           {messages.map((message, index) => (
             <div
@@ -100,21 +100,49 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
               } message-enter-active`}
             >
               <div
-                className={`max-w-[80%] rounded-lg px-4 py-2 ${
+                className={`max-w-[80%] text-lg rounded-lg px-5 py-3 shadow-md ${
                   message.role === "user"
                     ? "bg-primary text-primary-foreground"
                     : ""
                 }`}
               >
                 {message.role === "assistant" ? (
-                  <ReactMarkdown>{message.content}</ReactMarkdown>
+                  <>
+                    <ReactMarkdown className="prose prose-sm max-w-none text-foreground">
+                      {message.content}
+                    </ReactMarkdown>
+                    {message.context && (
+                      <Accordion
+                        type="single"
+                        collapsible
+                        className="w-full mt-2"
+                      >
+                        <AccordionItem value="item-1">
+                          <AccordionTrigger>Retrieved Context</AccordionTrigger>
+                          <AccordionContent>
+                            <pre className="whitespace-pre-wrap text-xs">
+                              {JSON.stringify(message.context, null, 2)}
+                            </pre>
+                          </AccordionContent>
+                        </AccordionItem>
+                      </Accordion>
+                    )}
+                  </>
                 ) : (
-                  message.content
+                  <p className="text-lg">{message.content}</p>
                 )}
               </div>
             </div>
           ))}
         </div>
+        {isLoading && (
+          <div className="flex justify-start mt-4">
+            <div className="max-w-[80%] rounded-lg px-4 py-2 bg-secondary">
+              <Loader2 className="h-4 w-4 animate-spin" />
+            </div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
       </div>
       <div className="border-t p-4">
         <form onSubmit={handleSubmit} className="flex gap-2">
@@ -123,7 +151,7 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
             disabled={isLoading}
-            className="flex-1 outline-none"
+            className="flex-1 outline-none text-lg"
           />
           <Button
             type="submit"

@@ -9,7 +9,9 @@
     "start": "next start",
     "lint": "next lint",
     "clean": "rm -vrf contents/* && rm -vrf public/blogs/*",
-    "new": "node scripts/newPost.js"
+    "new": "node scripts/newPost.js",
+    "tag": "node scripts/generate-tags.js",
+    "metadata": "node scripts/generate-metadata.js"
   },
   "dependencies": {
     "@firecms/neat": "^0.3.0",

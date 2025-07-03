@@ -1,0 +1,254 @@
+{
+  "markdown/Built-inFunctions.md": {
+    "title": "Built-in Functions",
+    "tags": [
+      "Python"
+    ],
+    "categories": [
+      "27 Master Journey"
+    ],
+    "date": "2022-01-16T14:21:36.000Z"
+  },
+  "markdown/Django.md": {
+    "title": "Django + Docker -> Deployment with Nginx, Gunicorn and PostgreSQL",
+    "tags": [
+      "Django",
+      "Docker",
+      "Deployment",
+      "Web Development"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2023-07-03T21:15:13.000Z"
+  },
+  "markdown/Docker.md": {
+    "title": "DockerFile",
+    "tags": [
+      "Docker",
+      "Dockerfile"
+    ],
+    "categories": [],
+    "date": "2025-05-12"
+  },
+  "markdown/Github-io個人網站架設.md": {
+    "title": "Github.io個人網站架設",
+    "tags": [
+      "Hexo"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2021-07-27T15:23:19.000Z"
+  },
+  "markdown/MacTerminal.md": {
+    "title": "MacOS Terminal",
+    "tags": [
+      "MacOS",
+      "iTerm2",
+      "Terminal"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2021-11-06T21:13:40.000Z"
+  },
+  "markdown/PEP765.md": {
+    "title": "PEP 765 try finally迷思",
+    "tags": [
+      "Python"
+    ],
+    "categories": [],
+    "date": "2025-05-07"
+  },
+  "markdown/Setuptools-如何打包程式.md": {
+    "title": "從寫Package到打包上傳PYPI",
+    "tags": [
+      "Python"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2021-07-31T16:33:19.000Z"
+  },
+  "markdown/ShellScript.md": {
+    "title": "Shell Script Basics",
+    "tags": [
+      "Shell Script",
+      "Basics"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2022-07-11T14:12:19.000Z"
+  },
+  "markdown/Strings.md": {
+    "title": "Python Handling Strings",
+    "tags": [
+      "Python",
+      "String"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2021-08-28T09:17:33.000Z"
+  },
+  "markdown/Tlog3.md": {
+    "title": "Tlog#3 It's been a long time",
+    "tags": [
+      "Tlog"
+    ],
+    "categories": [],
+    "date": "2025-05-07"
+  },
+  "markdown/Vim.md": {
+    "title": "Vim",
+    "tags": [
+      "Text Editor"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2021-12-24T12:09:16.000Z"
+  },
+  "markdown/hacktoberfest.md": {
+    "title": "Hacktoberfest 2023 - from a junior engineer perspective",
+    "tags": [
+      "Hacktoberfest"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2023-09-30T10:25:15.000Z"
+  },
+  "markdown/hexo-2.md": {
+    "title": "Hexo token update",
+    "tags": [
+      "Basics"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2023-04-02T18:57:27.000Z"
+  },
+  "markdown/loop.md": {
+    "title": "Loop",
+    "tags": [
+      "Python"
+    ],
+    "categories": [
+      "27 Master Journey"
+    ],
+    "date": "2022-02-19T21:53:56.000Z"
+  },
+  "markdown/military.md": {
+    "title": "新兵日記",
+    "tags": [
+      "當兵"
+    ],
+    "categories": [
+      "Life"
+    ],
+    "date": "2022-06-13T19:30:32.000Z"
+  },
+  "markdown/tlog.md": {
+    "title": "Tlog#1",
+    "tags": [
+      "Tlog"
+    ],
+    "categories": [
+      "Life"
+    ],
+    "date": "2023-04-02T17:30:18.000Z"
+  },
+  "markdown/tlog2.md": {
+    "title": "Tlog#2 天文碩士轉職後端工程師",
+    "tags": [
+      "Tlog"
+    ],
+    "categories": [
+      "Life"
+    ],
+    "date": "2023-09-20T22:43:05.000Z"
+  },
+  "markdown/vtuber.md": {
+    "title": "Vtuber的定位——淺談、反思、我推文化",
+    "tags": [
+      "Vtuber"
+    ],
+    "categories": [
+      "Life"
+    ],
+    "date": "2023-10-07T18:29:35.000Z"
+  },
+  "markdown/whisper.md": {
+    "title": "whisper",
+    "tags": [
+      "Python",
+      "Youtube"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2024-08-10T15:13:54.000Z"
+  },
+  "markdown/ytdlp.md": {
+    "title": "Yt-dlp 存擋不再錯過",
+    "tags": [
+      "Python",
+      "Basics",
+      "Youtube"
+    ],
+    "categories": [
+      "Notes"
+    ],
+    "date": "2024-02-28T00:17:45.000Z"
+  },
+  "markdown/zsh_autosuggetion.md": {
+    "title": "重開/多Session無法吃到zsh-autosuggestions",
+    "tags": [
+      "oh my zsh",
+      "Bug Fix"
+    ],
+    "categories": [],
+    "date": "2025-05-09"
+  },
+  "markdown/成長環境的重要.md": {
+    "title": "成長環境重要嗎？",
+    "tags": [],
+    "categories": [
+      "Life"
+    ],
+    "date": "2021-07-24T01:53:00.000Z"
+  },
+  "markdown/給十年後的你.md": {
+    "title": "寫給10年後的你",
+    "tags": [],
+    "categories": [
+      "Life"
+    ],
+    "date": "2021-06-21T13:55:50.000Z"
+  },
+  "markdown/胃痛番.md": {
+    "title": "致陪伴我青春的動畫 TIGER×DRAGON！",
+    "tags": [
+      "Animation",
+      "致陪伴我青春的動畫"
+    ],
+    "categories": [
+      "Life"
+    ],
+    "date": "2022-01-22T16:17:22.000Z"
+  },
+  "markdown/胃痛番2.md": {
+    "title": "致陪伴我青春的動畫 86 不存在的戰區",
+    "tags": [
+      "Animation",
+      "致陪伴我青春的動畫"
+    ],
+    "categories": [
+      "Life"
+    ],
+    "date": "2022-08-18T17:08:01.000Z"
+  }
+}
