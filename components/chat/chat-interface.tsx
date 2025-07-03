@@ -123,12 +123,13 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
             onChange={(e) => setInput(e.target.value)}
             placeholder="Type your message..."
             disabled={isLoading}
-            className="flex-1"
+            className="flex-1 outline-none"
           />
           <Button
             type="submit"
             size="icon"
             disabled={isLoading || !input.trim()}
+            className="outline-none"
           >
             {isLoading ? (
               <Loader2 className="h-4 w-4 animate-spin" />

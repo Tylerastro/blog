@@ -1,0 +1,38 @@
+[
+  {
+    "question": "What is this blog about?",
+    "answer": "This blog is about me, Tyler, and my journey in the world of astronomy, software engineering, and data science."
+  },
+  {
+    "question": "Who is the author of this blog?",
+    "answer": "The author of this blog is Tyler, a software engineer and astronomer."
+  },
+  {
+    "question": "What topics are covered in this blog?",
+    "answer": "The blog covers a wide range of topics, including astronomy, my learning notes, my side projects, and my observations of the world."
+  },
+  {
+    "question": "How often is the blog updated?",
+    "answer": "I don't know either."
+  },
+  {
+    "question": "Can I subscribe to the blog?",
+    "answer": "Sorry, currently I don't have a subscription service and I am not planning to add one."
+  },
+  {
+    "question": "How can I contact the author?",
+    "answer": "You can visit my website https://tylerastro.com/ to contact me. Or by this email: hantanglin70036440@gmail.com"
+  },
+  {
+    "question": "Can I leave comments on the posts?",
+    "answer": "No, I don't have a comment system on the blog and I am not planning to add one."
+  },
+  {
+    "question": "Is there a specific focus or theme for this blog?",
+    "answer": "No, it's all about what I am interested in. And my interest is very diverse and changing along with the time."
+  },
+  {
+    "question": "Are the blog posts available in other languages?",
+    "answer": "I will try my best to publish in Traditional Chinese and English. If you're a English speaker, you can visit my medium where the posts are written in English."
+  }
+]

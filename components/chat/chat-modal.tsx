@@ -16,7 +16,7 @@ export default function ChatModal({ children }: { children: React.ReactNode }) {
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>{children}</DialogTrigger>
-      <DialogContent className="sm:max-w-[600px] md:max-w-[900px] h-[700px] p-3">
+      <DialogContent className="sm:max-w-[600px] md:max-w-[900px] h-[700px] p-3 outline-none">
         <DialogHeader className="p-3 pb-0">
           <DialogTitle className="text-2xl font-bold">Let's chat</DialogTitle>
         </DialogHeader>
