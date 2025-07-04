@@ -1,5 +1,7 @@
 import json
 import os
+import re
+from typing import Any, Dict, List, Optional
 
 from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.history_aware_retriever import \
@@ -9,17 +11,205 @@ from langchain.document_loaders import (DirectoryLoader, PyPDFLoader,
                                         UnstructuredMarkdownLoader)
 from langchain.prompts import (ChatPromptTemplate, FewShotPromptTemplate,
                                MessagesPlaceholder, PromptTemplate)
+from langchain.retrievers import EnsembleRetriever
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain.vectorstores import FAISS
 from langchain_community.chat_message_histories import ChatMessageHistory
 from langchain_core.chat_history import BaseChatMessageHistory
+from langchain_core.retrievers import BaseRetriever
 from langchain_core.runnables.history import RunnableWithMessageHistory
 from langchain_google_genai import (ChatGoogleGenerativeAI,
                                     GoogleGenerativeAIEmbeddings)
 from langchain_openai import ChatOpenAI, OpenAIEmbeddings
 
 from backend.helpers import time_profiler
+
+
+class BlogPostRetriever(BaseRetriever):
+    """Custom retriever for blog posts based on tag filtering"""
+
+    blog_posts: List[Dict[str, Any]] = []
+    all_tags: List[str] = []
+
+    class Config:
+        arbitrary_types_allowed = True
+
+    def __init__(self, blog_posts: List[Dict[str, Any]], **kwargs):
+        super().__init__(**kwargs)
+        self.blog_posts = blog_posts
+        self.all_tags = list(
+            set(tag for post in self.blog_posts for tag in post.get('tags', [])))
+
+    def get_relevant_documents(self, query: str) -> List[Document]:
+        """Get relevant blog post documents based on query"""
+        # Check if this is a blog post query
+        if not self._is_blog_post_query(query):
+            return []
+
+        # Extract relevant tags from the query
+        relevant_tags = self._extract_relevant_tags(query, self.all_tags)
+
+        # Filter posts by tags
+        filtered_posts = self._filter_posts_by_tags(
+            self.blog_posts, relevant_tags)
+
+        # If no specific tags found, return all posts (with a limit)
+        if not filtered_posts and self._is_blog_post_query(query):
+            filtered_posts = self.blog_posts[:10]  # Limit to 10 most recent
+
+        # Create document objects
+        documents = self._create_blog_post_documents(filtered_posts)
+
+        return documents
+
+    async def aget_relevant_documents(self, query: str) -> List[Document]:
+        """Async version of get_relevant_documents"""
+        return self.get_relevant_documents(query)
+
+    def _is_blog_post_query(self, query: str) -> bool:
+        """Detect if the user is asking about blog posts"""
+        blog_indicators = [
+            # English indicators
+            r'\b(blog|post|article|write|wrote|writing)\b',
+            r'\b(what.*write|what.*wrote|what.*blog)\b',
+            r'\b(tell.*about.*post|about.*blog)\b',
+            r'\b(show.*post|list.*post|find.*post)\b',
+            # Chinese indicators
+            r'\b(部落格|文章|寫|寫了|寫過|發布|發表)\b',
+            r'\b(什麼.*寫|寫了什麼|寫過什麼)\b',
+            r'\b(關於.*文章|關於.*部落格)\b',
+            r'\b(顯示.*文章|列出.*文章|找.*文章)\b',
+            # Technology-related terms (likely blog topics)
+            r'\b(Python|Django|Docker|JavaScript|React|Vue|Node|CSS|HTML|Git|GitHub|Linux|MacOS|Terminal|Vim|Shell|Script)\b',
+            r'\b(機器學習|人工智慧|軟體開發|程式設計|網頁開發|前端|後端|資料庫|演算法)\b',
+        ]
+
+        query_lower = query.lower()
+        for pattern in blog_indicators:
+            if re.search(pattern, query_lower, re.IGNORECASE):
+                return True
+        return False
+
+    def _extract_relevant_tags(self, query: str, available_tags: List[str]) -> List[str]:
+        """Extract relevant tags from user query"""
+        relevant_tags = []
+        query_lower = query.lower()
+
+        # Direct tag matching
+        for tag in available_tags:
+            if tag.lower() in query_lower:
+                relevant_tags.append(tag)
+
+        # Semantic tag matching based on query content
+        tag_mappings = {
+            # Programming languages
+            'python': ['Python'],
+            'django': ['Django'],
+            'docker': ['Docker', 'Dockerfile'],
+            'javascript': ['JavaScript'],
+            'react': ['React'],
+            'vue': ['Vue'],
+            'node': ['Node'],
+            'html': ['HTML'],
+            'css': ['CSS'],
+            'shell': ['Shell Script'],
+            'bash': ['Shell Script'],
+            'terminal': ['Terminal'],
+            'macos': ['MacOS'],
+            'linux': ['Linux'],
+            'vim': ['Text Editor'],
+            'git': ['Git'],
+            'github': ['GitHub'],
+            'hexo': ['Hexo'],
+            'deployment': ['Deployment'],
+            'web development': ['Web Development'],
+            'database': ['Database'],
+            'mysql': ['MySQL'],
+            'postgresql': ['PostgreSQL'],
+            'basics': ['Basics'],
+            'tutorial': ['Basics'],
+            'guide': ['Basics'],
+            'youtube': ['Youtube'],
+            'video': ['Youtube'],
+            'download': ['Youtube'],
+            'animation': ['Animation'],
+            'anime': ['Animation'],
+            'vtuber': ['Vtuber'],
+            'military': ['當兵'],
+            'army': ['當兵'],
+            'tlog': ['Tlog'],
+            'diary': ['Tlog'],
+            'life': ['Life'],
+            'personal': ['Life'],
+            'hacktoberfest': ['Hacktoberfest'],
+            'open source': ['Hacktoberfest'],
+            # Chinese mappings
+            '程式': ['Python', 'Programming'],
+            '網頁': ['Web Development'],
+            '部署': ['Deployment'],
+            '資料庫': ['Database'],
+            '終端': ['Terminal'],
+            '指令': ['Shell Script'],
+            '動畫': ['Animation'],
+            '當兵': ['當兵'],
+            '軍隊': ['當兵'],
+            '日記': ['Tlog'],
+            '生活': ['Life'],
+        }
+
+        for keyword, tags in tag_mappings.items():
+            if keyword in query_lower:
+                relevant_tags.extend(
+                    [tag for tag in tags if tag in available_tags])
+
+        # Remove duplicates and return
+        return list(set(relevant_tags))
+
+    def _filter_posts_by_tags(self, posts: List[Dict], relevant_tags: List[str]) -> List[Dict]:
+        """Filter blog posts by relevant tags"""
+        if not relevant_tags:
+            return posts
+
+        filtered_posts = []
+        for post in posts:
+            post_tags = post.get('tags', [])
+            if any(tag in post_tags for tag in relevant_tags):
+                filtered_posts.append(post)
+
+        return filtered_posts
+
+    def _create_blog_post_documents(self, posts: List[Dict]) -> List[Document]:
+        """Create Document objects from blog post metadata"""
+        documents = []
+        for post in posts:
+            title = post.get('title', 'Unknown Title')
+            tags = post.get('tags', [])
+            date = post.get('date', '')
+            categories = post.get('categories', [])
+
+            # Create rich content for the document
+            content = f"""
+            Title: {title}
+            Date: {date}
+            Tags: {', '.join(tags)}
+            Categories: {', '.join(categories)}
+
+            This is a blog post by Tyler about {', '.join(tags)} topics.
+            """
+
+            documents.append(Document(
+                page_content=content,
+                metadata={
+                    'title': title,
+                    'tags': tags,
+                    'date': date,
+                    'categories': categories,
+                    'type': 'blog_post'
+                }
+            ))
+
+        return documents
 
 
 class ChatbotService:
@@ -83,15 +273,61 @@ class ChatbotService:
         return cv_docs + markdown_docs + qa_docs
 
     @time_profiler
+    def _load_blog_metadata(self) -> List[Dict[str, Any]]:
+        """Load blog post metadata from tags.json and metadata.json"""
+        project_root = os.path.dirname(os.path.dirname(
+            os.path.dirname(os.path.abspath(__file__))))
+
+        # Load tags.json
+        tags_path = os.path.join(project_root, "backend", "QA", "tags.json")
+        metadata_path = os.path.join(
+            project_root, "backend", "QA", "metadata.json")
+
+        blog_posts = []
+
+        if os.path.exists(tags_path):
+            with open(tags_path, 'r', encoding='utf-8') as f:
+                tags_data = json.load(f)
+                blog_posts.extend(tags_data)
+
+        # Load additional metadata if available
+        if os.path.exists(metadata_path):
+            with open(metadata_path, 'r', encoding='utf-8') as f:
+                metadata = json.load(f)
+                # Merge metadata with tags data
+                for post in blog_posts:
+                    # Find corresponding metadata entry
+                    for filepath, meta in metadata.items():
+                        if meta.get('title') == post.get('title'):
+                            post.update(meta)
+                            post['filepath'] = filepath
+                            break
+
+        return blog_posts
+
+    @time_profiler
     def _create_rag_chain(self):
         docs = self._load_documents()
 
         text_splitter = RecursiveCharacterTextSplitter(
-            chunk_size=1000, chunk_overlap=200)
+            chunk_size=500, chunk_overlap=100)
         splits = text_splitter.split_documents(docs)
 
         vectorstore = FAISS.from_documents(
             documents=splits, embedding=self.embeddings)
+
+        # Create general vector store retriever
+        general_retriever = vectorstore.as_retriever(search_kwargs={"k": 4})
+
+        # Create blog post retriever
+        blog_posts = self._load_blog_metadata()
+        blog_retriever = BlogPostRetriever(blog_posts)
+
+        # Combine retrievers using EnsembleRetriever
+        ensemble_retriever = EnsembleRetriever(
+            retrievers=[general_retriever, blog_retriever],
+            weights=[0.7, 0.3]  # Give more weight to general retriever
+        )
 
         examples = [
             {
@@ -123,6 +359,16 @@ class ChatbotService:
                 "context": "當我沒有足夠資訊回答問題時，我應該誠實地說不知道。",
                 "question": "Tyler 的寵物叫什麼名字？",
                 "answer": "很抱歉，我沒有關於 Tyler 寵物的資訊。"
+            },
+            {
+                "context": "Tyler has written blog posts about Python, Django, Docker, and various development tools and technologies.",
+                "question": "What blog posts has Tyler written about Python?",
+                "answer": "Tyler has written several blog posts about Python, including topics like built-in functions, loops, string handling, and Python package development and deployment to PyPI."
+            },
+            {
+                "context": "Tyler的部落格文章涵蓋了Python、Django、Docker等技術主題。",
+                "question": "Tyler寫了哪些關於Python的文章？",
+                "answer": "Tyler撰寫了多篇關於Python的文章，包括內建函數、迴圈、字串處理，以及Python套件開發和部署到PyPI等主題。"
             }
         ]
 
@@ -138,10 +384,12 @@ class ChatbotService:
         )
 
         prefix = """You are Tyler's personal blog assistant. Your role is to help visitors learn about 
-        Tyler by answering questions based on his blog posts, CV, and personal information. Your tone should be professional yet friendly.
+        Tyler by answering questions based on his blog posts, CV, and personal information. Your tone should be neutral and friendly.
 
         Use the following context from Tyler's blog and CV to answer questions about him, his experiences, skills, 
         projects, and thoughts. If you don't know the answer based on the provided context, politely say that you don't have that information about Tyler.
+
+        When answering questions about Tyler's blog posts, provide specific information about the posts including titles, topics, and relevant details.
 
         IMPORTANT: You must respond in the EXACT same language as the user's question. If the question is in English, 
         respond in English. If the question is in Chinese, respond in Chinese. If the question is in any other language, respond in that same language. Do not translate or change the language of your response.
@@ -179,7 +427,7 @@ class ChatbotService:
         ])
 
         history_aware_retriever = create_history_aware_retriever(
-            self.llm, vectorstore.as_retriever(), contextualize_q_prompt
+            self.llm, ensemble_retriever, contextualize_q_prompt
         )
 
         question_answer_chain = create_stuff_documents_chain(

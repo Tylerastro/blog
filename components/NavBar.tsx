@@ -92,7 +92,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
             <div className="flex items-center">
               <Link href="/" className="flex items-center space-x-2">
                 <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
-                  <span className="text-xs">TL</span>
+                  <span className="text-base">TL</span>
                 </div>
               </Link>
             </div>
@@ -104,7 +104,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="text-lg transition-colors hover:text-secondary-foreground"
+                      className="text-2xl transition-colors hover:text-secondary-foreground"
                     >
                       {link.label}
                     </Link>
@@ -114,7 +114,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-lg cursor-se-resize">
+                    <NavigationMenuTrigger className="text-2xl cursor-se-resize">
                       Blog
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -143,7 +143,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="text-lg transition-colors hover:text-secondary-foreground"
+                        className="text-2xl transition-colors hover:text-secondary-foreground"
                       >
                         {link.label}
                       </Link>
@@ -152,8 +152,20 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 ))}
             </nav>
             <ChatModal>
-              <Button size="lg" className="ml-8">
-                Let's Talk
+              <Button
+                size="lg"
+                className="ml-8 text-xl relative overflow-hidden group
+                  backdrop-blur-md
+                  hover:shadow-xl hover:shadow-black/20
+                  transition-all duration-300 ease-out
+                  hover:scale-105
+                  before:absolute before:inset-0
+                  before:translate-x-[-100%] before:transition-transform before:duration-700
+                  hover:before:translate-x-[100%]
+                  after:absolute after:inset-0
+                  hover:after:opacity-100 after:transition-opacity after:duration-300"
+              >
+                <span className="relative z-10 font-medium">Let's Talk</span>
               </Button>
             </ChatModal>
           </div>
