@@ -6,6 +6,7 @@ import ReactMarkdown from "react-markdown";
 import { useState, useRef, useEffect } from "react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
 import { Loader2, Send } from "lucide-react";
 
 import {
@@ -19,6 +20,78 @@ type Message = {
   role: "user" | "assistant";
   content: string;
   context?: any[];
+};
+
+// Custom heading components for ReactMarkdown
+const customComponents = {
+  h1: ({ children, ...props }: any) => (
+    <h1
+      className="text-2xl font-bold py-4 mb-4 pb-2 border-b-2 border-border text-foreground"
+      {...props}
+    >
+      {children}
+    </h1>
+  ),
+  h2: ({ children, ...props }: any) => (
+    <h2
+      className="text-xl font-semibold py-3 mb-3 pb-2 border-b border-border text-foreground"
+      {...props}
+    >
+      {children}
+    </h2>
+  ),
+  h3: ({ children, ...props }: any) => (
+    <h3
+      className="text-lg font-medium py-2 mb-2 pb-1 border-b border-border/50 text-foreground"
+      {...props}
+    >
+      {children}
+    </h3>
+  ),
+  p: ({ children, ...props }: any) => (
+    <p className="mb-3 leading-relaxed text-foreground" {...props}>
+      {children}
+    </p>
+  ),
+  ul: ({ children, ...props }: any) => (
+    <ul className="list-disc pl-6 mb-3 space-y-1 text-foreground" {...props}>
+      {children}
+    </ul>
+  ),
+  ol: ({ children, ...props }: any) => (
+    <ol className="list-decimal pl-6 mb-3 space-y-1 text-foreground" {...props}>
+      {children}
+    </ol>
+  ),
+  li: ({ children, ...props }: any) => (
+    <li className="text-foreground" {...props}>
+      {children}
+    </li>
+  ),
+  blockquote: ({ children, ...props }: any) => (
+    <blockquote
+      className="border-l-4 border-border pl-4 py-2 mb-3 italic text-muted-foreground"
+      {...props}
+    >
+      {children}
+    </blockquote>
+  ),
+  code: ({ children, ...props }: any) => (
+    <code
+      className="bg-muted px-1 py-0.5 rounded text-sm font-mono text-foreground"
+      {...props}
+    >
+      {children}
+    </code>
+  ),
+  pre: ({ children, ...props }: any) => (
+    <pre
+      className="bg-muted p-4 rounded-lg mb-3 overflow-x-auto text-sm font-mono text-foreground"
+      {...props}
+    >
+      {children}
+    </pre>
+  ),
 };
 
 export default function ChatInterface({ onClose }: { onClose: () => void }) {
@@ -39,6 +112,13 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      handleSubmit(e);
+    }
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -108,7 +188,10 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
               >
                 {message.role === "assistant" ? (
                   <>
-                    <ReactMarkdown className="prose prose-sm max-w-none text-foreground">
+                    <ReactMarkdown
+                      className="max-w-none text-foreground"
+                      components={customComponents}
+                    >
                       {message.content}
                     </ReactMarkdown>
                     {message.context && (
@@ -145,13 +228,15 @@ export default function ChatInterface({ onClose }: { onClose: () => void }) {
         <div ref={messagesEndRef} />
       </div>
       <div className="border-t p-4">
-        <form onSubmit={handleSubmit} className="flex gap-2">
-          <Input
+        <form onSubmit={handleSubmit} className="flex gap-2 items-end">
+          <Textarea
             value={input}
             onChange={(e) => setInput(e.target.value)}
-            placeholder="Type your message..."
+            onKeyDown={handleKeyDown}
+            placeholder="Type your message... (Shift+Enter for new line, Enter to send)"
             disabled={isLoading}
-            className="flex-1 outline-none text-lg"
+            className="flex-1 outline-none text-lg resize-none min-h-[2.5rem] max-h-32 overflow-y-auto"
+            rows={1}
           />
           <Button
             type="submit"

@@ -28,7 +28,7 @@ export default async function PostList({ posts }: PostListProps) {
             </h2>
             <time
               dateTime={post.created_date.toString()}
-              className="text-sm text-muted-foreground mb-2 block"
+              className="text-lg text-muted-foreground mb-2 block"
             >
               {formatDate(post.created_date)}
             </time>

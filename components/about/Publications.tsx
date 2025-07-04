@@ -45,15 +45,21 @@ const publications: PublicationType[] = [
   },
 ];
 
-const Publication = ({ title, authors, journal, year, link }: PublicationType) => (
+const Publication = ({
+  title,
+  authors,
+  journal,
+  year,
+  link,
+}: PublicationType) => (
   <li className="mb-4">
     <Link href={link} target="_blank" className="hover:underline">
       <div className="text-lg font-semibold">{title}</div>
     </Link>
-    <div className="text-sm text-muted-foreground">
+    <div className="text-base text-muted-foreground">
       {authors.join(", ")} ({year})
     </div>
-    <div className="text-sm italic">{journal}</div>
+    <div className="text-base italic">{journal}</div>
   </li>
 );
 

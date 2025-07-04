@@ -33,7 +33,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h6>
     ),
     p: ({ children }) => {
-      return <p className="py-2 my-2">{children}</p>;
+      return <p className="text-lg py-2 my-2">{children}</p>;
     },
     img: (props) => {
       return (

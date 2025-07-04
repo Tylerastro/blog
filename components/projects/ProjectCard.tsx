@@ -85,12 +85,15 @@ export default function ProjectCard({ project }: { project: Project }) {
       </div>
       <CardHeader>
         <div className="flex justify-between items-start">
-          <CardTitle className="text-xl">{project.title}</CardTitle>
-          <Badge variant="secondary" className="capitalize select-none">
+          <CardTitle className="text-2xl">{project.title}</CardTitle>
+          <Badge
+            variant="secondary"
+            className="capitalize text-base select-none"
+          >
             {project.category}
           </Badge>
         </div>
-        <div className="flex items-center text-sm text-muted-foreground">
+        <div className="flex items-center text-base text-muted-foreground">
           <Calendar className="h-4 w-4 mr-1" />
           {new Date(project.date).toLocaleDateString("en-US", {
             year: "numeric",
@@ -99,12 +102,16 @@ export default function ProjectCard({ project }: { project: Project }) {
         </div>
       </CardHeader>
       <CardContent>
-        <CardDescription className="text-sm">
+        <CardDescription className="text-lg">
           {project.description}
         </CardDescription>
         <div className="flex flex-wrap gap-2 mt-4">
           {project.tags.map((tag) => (
-            <Badge key={tag} variant="outline" className="text-xs select-none">
+            <Badge
+              key={tag}
+              variant="outline"
+              className="text-base select-none"
+            >
               {tag}
             </Badge>
           ))}
@@ -118,7 +125,12 @@ export default function ProjectCard({ project }: { project: Project }) {
           )}
         >
           {project.githubUrl && (
-            <Button variant="outline" size="sm" asChild className="flex-1">
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="flex-1 text-lg"
+            >
               <Link
                 href={project.githubUrl}
                 target="_blank"
@@ -130,7 +142,12 @@ export default function ProjectCard({ project }: { project: Project }) {
             </Button>
           )}
           {project.demoUrl && (
-            <Button variant="outline" size="sm" asChild className="flex-1">
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="flex-1 text-lg"
+            >
               <Link
                 href={project.demoUrl}
                 target="_blank"
@@ -142,7 +159,12 @@ export default function ProjectCard({ project }: { project: Project }) {
             </Button>
           )}
           {post && (
-            <Button variant="outline" size="sm" asChild className="flex-1">
+            <Button
+              variant="outline"
+              size="sm"
+              asChild
+              className="flex-1 text-lg"
+            >
               <Link href={post} target="_blank" rel="noopener noreferrer">
                 <BookText className="h-4 w-4 mr-2" />
                 Post

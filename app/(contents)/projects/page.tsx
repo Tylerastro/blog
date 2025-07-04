@@ -27,7 +27,7 @@ export default function ProjectsPage() {
     <main className="min-h-screen p-4 md:p-8 mx-auto max-w-7xl">
       <section className="text-center mb-12">
         <h1 className="mt-6 text-4xl font-bold">Projects</h1>
-        <p className="mt-4 text-muted-foreground max-w-2xl mx-auto">
+        <p className="mt-4 text-2xl text-muted-foreground max-w-2xl mx-auto">
           A collection of my work across various technologies and domains.
           Browse by category or explore all projects.
         </p>

@@ -7,15 +7,15 @@ from langchain.chains.combine_documents import create_stuff_documents_chain
 from langchain.chains.history_aware_retriever import \
     create_history_aware_retriever
 from langchain.chains.retrieval import create_retrieval_chain
-from langchain.document_loaders import (DirectoryLoader, PyPDFLoader,
-                                        UnstructuredMarkdownLoader)
 from langchain.prompts import (ChatPromptTemplate, FewShotPromptTemplate,
                                MessagesPlaceholder, PromptTemplate)
 from langchain.retrievers import EnsembleRetriever
 from langchain.schema import Document
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain.vectorstores import FAISS
 from langchain_community.chat_message_histories import ChatMessageHistory
+from langchain_community.document_loaders import (DirectoryLoader, PyPDFLoader,
+                                                  UnstructuredMarkdownLoader)
+from langchain_community.vectorstores import FAISS
 from langchain_core.chat_history import BaseChatMessageHistory
 from langchain_core.retrievers import BaseRetriever
 from langchain_core.runnables.history import RunnableWithMessageHistory
@@ -333,27 +333,90 @@ class ChatbotService:
             {
                 "context": "Tyler is a software engineer with experience in Python, React, and machine learning. He has worked on various web development projects.",
                 "question": "What programming languages does Tyler know?",
-                "answer": "Based on Tyler's background, he has experience with Python, React, and other web development technologies. He also has knowledge in machine learning technologies."
+                "answer": """# Tyler's Programming Expertise
+
+Tyler has experience with a variety of programming languages and technologies, including:
+
+*   **Python**: Proficient in backend development and data processing.
+*   **React**: Skilled in building interactive user interfaces.
+*   **JavaScript/TypeScript**: Core languages for web development.
+*   **Machine Learning**: Knowledgeable in ML concepts and frameworks.
+
+He has applied these skills in various web development projects."""
             },
             {
                 "context": "Tyler has written blog posts about Docker, Django, and various development tools.",
                 "question": "What does Tyler write about?",
-                "answer": "Tyler writes about various development topics including Docker, Django, and other development tools and technologies based on his blog posts."
+                "answer": """# Tyler's Blog Topics
+
+Tyler writes about a diverse range of development topics on his blog. His key interests and areas of expertise include:
+
+## Web Development Frameworks
+*   **Django**: In-depth articles on this Python web framework.
+*   **React**: Discussions on front-end development and component-based architecture.
+
+## DevOps & Tools
+*   **Docker**: Guides and insights on containerization.
+*   **Git/GitHub**: Best practices for version control.
+*   **Terminal/Shell Scripting**: Tips for efficient command-line usage.
+
+## Programming Languages
+*   **Python**: Various topics from built-in functions to package management.
+*   **JavaScript**: Modern JavaScript features and applications.
+
+### Other Notable Topics
+*   **Machine Learning**: Explorations into AI and data science concepts.
+*   **Personal Reflections**: Occasional posts on life and career development."""
             },
             {
-                "context": "Tyler graduated from university and has experience working on software projects.",
-                "question": "Tell me about Tyler's education",
-                "answer": "Tyler has a university education and practical experience working on software development projects."
+                "context": "Tyler graduated from university and has experience working on software projects.",                "question": "Tell me about Tyler's education",
+                "answer": """# Tyler's Educational Background
+
+Tyler holds a **university degree** which provided him with a strong foundation in computer science and software engineering principles. During his studies, he focused on areas relevant to modern software development.
+
+## Key Educational Highlights
+*   **Academic Projects**: Engaged in several hands-on projects that simulated real-world development scenarios.
+*   **Core Curriculum**: Covered essential topics such as data structures, algorithms, operating systems, and database management.
+
+This academic preparation, combined with practical experience, has equipped him with the skills necessary for his work in software development."""
             },
             {
                 "context": "Tyler 是一位軟體工程師，擅長 Python 和 React。他參與過多個網頁開發專案。",
                 "question": "Tyler 會什麼程式語言？",
-                "answer": "根據資料，Tyler 擅長 Python、React 等程式語言和網頁開發技術。他在機器學習技術方面也有相關知識。"
+                "answer": """# Tyler 的程式語言專長
+
+Tyler 精通多種程式語言和技術，其中包括：
+
+*   **Python**：擅長後端開發和資料處理。
+*   **React**：精於建構互動式使用者介面。
+*   **JavaScript/TypeScript**：網頁開發的核心語言。
+*   **機器學習**：具備機器學習概念和框架的知識。
+
+他已將這些技能應用於多個網頁開發專案中。"""
             },
             {
                 "context": "Tyler 寫了關於 Docker、Django 和各種開發工具的部落格文章。",
                 "question": "Tyler 都寫些什麼？",
-                "answer": "Tyler 撰寫各種開發主題的文章，包括 Docker、Django 和其他開發工具與技術，這些都基於他的部落格文章。"
+                "answer": """# Tyler 的部落格主題
+
+Tyler 在他的部落格上撰寫了各種開發主題的文章。他的主要興趣和專業領域包括：
+
+## 網頁開發框架
+*   **Django**：關於這個 Python 網頁框架的深入文章。
+*   **React**：關於前端開發和組件化架構的討論。
+
+## DevOps 和工具
+*   **Docker**：關於容器化的指南和見解。
+*   **Git/GitHub**：版本控制的最佳實踐。
+*   **終端機/Shell 腳本**：提高命令列使用效率的技巧。
+
+## 程式語言
+*   **Python**：從內建函數到套件管理的各種主題。
+*   **JavaScript**：現代 JavaScript 功能和應用。
+
+### 其他值得注意的主題
+*   **機器學習**：對 AI 和資料科學概念的探索。
+*   **個人反思**：偶爾發表關於生活和職業發展的文章。"""
             },
             {
                 "context": "當我沒有足夠資訊回答問題時，我應該誠實地說不知道。",
@@ -363,12 +426,38 @@ class ChatbotService:
             {
                 "context": "Tyler has written blog posts about Python, Django, Docker, and various development tools and technologies.",
                 "question": "What blog posts has Tyler written about Python?",
-                "answer": "Tyler has written several blog posts about Python, including topics like built-in functions, loops, string handling, and Python package development and deployment to PyPI."
+                "answer": """# Tyler's Python Blog Posts
+
+Tyler has written several blog posts focusing on Python. Here are some of the key topics he has covered:
+
+## Core Python Concepts
+*   **Built-in Functions**: Detailed explanations and usage examples.
+*   **Loops**: Understanding different types of loops and their applications.
+*   **String Handling**: Techniques for manipulating and working with strings.
+
+## Python Development & Deployment
+*   **Python Package Development**: Guides on how to create and structure Python packages.
+*   **Deployment to PyPI**: Steps for publishing your Python packages to the Python Package Index.
+
+These posts aim to provide practical insights and guidance for Python developers of all levels."""
             },
             {
                 "context": "Tyler的部落格文章涵蓋了Python、Django、Docker等技術主題。",
                 "question": "Tyler寫了哪些關於Python的文章？",
-                "answer": "Tyler撰寫了多篇關於Python的文章，包括內建函數、迴圈、字串處理，以及Python套件開發和部署到PyPI等主題。"
+                "answer": """# Tyler 的 Python 部落格文章
+
+Tyler 撰寫了多篇關於 Python 的部落格文章。以下是他涵蓋的一些主要主題：
+
+## 核心 Python 概念
+*   **內建函數**：詳細的解釋和使用範例。
+*   **迴圈**：了解不同類型的迴圈及其應用。
+*   **字串處理**：操作和處理字串的技巧。
+
+## Python 開發與部署
+*   **Python 套件開發**：關於如何建立和組織 Python 套件的指南。
+*   **部署到 PyPI**：將您的 Python 套件發佈到 Python 套件索引的步驟。
+
+這些文章旨在為各級 Python 開發人員提供實用的見解和指導。"""
             }
         ]
 
@@ -391,6 +480,8 @@ class ChatbotService:
 
         When answering questions about Tyler's blog posts, provide specific information about the posts including titles, topics, and relevant details.
 
+        Please structure your responses using markdown. Use headings, bold text, and lists to make the information clear and easy to read. For example, use bullet points for lists of blog posts or skills.
+
         IMPORTANT: You must respond in the EXACT same language as the user's question. If the question is in English, 
         respond in English. If the question is in Chinese, respond in Chinese. If the question is in any other language, respond in that same language. Do not translate or change the language of your response.
 
@@ -401,7 +492,7 @@ class ChatbotService:
         {context}
 
         Question: {input}
-        Answer as Tyler's blog assistant:"""
+        Answer as Tyler's blog assistant (structured with markdown):"""
 
         document_prompt = FewShotPromptTemplate(
             examples=examples,
