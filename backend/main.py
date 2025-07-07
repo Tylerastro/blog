@@ -53,6 +53,5 @@ async def clear_chat(session_id: str = "default"):
     """Clear chat history for a specific session"""
     # Clear session history from all chatbot instances
     for chatbot in chatbot_sessions.values():
-        if session_id in chatbot.store:
-            del chatbot.store[session_id]
+        chatbot.clear_session_history(session_id)
     return {"message": f"Chat history cleared for session: {session_id}"}
