@@ -9,11 +9,6 @@ const config: Config = {
   ],
   theme: {
     extend: {
-      fontFamily: {
-        robotoMono: ["var(--font-roboto-mono)"],
-        local_edu_vic_wa_nt_beginner: ["var(--font-edu-vic-wa-nt-beginner)"],
-        cabin: ["var(--font-cabin)"],
-      },
       colors: {
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
@@ -29,6 +24,7 @@ const config: Config = {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          nav: "hsl(var(--primary-nav))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -53,6 +49,7 @@ const config: Config = {
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
+        codeBlock: "hsl(var(--code-block))",
         chart: {
           "1": "hsl(var(--chart-1))",
           "2": "hsl(var(--chart-2))",

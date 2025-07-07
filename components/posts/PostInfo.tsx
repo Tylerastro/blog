@@ -26,11 +26,11 @@ export default function PostInfo({
       <div className="p-6 flex flex-col items-center">
         <h1
           id="post-title"
-          className="text-3xl text-center font-bold text-gray-900 dark:text-white mb-4"
+          className="text-3xl text-center font-bold text-primary-foreground mb-4"
         >
           {title}
         </h1>
-        <div className="flex items-center text-gray-600 dark:text-gray-300 mb-4">
+        <div className="flex items-center text-muted-foreground mb-4">
           <Calendar className="w-5 h-5 mr-2" />
           <time dateTime={new Date(date).toISOString()}>
             {new Date(date).toLocaleDateString("en-US", {

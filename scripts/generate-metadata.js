@@ -31,7 +31,6 @@ allFiles.forEach(filePath => {
     metadata[relativePath] = {
         title: data.title || 'No Title',
         tags: data.tags || [],
-        categories: data.categories || [],
         date: data.date || null,
     };
 });

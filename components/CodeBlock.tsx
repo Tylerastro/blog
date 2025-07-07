@@ -26,9 +26,6 @@ const extractTextFromNode = (node: React.ReactNode): string => {
 export function CodeBlock({ children, language }: CodeBlockProps) {
   const [isCopied, setIsCopied] = useState(false);
 
-  // Extract language from className
-  const lang = language.replace("language-", "");
-
   const copyToClipboard = () => {
     if (typeof window === "undefined" || !children) return;
     const codeString = extractTextFromNode(children);

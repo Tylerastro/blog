@@ -100,11 +100,11 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
             <nav className="relative gap-4 hidden md:flex md:items-center md:space-x-8">
               {navLinks.slice(0, 1).map((link) => (
                 <div key={link.href} className="text-hover-container">
-                  <div className="text-hover-effect">
+                  <div className="text-hover-effect text-primary-nav">
                     <Link
                       key={link.href}
                       href={link.href}
-                      className="text-2xl transition-colors hover:text-secondary-foreground"
+                      className="text-2xl transition-colors hover:text-primary-foreground"
                     >
                       {link.label}
                     </Link>
@@ -114,7 +114,7 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
               <NavigationMenu>
                 <NavigationMenuList>
                   <NavigationMenuItem>
-                    <NavigationMenuTrigger className="text-2xl cursor-se-resize">
+                    <NavigationMenuTrigger className="text-2xl cursor-se-resize text-primary-nav hover:text-primary-foreground">
                       Blog
                     </NavigationMenuTrigger>
                     <NavigationMenuContent>
@@ -139,11 +139,11 @@ export function NavBar({ className, links = [], ...props }: NavBarProps) {
                 .slice(1)
                 .map((link: { href: string; label: string }) => (
                   <div key={link.href} className="text-hover-container">
-                    <div className="text-hover-effect">
+                    <div className="text-hover-effect text-primary-nav">
                       <Link
                         key={link.href}
                         href={link.href}
-                        className="text-2xl transition-colors hover:text-secondary-foreground"
+                        className="text-2xl transition-colors hover:text-primary-foreground"
                       >
                         {link.label}
                       </Link>

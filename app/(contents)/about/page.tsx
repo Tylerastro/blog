@@ -7,7 +7,9 @@ export default async function AboutMe() {
   return (
     <main className="min-h-screen p-8 mx-auto md:max-w-2xl">
       <header className="text-center mb-16">
-        <h1 className="mt-6 text-5xl font-bold">Tyler</h1>
+        <h1 className="mt-6 text-primary-foreground text-5xl font-bold">
+          Tyler
+        </h1>
         <p className="mt-4 text-xl text-muted-foreground">Software Engineer</p>
         <SocialLinks />
       </header>

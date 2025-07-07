@@ -21,7 +21,7 @@ export default function TechBadge({ name, icon, className }: TechBadgeProps) {
       )}
     >
       <span />
-      <p className="flex items-center justify-center w-full h-full relative z-10 text-primary/90">
+      <p className="flex text-base items-center justify-center w-full h-full relative z-10 text-primary/90">
         {icon ? (
           <Image
             src={icon}
