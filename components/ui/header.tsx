@@ -1,4 +1,3 @@
-import { useTranslations } from "next-intl";
 import { ModeToggle } from "../DarkModeToggle";
 import Link from "next/link";
 import { Menu } from "lucide-react";
