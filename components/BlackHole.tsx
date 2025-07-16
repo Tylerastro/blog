@@ -7,7 +7,7 @@ import { useControls } from "leva";
 import fragmentShader from "@/components/shaders/blackhole/fragment.glsl";
 import vertexShader from "@/components/shaders/blackhole/vertex.glsl";
 
-function BlackHolePlane() {
+function BlackHolePlane({ scrollProgress = 0 }: { scrollProgress?: number }) {
   const meshRef = useRef<THREE.Mesh>(null);
   const materialRef = useRef<THREE.ShaderMaterial>(null);
 
@@ -32,7 +32,7 @@ function BlackHolePlane() {
     []
   );
 
-  useFrame(({ clock, size }) => {
+  useFrame(({ clock, size, camera }) => {
     if (materialRef.current) {
       // Update animation-related values
       materialRef.current.uniforms.iTime.value = clock.getElapsedTime();
@@ -47,6 +47,10 @@ function BlackHolePlane() {
       materialRef.current.uniforms.uB.value = uB;
       materialRef.current.uniforms.uA.value = uA;
     }
+
+    // Animate camera zoom based on scroll progress
+    const targetZ = 5 - scrollProgress * 4.5; // Zoom from 5 to 0.5
+    camera.position.z = targetZ;
   });
 
   return (
@@ -64,15 +68,23 @@ function BlackHolePlane() {
 
 interface BlackHoleProps {
   className?: string;
+  scrollProgress?: number;
+  opacity?: number;
 }
 
-export default function BlackHole({ className = "" }: BlackHoleProps) {
+export default function BlackHole({
+  className = "",
+  scrollProgress = 0,
+  opacity = 1,
+}: BlackHoleProps) {
   return (
-    <Canvas
-      className="w-full h-full"
-      camera={{ position: [0, 0, 5], aspect: 1, near: 0.1, far: 100 }}
-    >
-      <BlackHolePlane />
-    </Canvas>
+    <div className="fixed inset-0 w-full h-full" style={{ opacity }}>
+      <Canvas
+        className="w-full h-full"
+        camera={{ position: [0, 0, 5], aspect: 1, near: 0.1, far: 100 }}
+      >
+        <BlackHolePlane scrollProgress={scrollProgress} />
+      </Canvas>
+    </div>
   );
 }

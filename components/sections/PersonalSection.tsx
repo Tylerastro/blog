@@ -1,96 +1,91 @@
-export default async function PersonalSection() {
+import Squares from "@/components/Squares";
+
+export default function PersonalSection() {
   return (
-    <section className="h-[100svh] flex flex-col snap-center relative overflow-hidden items-center justify-center p-8">
-      {/* Floating Card */}
-      <div className="flex flex-col items-center justify-center text-center p-8 relative z-10 max-w-4xl w-full bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 backdrop-blur-sm rounded-3xl border border-white/20 shadow-2xl">
-        {/* Background decoration for card */}
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(120,119,198,0.1),transparent_50%)] rounded-3xl" />
+    <section className="h-[100svh] flex flex-col snap-center relative overflow-hidden items-center justify-center p-8 transition-opacity duration-1000">
+      {/* Canvas Background Layer */}
+      <div className="absolute inset-0 z-0">
+        <Squares
+          direction="diagonal"
+          speed={0.5}
+          borderColor="#333"
+          squareSize={40}
+          hoverFillColor="#1a1a1a"
+        />
+      </div>
 
-        <div className="relative z-10 w-full">
-          {/* Main Title */}
+      {/* Content Layer */}
+      <div className="max-w-4xl mx-auto relative z-10">
+        <h1 className="text-6xl font-bold mb-8">Tyler Lin</h1>
+
+        <div className="text-lg text-gray-300 mb-8">
+          <p className="mb-6">
+            Hey! I'm Tyler Lin (Tylerastro), a software engineer, astronomer,
+            and baseball player.
+          </p>
+
+          <div className="mb-4">
+            <span className="text-gray-400">Working at</span>
+            <span className="ml-2">🏢 Pactson (Backend Engineer)</span>
+          </div>
+
+          <div className="mb-4">
+            <span className="text-gray-400">Background</span>
+            <span className="ml-2">🎓 Physics BSc & Astronomy Master's</span>
+            <span className="mx-2">
+              📝 Two first-author papers in AJ & MNRAS
+            </span>
+          </div>
+
+          <div className="mb-4">
+            <span className="text-gray-400">Tech Stack</span>
+            <span className="ml-2">🐍 Python</span>
+            <span className="mx-2">⚛️ React/Next.js</span>
+            <span className="mx-2">🗄️ SQL</span>
+            <span className="mx-2">🔧 Django/FastAPI</span>
+            <span className="mx-2">👁️ OpenCV</span>
+          </div>
+
           <div className="mb-8">
-            <h1 className="text-7xl md:text-8xl lg:text-9xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-purple-200 to-white drop-shadow-2xl">
-              ABOUT
-            </h1>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white/90 -mt-4 drop-shadow-lg">
-              Tyler
-            </h2>
+            <span className="text-gray-400">Interests</span>
+            <span className="ml-2">🌟 VTuber Industry</span>
+            <span className="mx-2">⚾ Baseball/Softball</span>
+            <span className="mx-2">👨‍⚖️ Umpiring (3 years)</span>
+            <span className="mx-2">🇫🇷 Learning French & Japanese</span>
           </div>
 
-          {/* Content Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto">
-            {/* Left Column */}
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-bold text-purple-300 mb-3">
-                  Who I Am
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  A passionate developer crafting digital experiences with
-                  creativity and precision. I believe in the power of clean code
-                  and beautiful design.
-                </p>
-              </div>
+          <p className="mb-6">
+            I'm passionate about creating solutions that make a real impact.
+            Currently developing scalable APIs and integrating AI solutions at
+            Pactson, while working on VTuber and ACG-related side projects. I
+            love rapid prototyping and iterating quickly - inspired by Elon
+            Musk's approach to innovation.
+          </p>
 
-              <div>
-                <h3 className="text-2xl font-bold text-purple-300 mb-3">
-                  What I Do
-                </h3>
-                <p className="text-lg text-gray-300 leading-relaxed">
-                  Full-stack development, UI/UX design, and turning complex
-                  problems into elegant solutions.
-                </p>
-              </div>
-            </div>
+          <p className="mb-6">
+            My average bug fix time is under 15 minutes, and I'm proud of my
+            first-principle problem-solving approach. I've led critical projects
+            and enjoy mentoring junior developers while keeping teams passionate
+            about what they do.
+          </p>
 
-            {/* Right Column */}
-            <div className="space-y-6">
-              <div>
-                <h3 className="text-2xl font-bold text-purple-300 mb-3">
-                  Skills
-                </h3>
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    "React",
-                    "Next.js",
-                    "TypeScript",
-                    "Node.js",
-                    "Python",
-                    "Design",
-                  ].map((skill) => (
-                    <span
-                      key={skill}
-                      className="px-3 py-1 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium text-white border border-white/20"
-                    >
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+          <p className="mb-6">
+            In my free time, I work on side projects while listening to VTuber
+            streams - the perfect way to relax and recharge. I'm also an active
+            baseball/softball player and certified umpire with leadership
+            experience from being team captain.
+          </p>
 
-              <div>
-                <h3 className="text-2xl font-bold text-purple-300 mb-3">
-                  Location
-                </h3>
-                <p className="text-lg text-gray-300">
-                  📍 Based in the digital realm, working globally
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Bottom Highlight */}
-          <div className="mt-12">
-            <p className="text-xl font-semibold text-white/80 italic">
-              "Code is poetry in motion"
-            </p>
+          <div className="flex items-center text-sm">
+            <span className="bg-gray-700 px-2 py-1 rounded text-xs mr-3">
+              Taipei, Taiwan
+            </span>
+            <span>
+              Looking to collaborate with passionate teams. Feel free to reach
+              out at hantanglin70036440@gmail.com
+            </span>
           </div>
         </div>
-
-        {/* Floating elements inside card */}
-        <div className="absolute top-6 left-6 w-2 h-2 bg-purple-400 rounded-full opacity-60" />
-        <div className="absolute bottom-6 right-6 w-3 h-3 bg-white/40 rounded-full" />
-        <div className="absolute top-1/2 left-4 w-1 h-1 bg-purple-300 rounded-full" />
       </div>
     </section>
   );
