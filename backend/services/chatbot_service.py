@@ -64,7 +64,7 @@ class ChatbotService:
         if self.model_provider == "openai":
             return ChatOpenAI(model_name="gpt-3.5-turbo", temperature=0)
         elif self.model_provider == "google":
-            return ChatGoogleGenerativeAI(model="models/gemini-2.5-flash", temperature=0.3)
+            return ChatGoogleGenerativeAI(model="models/gemini-2.5-flash-lite", temperature=0.3)
         else:
             raise ValueError(
                 f"Unsupported model provider: {self.model_provider}")

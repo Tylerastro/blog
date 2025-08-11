@@ -7,9 +7,9 @@ export default function PersonalSection() {
       <div className="absolute inset-0 z-0">
         <Squares
           direction="diagonal"
-          speed={0.5}
+          speed={0.2}
           borderColor="#333"
-          squareSize={40}
+          squareSize={108}
           hoverFillColor="#1a1a1a"
         />
       </div>

@@ -21,7 +21,7 @@
   },
   {
     "question": "What technologies do you work with?",
-    "answer": "I work with various technologies across the full stack. For backend development, I'm familiar with frameworks like Django, FastAPI, and Streamlit to develop RESTful APIs. I'm also interested in computer vision and use OpenCV to develop tools in sports science. Additionally, I work with React, Next.js, Three.js for frontend development, and have experience with SQL databases."
+    "answer": "I work with various technologies across the full stack. For backend development, I'm familiar with frameworks like Django, FastAPI, and Streamlit. I'm also interested in computer vision and use OpenCV to develop tools in sports science. Additionally, I work with React, Next.js, Three.js for frontend development, and have experience with SQL/NoSQL databases, like PostgreSQL, MongoDB, and MySQL."
   },
   {
     "question": "What's your education background?",

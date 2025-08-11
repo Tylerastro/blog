@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { NavBar } from "@/components/NavBar";
 import { BackToTop } from "@/components/BackToTop";
-import { Outfit, Author, zenKaku } from "@/styles/fonts";
+import { fontVariables } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -20,10 +20,8 @@ export default async function LocaleLayout({
     <html lang="en-US" suppressHydrationWarning>
       <body
         className={cn(
-          "antialiased bg-background ",
-          zenKaku.className,
-          Outfit.className,
-          Author.className,
+          "antialiased bg-background",
+          fontVariables,
           "transition-colors",
           "duration-700"
         )}

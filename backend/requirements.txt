@@ -1,0 +1,31 @@
+# Core web framework and server
+fastapi
+uvicorn[standard]
+
+# LangChain core and components for RAG
+langchain
+langchain-core
+langchain-community>=0.3.26
+
+# LLM providers
+langchain-openai
+langchain-google-genai
+
+# Vector store and embeddings
+faiss-cpu
+
+# Document processing and loading
+pypdf
+unstructured[md]
+
+# Environment configuration
+python-dotenv
+
+# HTTP client for API calls (if needed)
+httpx
+
+# Pydantic for data validation (typically comes with FastAPI)
+pydantic
+
+# Additional utilities that might be needed
+typing-extensions

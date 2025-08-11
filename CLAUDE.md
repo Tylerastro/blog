@@ -13,6 +13,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ### Blog Management
 - `npm run new "Post Title"` - Create new blog post with frontmatter template
 - `npm run clean` - Remove generated content from `/contents/` and `/public/blogs/`
+- `npm run tag` - Generate tags from post metadata
+- `npm run metadata` - Generate metadata from posts
+
+### Backend Services
+- Backend documentation is available in `/backend/CLAUDE.md`
 
 ### Build Process (Automatic)
 The `npm run dev` command runs these scripts in sequence:
@@ -77,9 +82,26 @@ Blog posts support these frontmatter fields:
 - **Middleware**: Custom routing logic for locale handling and image redirects
 
 ### Special Features
-- **3D Graphics**: Three.js integration with GLSL shader support
-- **GSAP Animations**: Animation library integration
-- **Syntax Highlighting**: rehype-starry-night for code blocks
-- **Math Rendering**: LaTeX math support via rehype-mathjax
-- **Image Optimization**: Next.js Image component with custom MDX renderer
-- **Task Lists**: GitHub-style checkbox support in markdown
+- **3D Graphics**: Three.js integration with GLSL shader support (`/components/shaders/` and `BlackHole.tsx`)
+- **GSAP Animations**: Animation library integration for scroll-based effects
+- **Syntax Highlighting**: rehype-starry-night for code blocks in MDX
+- **Math Rendering**: LaTeX math support via rehype-mathjax  
+- **Image Optimization**: Next.js Image component with custom MDX renderer and middleware redirects
+- **Task Lists**: GitHub-style checkbox support in markdown via custom `li` component
+- **AI Chat**: Backend RAG system for blog content Q&A using LangChain
+
+### Technical Stack
+- **Frontend**: Next.js 15+ with App Router, React 19, TypeScript
+- **Styling**: Tailwind CSS with custom theme, Radix UI components
+- **Animation**: GSAP, Framer Motion, custom keyframes
+- **3D/Graphics**: Three.js, React Three Fiber, GLSL shaders
+- **Content**: MDX with custom components, gray-matter for frontmatter
+- **Backend**: FastAPI (Python) with LangChain for AI features
+- **Build Tools**: Next.js bundler, raw-loader for GLSL, Turbopack support
+
+### Key Architecture Patterns
+- **Content Pipeline**: Markdown → MDX conversion with asset handling
+- **Component Architecture**: Radix UI base with custom extensions
+- **Route Middleware**: Custom image path redirects and i18n setup (currently disabled)  
+- **3D Integration**: GLSL shaders loaded as raw text, Three.js canvas components
+- **State Management**: React state with context for theme, no external state library
