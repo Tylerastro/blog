@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Toaster } from "@/components/ui/toaster";
 import { cn } from "@/lib/utils";
 import "./globals.css";
-import { NavBar } from "@/components/NavBar";
+import { Sidebar } from "@/components/Sidebar";
 import { BackToTop } from "@/components/BackToTop";
 import { fontVariables } from "@/styles/fonts";
 
@@ -27,7 +27,7 @@ export default async function LocaleLayout({
         )}
       >
         <Toaster />
-        <NavBar />
+        <Sidebar />
         {children}
         <BackToTop />
       </body>

@@ -305,3 +305,29 @@ ol {
 .message-enter-active {
   animation: fadeInSlideUp 0.3s ease-out;
 }
+
+@keyframes rollIn {
+  0% {
+    opacity: 0;
+    transform: rotate(-270deg) scale(0.3);
+  }
+
+  50% {
+    opacity: 0.5;
+    transform: rotate(90deg) scale(0.9);
+  }
+
+  90% {
+    opacity: 0.9;
+    transform: rotate(-30deg) scale(1);
+  }
+
+  100% {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+  }
+}
+
+.roll-in-animation {
+  animation: rollIn 2s linear;
+}

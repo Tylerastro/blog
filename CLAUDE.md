@@ -18,6 +18,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ### Backend Services
 - Backend documentation is available in `/backend/CLAUDE.md`
+- Backend server: `cd backend && uvicorn main:app --reload` (runs on http://localhost:8000)
+- Backend setup requires `.env.local` with `GOOGLE_API_KEY` and/or `OPENAI_API_KEY`
+
+### Testing
+- No formal test framework is configured - this project focuses on blog content generation
 
 ### Build Process (Automatic)
 The `npm run dev` command runs these scripts in sequence:
@@ -98,6 +103,7 @@ Blog posts support these frontmatter fields:
 - **Content**: MDX with custom components, gray-matter for frontmatter
 - **Backend**: FastAPI (Python) with LangChain for AI features
 - **Build Tools**: Next.js bundler, raw-loader for GLSL, Turbopack support
+- **Package Manager**: npm (standard), backend uses `uv` for Python dependencies
 
 ### Key Architecture Patterns
 - **Content Pipeline**: Markdown → MDX conversion with asset handling
@@ -105,3 +111,10 @@ Blog posts support these frontmatter fields:
 - **Route Middleware**: Custom image path redirects and i18n setup (currently disabled)  
 - **3D Integration**: GLSL shaders loaded as raw text, Three.js canvas components
 - **State Management**: React state with context for theme, no external state library
+
+### Important Build Configuration
+- **ESLint**: Ignored during builds (`eslint.ignoreDuringBuilds: true`)
+- **GLSL Shaders**: Raw text loading via webpack and Turbopack configuration
+- **MDX Processing**: Custom rehype plugins for code props and syntax highlighting
+- **Image Handling**: Unsplash remote patterns configured for optimization
+- **File Extensions**: MD, MDX, JS, JSX, TS, TSX all processed as pages
