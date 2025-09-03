@@ -23,7 +23,7 @@ export default async function PostList({ posts }: PostListProps) {
           group-hover:opacity-50 group-hover:scale-95 hover:!opacity-100 hover:!scale-105 overflow-x-hidden"
         >
           <Link href={`/posts/${post.slug}`} className="block">
-            <h2 className="text-2xl font-bold text-primary-foreground transition-colors duration-200 break-words">
+            <h2 className="text-2xl font-bold text-foreground transition-colors duration-200 break-words">
               {post.title}
             </h2>
             <time

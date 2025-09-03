@@ -30,14 +30,14 @@ export default async function BlogPostsList({
   if (!posts.length) {
     return (
       <div className="w-full py-12 text-center">
-        <p className="text-lg text-gray-600 dark:text-gray-400">{"noPosts"}</p>
+        <p className="text-lg text-muted-foreground">{"noPosts"}</p>
       </div>
     );
   }
 
   return (
     <section className="px-4 py-10 md:py-12 lg:py-16 items-center justify-center">
-      <h1 className="mb-8 text-center text-4xl font-bold text-primary-foreground">
+      <h1 className="mb-8 text-center text-4xl font-bold text-foreground">
         Blog
       </h1>
       <div className="flex flex-col gap-8 items-center justify-center">
@@ -50,10 +50,10 @@ export default async function BlogPostsList({
               <a
                 key={pageNum}
                 href={`/posts?page=${pageNum}`}
-                className={`px-4 py-2 border rounded-md ${
+                className={`px-4 py-2 border border-border rounded-md transition-colors ${
                   currentPage === pageNum
-                    ? "bg-primary-foreground text-white"
-                    : "hover:bg-gray-100 dark:hover:bg-gray-800"
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                    : "hover:bg-muted text-foreground"
                 }`}
               >
                 {pageNum}

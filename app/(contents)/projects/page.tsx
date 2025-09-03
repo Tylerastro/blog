@@ -34,7 +34,7 @@ export default function ProjectsPage() {
       </section>
 
       <Tabs defaultValue="all" className="mb-8">
-        <TabsList className="mb-8 flex flex-wrap justify-center">
+        {/* <TabsList className="mb-8 flex flex-wrap justify-center">
           {categories.map((category) => (
             <div key={category}>
               <div className="text-hover-effect">
@@ -48,7 +48,7 @@ export default function ProjectsPage() {
               </div>
             </div>
           ))}
-        </TabsList>
+        </TabsList> */}
 
         <TabsContent value={activeCategory} className="mt-0">
           <div

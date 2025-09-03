@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import "./globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import { BackToTop } from "@/components/BackToTop";
-import { fontVariables } from "@/styles/fonts";
+import { fontVariables, outfit } from "@/styles/fonts";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -17,11 +17,10 @@ export default async function LocaleLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en-US" suppressHydrationWarning>
+    <html lang="en-US" suppressHydrationWarning className={cn(fontVariables, outfit.className)}>
       <body
         className={cn(
           "antialiased bg-background",
-          fontVariables,
           "transition-colors",
           "duration-700"
         )}

@@ -26,7 +26,7 @@ export default function PostInfo({
       <div className="p-6 flex flex-col items-center">
         <h1
           id="post-title"
-          className="text-3xl text-center font-bold text-primary-foreground mb-4"
+          className="text-3xl text-center font-bold text-foreground mb-4"
         >
           {title}
         </h1>

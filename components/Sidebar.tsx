@@ -10,8 +10,15 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 import { useState } from "react";
-import { ModeToggle } from "./DarkModeToggle";
 import ChatModal from "@/components/chat/chat-modal";
+import { Globe } from "lucide-react";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const navigationItems = [
   {
@@ -33,6 +40,7 @@ const navigationItems = [
 
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
+  const [language, setLanguage] = useState("en");
 
   const SidebarContent = () => (
     <div className="flex flex-col h-full">
@@ -42,22 +50,26 @@ export function Sidebar() {
           className="flex items-center space-x-2"
           onClick={() => setIsOpen(false)}
         >
-          <div className="h-8 w-8 rounded-full bg-primary flex items-center justify-center text-primary-foreground">
-            <span className="text-base font-bold">TL</span>
-          </div>
-          <span className="text-xl font-bold">Taylor Lin</span>
+          <span className="text-xl font-bold">Tyler Lin</span>
         </Link>
         <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-          <X className={`h-5 w-5 ${isOpen ? 'roll-in-animation' : ''}`} />
+          <X className={`h-5 w-5 ${isOpen ? "roll-in-animation" : ""}`} />
         </Button>
       </div>
 
       <nav className="flex-1 px-4">
         <ul className="space-y-2">
-          {navigationItems.map((item) => {
+          {navigationItems.map((item, index) => {
             const Icon = item.icon;
             return (
-              <li key={item.href}>
+              <li
+                key={item.href}
+                className="animate-slide-in-left opacity-0"
+                style={{
+                  animationDelay: `${index * 150 + 250}ms`,
+                  animationFillMode: "forwards",
+                }}
+              >
                 <Link
                   href={item.href}
                   onClick={() => setIsOpen(false)}
@@ -71,14 +83,21 @@ export function Sidebar() {
           })}
         </ul>
       </nav>
-
+      <div className="space-y-3">
+        <Select value={language} onValueChange={setLanguage}>
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select language" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="en">English</SelectItem>
+            <SelectItem value="zh-TW">繁體中文</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
       <div className="p-4 space-y-4 border-t">
         <ChatModal>
           <Button className="w-full text-lg py-3">Let's Talk</Button>
         </ChatModal>
-        <div className="flex justify-center">
-          <ModeToggle />
-        </div>
       </div>
     </div>
   );
@@ -89,7 +108,7 @@ export function Sidebar() {
       <div className="fixed top-4 left-4 z-50">
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
-            <Button variant="outline" size="icon" className="shadow-lg">
+            <Button variant="ghost" size="icon" className="shadow-lg">
               <Menu className="h-5 w-5" />
             </Button>
           </SheetTrigger>
