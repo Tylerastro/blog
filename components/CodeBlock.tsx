@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 
 interface CodeBlockProps {
   children: React.ReactNode;
-  language: string;
+  [key: string]: any;
 }
 
 const extractTextFromNode = (node: React.ReactNode): string => {
@@ -23,7 +23,7 @@ const extractTextFromNode = (node: React.ReactNode): string => {
   return "";
 };
 
-export function CodeBlock({ children, language }: CodeBlockProps) {
+export function CodeBlock({ children, ...props }: CodeBlockProps) {
   const [isCopied, setIsCopied] = useState(false);
 
   const copyToClipboard = () => {
@@ -39,22 +39,19 @@ export function CodeBlock({ children, language }: CodeBlockProps) {
   }, [isCopied]);
 
   return (
-    <div className="relative my-4 rounded-xl border border-white/10">
-      <div className="absolute top-0 right-0 flex items-center">
-        {/* <span className="text-xs text-gray-400 select-none">{lang}</span> */}
-        <button
-          onClick={copyToClipboard}
-          className="p-1.5 rounded-md bg-gray-700/50 hover:bg-gray-600/50 text-gray-400 transition-colors transform -translate-y-1/4 translate-x-1/4"
-          aria-label="Copy code"
-        >
-          {isCopied ? (
-            <Check size={16} className="text-green-500" />
-          ) : (
-            <Clipboard size={16} />
-          )}
-        </button>
-      </div>
-      <pre className="p-4 rounded-xl bg-gray-900 text-white overflow-x-auto">
+    <div className="relative group">
+      <button
+        onClick={copyToClipboard}
+        className="absolute top-2 right-2 p-2 rounded-md bg-muted/80 hover:bg-muted text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity z-10"
+        aria-label="Copy code"
+      >
+        {isCopied ? (
+          <Check size={14} className="text-green-500" />
+        ) : (
+          <Clipboard size={14} />
+        )}
+      </button>
+      <pre {...props}>
         {children}
       </pre>
     </div>

@@ -1,7 +1,7 @@
 import createMDX from '@next/mdx'
 import rehypeMdxCodeProps from 'rehype-mdx-code-props'
 import remarkMath from 'remark-math'
-import rehypeStarryNight from 'rehype-starry-night'
+import rehypePrettyCode from 'rehype-pretty-code'
  
 /** @type {import('next').NextConfig} */
 const nextConfig = {
@@ -52,12 +52,19 @@ const nextConfig = {
 
 const withMDX = createMDX({
   options: {
-     rehypePlugins: [
-      rehypeMdxCodeProps,
-      rehypeStarryNight
+    rehypePlugins: [
+      [
+        rehypePrettyCode,
+        {
+          theme: 'github-light',
+          keepBackground: false,
+          grid: true,
+        }
+      ],
+      rehypeMdxCodeProps
     ],
     remarkPlugins: [
-      remarkMath,
+      // remarkMath,
     ],
   }  
 })

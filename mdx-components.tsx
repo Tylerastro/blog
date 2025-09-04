@@ -47,17 +47,14 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     pre: ({ children, ...props }) => {
-      const codeElement = React.Children.only(
-        children
-      ) as React.ReactElement & {
-        props: { className?: string; children: React.ReactNode };
-      };
+      // Check if this is a rehype-pretty-code processed pre element
+      if (props['data-rehype-pretty-code-fragment'] !== undefined) {
+        // This is already processed by rehype-pretty-code, wrap with CodeBlock for copy functionality
+        return <CodeBlock {...props}>{children}</CodeBlock>;
+      }
 
-      return (
-        <CodeBlock {...props} language={codeElement.props.className || ""}>
-          {codeElement.props.children}
-        </CodeBlock>
-      );
+      // For non-code pre elements, render normally
+      return <pre className="p-4 rounded-lg bg-muted overflow-x-auto" {...props}>{children}</pre>;
     },
     blockquote: ({ children }) => (
       <MediumBlockquote>{children}</MediumBlockquote>

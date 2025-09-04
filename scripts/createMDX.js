@@ -19,7 +19,7 @@ function getPostsMetadata() {
       return null;
     }
     
-    // Generate MDX file
+    // Generate MDX file - keep it simple
     const mdxContent = generateMdxContent(
       matterResult.data,
       matterResult.content
@@ -30,14 +30,9 @@ function getPostsMetadata() {
   return posts;
 }
 
-function generateMdxContent(frontmatter, content)  {
-  // const frontmatterStr = `---\n${Object.entries(frontmatter)
-  //   .map(([key, value]) => `${key}: ${JSON.stringify(value)}`)
-  //   .join("\n")}\n---\n\n`;
+function generateMdxContent(frontmatter, content) {
   content = content.replace("<!--more-->", "");
-  
-
-  return `${content}`;
+  return content; // Keep as raw markdown, let Next.js handle the processing
 }
 
-getPostsMetadata()
+getPostsMetadata();
