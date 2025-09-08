@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { useState } from "react";
 import ChatModal from "@/components/chat/chat-modal";
-import { Globe } from "lucide-react";
+import { User } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -25,6 +25,11 @@ const navigationItems = [
     href: "/",
     label: "Home",
     icon: Home,
+  },
+  {
+    href: "/about",
+    label: "About",
+    icon: User,
   },
   {
     href: "/projects",
