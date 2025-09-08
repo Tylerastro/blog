@@ -3,6 +3,7 @@ import Image from "next/image";
 import { CodeBlock } from "./components/CodeBlock";
 import { MediumBlockquote } from "./components/posts/BlockQuote";
 import InlineCode from "./components/inlineCode";
+import YouTube from "./components/YouTubePlayer";
 import React from "react";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
@@ -33,6 +34,26 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h6>
     ),
     p: ({ children }) => {
+      // Check if children contains block elements that shouldn't be in <p>
+      const hasBlockElements = React.Children.toArray(children).some(child => {
+        if (React.isValidElement(child)) {
+          const tagName = typeof child.type === 'string' ? child.type : '';
+          // Check for HTML block elements
+          const isHTMLBlockElement = ['iframe', 'div', 'blockquote', 'pre', 'ul', 'ol', 'table'].includes(tagName);
+          
+          // Check for React components that render block elements (like YouTube)
+          const componentName = typeof child.type === 'function' ? child.type.name : '';
+          const isBlockComponent = ['YouTube'].includes(componentName);
+          
+          return isHTMLBlockElement || isBlockComponent;
+        }
+        return false;
+      });
+
+      if (hasBlockElements) {
+        return <div className="text-lg py-2 my-2">{children}</div>;
+      }
+
       return <p className="text-lg py-2 my-2">{children}</p>;
     },
     img: (props) => {
@@ -156,6 +177,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
       return <li>{children}</li>;
     },
+    YouTube,
     ...components,
   };
 }

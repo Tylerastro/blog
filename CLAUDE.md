@@ -58,6 +58,44 @@ This is a Next.js blog with a custom markdown processing pipeline:
    - Processes frontmatter properties
 4. Next.js renders MDX using custom components from `mdx-components.tsx`
 
+### MD to MDX Processing Pipeline
+
+**Step 1: Source Creation**
+- Markdown files created in `/markdown/PostTitle.md` with YAML frontmatter
+- Associated assets (images, videos, files) placed in `/markdown/PostTitle/` folder
+- Frontmatter supports: title, date, tags, draft, password, preview, medium, audio
+
+**Step 2: Asset Processing** (`scripts/movePostAssets.sh`)
+- Scans `/markdown/` directory for post folders
+- Copies all assets from `/markdown/[PostTitle]/` to `/public/blogs/[PostTitle]/`
+- Makes assets publicly accessible at `/blogs/[PostTitle]/[asset]` URLs
+- Preserves directory structure and file names
+
+**Step 3: MDX Conversion** (`scripts/createMDX.js`)
+- Reads all `.md` files from `/markdown/` directory
+- Parses frontmatter using gray-matter
+- Converts markdown content to MDX format
+- Outputs processed files to `/contents/[PostTitle].mdx`
+- Skips password-protected posts during processing
+
+**Step 4: Property Processing** (`scripts/convertProp.py`)
+- Processes frontmatter properties and metadata
+- Generates additional post metadata for indexing
+- Handles tag extraction and categorization
+
+**Step 5: Next.js Rendering**
+- Next.js App Router loads `.mdx` files from `/contents/`
+- MDX components from `mdx-components.tsx` render markdown elements
+- Custom components handle: code blocks (with syntax highlighting), images, links, lists
+- Rehype plugins process: syntax highlighting, math rendering, code props
+- Final HTML served with full styling and interactive features
+
+**Key Files in Pipeline:**
+- Source: `/markdown/PostTitle.md` + `/markdown/PostTitle/` (assets)
+- Scripts: `movePostAssets.sh`, `createMDX.js`, `convertProp.py`
+- Output: `/contents/PostTitle.mdx` + `/public/blogs/PostTitle/` (assets)
+- Rendering: `mdx-components.tsx`, `/app/` routes, `/components/posts/`
+
 ### Key Components
 - **MDX Components**: Custom renderers for markdown elements in `mdx-components.tsx`
 - **CodeBlock**: Syntax highlighting component with rehype-starry-night
