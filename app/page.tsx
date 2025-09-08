@@ -1,5 +1,6 @@
 import { BaseballScoreboardBanner } from "@/components/BaseballScoreboardBanner";
 import Section2 from "@/components/Section2";
+import Beams from "@/components/reactbits/Beams";
 
 export default async function Home() {
   return (
@@ -12,8 +13,22 @@ export default async function Home() {
         </div>
 
         {/* Bottom Left - Empty for now */}
-        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 flex items-center justify-center">
-          <p className="text-muted-foreground">Ape Coming Soon...</p>
+        <div className="bg-gray-50 dark:bg-gray-900 rounded-lg border-2 border-dashed border-gray-300 dark:border-gray-600 relative overflow-hidden">
+          <div className="absolute inset-0">
+            <Beams
+              beamWidth={2}
+              beamHeight={15}
+              beamNumber={12}
+              lightColor="#ffffff"
+              speed={2}
+              noiseIntensity={1.75}
+              scale={0.5}
+              rotation={0}
+            />
+          </div>
+          <div className="relative z-10 flex items-center justify-center h-full text-white font-semibold text-5xl">
+            coming soon
+          </div>
         </div>
 
         {/* Bottom Right - About Me */}

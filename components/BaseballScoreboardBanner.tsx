@@ -84,7 +84,7 @@ export function BaseballScoreboardBanner() {
             <div className="bg-background text-foreground rounded px-2 py-1 font-bold text-sm">
               BLOG
             </div>
-            {[0, 1, 0, 2, 1, 0, 3, 1, "X"].map((score, index) => (
+            {[0, 1, "", "", "", "", "", "", ""].map((score, index) => (
               <div
                 key={index}
                 className="bg-background text-foreground rounded px-2 py-1 font-bold"
@@ -96,7 +96,7 @@ export function BaseballScoreboardBanner() {
             <div className="bg-background text-foreground rounded px-2 py-1 font-bold text-sm">
               LIFE
             </div>
-            {[1, 0, 1, 0, 2, 1, 0, 0, "X"].map((score, index) => (
+            {[1, 0, "", "", "", "", "", "", ""].map((score, index) => (
               <div
                 key={index}
                 className="bg-background text-foreground rounded px-2 py-1 font-bold"
