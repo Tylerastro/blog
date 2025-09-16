@@ -16,11 +16,7 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 
-type Message = {
-  role: "user" | "assistant";
-  content: string;
-  context?: any[];
-};
+import type { Message } from "@/types";
 
 // Custom heading components for ReactMarkdown
 const customComponents = {

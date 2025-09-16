@@ -4,17 +4,9 @@ import { useInView } from "react-intersection-observer";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import PostCard from "./PostCard";
-import { PostMetadata } from "@/types/posts";
+import type { PostMetadata, TimelineProps, GroupedPosts } from "@/types";
 
 gsap.registerPlugin(ScrollTrigger);
-
-interface TimelineProps {
-  posts: PostMetadata[];
-}
-
-interface GroupedPosts {
-  [key: string]: PostMetadata[];
-}
 
 const Timeline = ({ posts }: TimelineProps) => {
   const [loadedYears, setLoadedYears] = useState<string[]>([]);

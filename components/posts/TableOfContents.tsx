@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-
-interface TOCItem {
-  id: string;
-  text: string;
-  level: number;
-  key: string;
-}
+import type { TOCItem } from "@/types";
 
 export function TableOfContents() {
   const [toc, setToc] = useState<TOCItem[]>([]);

@@ -1,3 +1,4 @@
+"use client";
 import {
   Card,
   CardContent,
@@ -11,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Calendar, ExternalLink, Github, BookText } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { Project } from "@/app/(contents)/projects/projects";
+import { Project } from "@/app/[lang]/(contents)/projects/projects";
 import { cn } from "@/lib/utils";
 import { useRef } from "react";
 
@@ -106,7 +107,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           {project.description}
         </CardDescription>
         <div className="flex flex-wrap gap-2 mt-4">
-          {project.tags.map((tag) => (
+          {project.tags.map((tag: string) => (
             <Badge
               key={tag}
               variant="outline"

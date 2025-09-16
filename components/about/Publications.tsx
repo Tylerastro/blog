@@ -1,15 +1,7 @@
 import Link from "next/link";
+import type { Publication } from "@/types";
 
-type PublicationType = {
-  title: string;
-  authors: string[];
-  journal: string;
-  year: number;
-  volume?: string;
-  link: string;
-};
-
-const publications: PublicationType[] = [
+const publications: Publication[] = [
   {
     title:
       "A closer look at the host-galaxy environment of high-velocity Type Ia supernovae",
@@ -51,7 +43,7 @@ const Publication = ({
   journal,
   year,
   link,
-}: PublicationType) => (
+}: Publication) => (
   <li className="mb-4">
     <Link href={link} target="_blank" className="hover:underline">
       <div className="text-lg font-semibold">{title}</div>

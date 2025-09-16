@@ -3,7 +3,10 @@ import { Skills } from "@/components/about/Skills";
 import { Education } from "@/components/about/Education";
 import { Publications } from "@/components/about/Publications";
 
-export default async function AboutMe() {
+import type { AboutMeProps } from "@/types";
+
+export default async function AboutMe({ params }: AboutMeProps) {
+  const { lang } = await params;
   return (
     <main className="min-h-screen p-8 mx-auto md:max-w-2xl">
       <header className="text-center mb-16">

@@ -7,7 +7,10 @@ const MIN_OPACITY = 0.5;
 const MAX_OPACITY = 1.0;
 const HOVER_SCALE = 1.1; // Scale factor for hovered tag
 
-const TagCloudPage = async () => {
+import type { TagCloudPageProps } from "@/types";
+
+const TagCloudPage = async ({ params }: TagCloudPageProps) => {
+  const { lang } = await params;
   const tags = getAllTagsWithCount();
   if (!tags.length) {
     return (
@@ -35,7 +38,7 @@ const TagCloudPage = async () => {
           return (
             <Link
               key={tag.slug}
-              href={`./tags/${tag.slug}`}
+              href={`/${lang}/posts/tags/${tag.slug}`}
               tabIndex={0}
               aria-label={`View posts tagged ${tag.name}`}
               className="transition-all duration-300 focus:outline-none rounded group-hover:opacity-50 hover:!opacity-100 hover:scale-110 hover:z-10"

@@ -2,12 +2,7 @@
 import { Code2, Icon, type LucideIcon } from "lucide-react";
 import Image from "next/image";
 import { cn } from "@/lib/utils";
-
-interface TechBadgeProps {
-  name: string;
-  icon?: string;
-  className?: string;
-}
+import type { TechBadgeProps } from "@/types";
 
 export default function TechBadge({ name, icon, className }: TechBadgeProps) {
   return (

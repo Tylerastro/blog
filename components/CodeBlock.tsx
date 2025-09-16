@@ -2,11 +2,7 @@
 
 import { Check, Clipboard } from "lucide-react";
 import React, { useEffect, useState } from "react";
-
-interface CodeBlockProps {
-  children: React.ReactNode;
-  [key: string]: any;
-}
+import type { CodeBlockProps } from "@/types";
 
 const extractTextFromNode = (node: React.ReactNode): string => {
   if (typeof node === "string") {

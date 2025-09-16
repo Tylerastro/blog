@@ -1,5 +1,6 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import type { ListItem, TabContentProps } from "@/types";
 import "./module.css";
 
 const projects = [
@@ -43,23 +44,7 @@ const blogs = [
   { id: 5, title: "Web Performance Tips", date: "Sep 18, 2023" },
 ];
 
-interface ListItem {
-  id: number;
-  name?: string;
-  title?: string;
-  status?: string;
-  date?: string;
-  [key: string]: any;
-}
-
-interface TabContentProps {
-  items: ListItem[];
-  tabValue: string;
-  className?: string;
-  labelField?: string;
-  badgeText?: string;
-  hasDarkBackground?: boolean;
-}
+// Types now defined in central types
 
 const TabContent = ({
   items,

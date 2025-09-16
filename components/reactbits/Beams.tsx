@@ -14,22 +14,9 @@ import * as THREE from "three";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { PerspectiveCamera } from "@react-three/drei";
 import { degToRad } from "three/src/math/MathUtils.js";
+import type { UniformValue, ExtendMaterialConfig, ShaderWithDefines, BeamsProps } from "@/types";
 
-type UniformValue = THREE.IUniform<unknown> | unknown;
-
-interface ExtendMaterialConfig {
-  header: string;
-  vertexHeader?: string;
-  fragmentHeader?: string;
-  material?: THREE.MeshPhysicalMaterialParameters & { fog?: boolean };
-  uniforms?: Record<string, UniformValue>;
-  vertex?: Record<string, string>;
-  fragment?: Record<string, string>;
-}
-
-type ShaderWithDefines = THREE.ShaderLibShader & {
-  defines?: Record<string, string | number | boolean>;
-};
+// Types are now defined in central types
 
 function extendMaterial<T extends THREE.Material = THREE.Material>(
   BaseMaterial: new (params?: THREE.MaterialParameters) => T,
@@ -181,16 +168,7 @@ float cnoise(vec3 P){
 }
 `;
 
-interface BeamsProps {
-  beamWidth?: number;
-  beamHeight?: number;
-  beamNumber?: number;
-  lightColor?: string;
-  speed?: number;
-  noiseIntensity?: number;
-  scale?: number;
-  rotation?: number;
-}
+// BeamsProps is now defined in central types
 
 const Beams: FC<BeamsProps> = ({
   beamWidth = 2,

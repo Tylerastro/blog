@@ -2,14 +2,13 @@ import PostInfo from "@/components/posts/PostInfo";
 import YouTubePlayer from "@/components/YouTubePlayer";
 import { getPostMetadata } from "@/utils/getPostMetaData";
 import getPostsMetadata from "@/utils/getPostMetaData";
+import type { BlogPostPageProps } from "@/types";
 
 export default async function BlogPostPage({
   params,
-}: {
-  params: Promise<{ slug: string }>;
-}) {
+}: BlogPostPageProps) {
   const resolvedParams = await params;
-  const slug = resolvedParams.slug;
+  const { lang, slug } = resolvedParams;
   // Decode the URL-encoded slug
   const decodedSlug = decodeURIComponent(slug);
 
@@ -42,9 +41,9 @@ export default async function BlogPostPage({
 
 export function generateStaticParams() {
   const posts = getPostsMetadata();
-  const languages: Array<"en-US" | "zh-TW"> = ["en-US", "zh-TW"];
+  const languages: Array<"en" | "zh" | "jp"> = ["en", "zh", "jp"];
 
-  const staticParams: Array<{ lang: "en-US" | "zh-TW"; slug: string }> = [];
+  const staticParams: Array<{ lang: "en" | "zh" | "jp"; slug: string }> = [];
 
   for (const lang of languages) {
     for (const post of posts) {

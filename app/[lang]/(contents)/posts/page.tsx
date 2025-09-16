@@ -1,12 +1,13 @@
 import getPostsMetadata from "@/utils/getPostMetaData";
 import PostList from "@/components/posts/PostList";
 import { redirect } from "next/navigation";
+import type { BlogPostsListProps } from "@/types";
 
 export default async function BlogPostsList({
+  params,
   searchParams,
-}: {
-  searchParams: Promise<{ page: string }>;
-}) {
+}: BlogPostsListProps) {
+  const { lang } = await params;
   const posts = getPostsMetadata();
   posts.sort((a, b) => {
     const dateA = new Date(a.created_date);
@@ -24,7 +25,7 @@ export default async function BlogPostsList({
   );
 
   if (currentPage > totalPages) {
-    return redirect("/posts");
+    return redirect(`/${lang}/posts`);
   }
 
   if (!posts.length) {
@@ -49,7 +50,7 @@ export default async function BlogPostsList({
             (pageNum) => (
               <a
                 key={pageNum}
-                href={`/posts?page=${pageNum}`}
+                href={`/${lang}/posts?page=${pageNum}`}
                 className={`px-4 py-2 border border-border rounded-md transition-colors ${
                   currentPage === pageNum
                     ? "bg-primary text-primary-foreground hover:bg-primary/90"

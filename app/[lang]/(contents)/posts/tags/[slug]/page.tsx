@@ -1,7 +1,7 @@
 import { getTagBySlug, getPostsByTag } from "@/lib/tags";
 import PostList from "@/components/posts/PostList";
 import Link from "next/link";
-import type { BlogPost } from "@/types/posts";
+import type { BlogPost, TagSlugPageProps } from "@/types";
 import { Slash, ChevronDown } from "lucide-react";
 import {
   Breadcrumb,
@@ -19,25 +19,22 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { notoColorEmoji } from "@/styles/fonts";
 
-interface TagSlugPageProps {
-  params: Promise<{ slug: string }>;
-  searchParams: Promise<{ page?: string }>;
-}
 
 const postsPerPage = 7;
 
 const TagSlugPage = async (props: TagSlugPageProps) => {
   const searchParams = await props.searchParams;
   const params = await props.params;
+  const { lang, slug } = params;
   // Decode the slug to handle Chinese and other non-ASCII characters
-  const decodedSlug = decodeURIComponent(params.slug);
+  const decodedSlug = decodeURIComponent(slug);
   const tag = getTagBySlug(decodedSlug);
   if (!tag) {
     return (
       <>
         <h1 className="text-3xl font-bold mb-6">Tag Not Found</h1>
         <Link
-          href="../"
+          href={`/${lang}/posts/tags`}
           className="text-blue-600 underline"
           tabIndex={0}
           aria-label="Back to tag cloud"
@@ -71,13 +68,13 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
         <Breadcrumb>
           <BreadcrumbList className="list-none">
             <BreadcrumbItem>
-              <BreadcrumbLink href="/">Home</BreadcrumbLink>
+              <BreadcrumbLink href={`/${lang}`}>Home</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
               <Slash className="w-4 h-4" />
             </BreadcrumbSeparator>
             <BreadcrumbItem>
-              <BreadcrumbLink href="/posts">Posts</BreadcrumbLink>
+              <BreadcrumbLink href={`/${lang}/posts`}>Posts</BreadcrumbLink>
             </BreadcrumbItem>
             <BreadcrumbSeparator>
               <Slash className="w-4 h-4" />
@@ -89,7 +86,7 @@ const TagSlugPage = async (props: TagSlugPageProps) => {
                 </DropdownMenuTrigger>
                 <DropdownMenuContent align="start" className="w-fit">
                   <DropdownMenuItem>
-                    <Link href="/posts/tags">All Tags</Link>
+                    <Link href={`/${lang}/posts/tags`}>All Tags</Link>
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>

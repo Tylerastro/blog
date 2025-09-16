@@ -11,13 +11,17 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function LocaleLayout({
+export default async function RootLayout({
   children,
+  params,
 }: Readonly<{
   children: React.ReactNode;
+  params: Promise<{ lang: "en" | "zh" | "jp" }>;
 }>) {
+  const { lang } = await params;
+
   return (
-    <html lang="en-US" suppressHydrationWarning className={cn(fontVariables, outfit.className)}>
+    <html lang={lang} suppressHydrationWarning className={cn(fontVariables, outfit.className)}>
       <body
         className={cn(
           "antialiased bg-background",

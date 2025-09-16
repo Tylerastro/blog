@@ -1,5 +1,6 @@
-import { PostMetadata } from "@/types/posts";
+import type { PostMetadata, PostListProps } from "@/types";
 import Link from "next/link";
+
 export function formatDate(dateString: string): string {
   const date = new Date(dateString);
   return date.toLocaleDateString("en-US", {
@@ -7,10 +8,6 @@ export function formatDate(dateString: string): string {
     month: "long",
     day: "numeric",
   });
-}
-
-interface PostListProps {
-  posts: PostMetadata[];
 }
 
 export default async function PostList({ posts }: PostListProps) {

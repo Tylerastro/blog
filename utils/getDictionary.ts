@@ -1,18 +1,17 @@
 import "server-only";
 
+export interface Dictionary {}
+
 const dictionaries = {
-  "en-US": () => import("@/messages/en.json").then((module) => module.default),
-  "zh-TW": () => import("@/messages/zh.json").then((module) => module.default),
+  en: () => import("@/messages/en.json").then((module) => module.default),
+  zh: () => import("@/messages/zh.json").then((module) => module.default),
+  jp: () => import("@/messages/jp.json").then((module) => module.default),
 };
 
-interface Blog {
-  title: string;
-}
-
-export interface Dictionary {
-  Blog: Blog;
-}
-
 export const getDictionary = async (
-  locale: "en-US" | "zh-TW"
-): Promise<Dictionary> => (await dictionaries[locale]()) as Dictionary;
+  locale: "en" | "zh" | "jp"
+): Promise<Dictionary> => {
+  // Handle case where locale might not match our dictionary keys
+  const selectedLocale = locale in dictionaries ? locale : "en";
+  return dictionaries[selectedLocale]();
+};

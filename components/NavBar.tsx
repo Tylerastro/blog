@@ -1,5 +1,5 @@
 import Link from "next/link";
-
+import type { NavBarProps, BlogLink } from "@/types";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import {
@@ -14,19 +14,7 @@ import {
 } from "@/components/ui/navigation-menu";
 import ChatModal from "@/components/chat/chat-modal";
 
-interface NavBarProps extends React.HTMLAttributes<HTMLElement> {
-  links?: {
-    href: string;
-    label: string;
-  }[];
-}
-
-// Blog dropdown links with descriptions
-type BlogLink = {
-  title: string;
-  href: string;
-  description: string;
-};
+// Blog dropdown links with descriptions - now defined in central types
 
 const blogLinks: BlogLink[] = [
   {

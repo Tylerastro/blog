@@ -1,16 +1,7 @@
 import { Calendar, Tag, ExternalLink } from "lucide-react";
 import Link from "next/link";
 import { AudioPlayer } from "./AudioPlayer";
-
-interface PostInfoProps {
-  filename: string;
-  date: string;
-  title: string;
-  tags: string[];
-  categories: string[];
-  mediumLink: string;
-  audioLink: string;
-}
+import type { PostInfoProps } from "@/types";
 
 export default function PostInfo({
   filename,

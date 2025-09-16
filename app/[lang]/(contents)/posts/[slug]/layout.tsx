@@ -7,13 +7,13 @@ export const metadata: Metadata = {
   description: "",
 };
 
-export default async function LocaleLayout(props: {
+export default async function PostLayout(props: {
   children: React.ReactNode;
-  params: Promise<{ locale: string }>;
+  params: Promise<{ lang: "en" | "zh" | "jp"; slug: string }>;
 }) {
   const params = await props.params;
 
-  const { locale } = params;
+  const { lang, slug } = params;
 
   const { children } = props;
 
