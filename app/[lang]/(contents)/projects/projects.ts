@@ -69,7 +69,7 @@ export const projects: Project[] = [
   },
   {
     id: "4",
-    title: "Utanoko Track",
+    title: "Utano Track",
     description:
       "The web application scrape comment timestamps and link to the video.",
     category: "web",

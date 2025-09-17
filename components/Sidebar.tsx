@@ -9,7 +9,7 @@ import {
   SheetTrigger,
   SheetTitle,
 } from "@/components/ui/sheet";
-import { useState } from "react";
+import { useState, useCallback, memo } from "react";
 import ChatModal from "@/components/chat/chat-modal";
 import { User } from "lucide-react";
 import {
@@ -43,53 +43,80 @@ const navigationItems = [
   },
 ];
 
+// Memoized navigation item component for performance
+const NavigationItem = memo(({ item, index, onClose }: {
+  item: typeof navigationItems[0],
+  index: number,
+  onClose: () => void
+}) => {
+  const Icon = item.icon;
+
+  return (
+    <li
+      className="opacity-0 animate-sidebar-item-enter will-change-transform"
+      style={{
+        animationDelay: `${index * 150 + 250}ms`, // More noticeable staggered animation
+        animationFillMode: "forwards",
+      }}
+    >
+      <Link
+        href={item.href}
+        onClick={onClose}
+        className="flex items-center space-x-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors group will-change-transform"
+      >
+        <Icon className="h-5 w-5 group-hover:scale-110 transition-transform duration-150 ease-out will-change-transform" />
+        <span className="font-medium text-lg">{item.label}</span>
+      </Link>
+    </li>
+  );
+});
+
+NavigationItem.displayName = "NavigationItem";
+
 export function Sidebar() {
   const [isOpen, setIsOpen] = useState(false);
   const [language, setLanguage] = useState("en");
 
-  const SidebarContent = () => (
+  const handleClose = useCallback(() => {
+    setIsOpen(false);
+  }, []);
+
+  const handleLanguageChange = useCallback((value: string) => {
+    setLanguage(value);
+  }, []);
+
+  const SidebarContent = memo(() => (
     <div className="flex flex-col h-full">
       <div className="flex items-center justify-between p-6">
         <Link
           href="/"
-          className="flex items-center space-x-2"
-          onClick={() => setIsOpen(false)}
+          className="flex items-center space-x-2 transition-opacity hover:opacity-80"
+          onClick={handleClose}
         >
           <span className="text-xl font-bold">Tyler Lin</span>
         </Link>
-        <Button variant="ghost" size="icon" onClick={() => setIsOpen(false)}>
-          <X className={`h-5 w-5 ${isOpen ? "roll-in-animation" : ""}`} />
+        <Button variant="ghost" size="icon" onClick={handleClose}>
+          <X
+            className="h-5 w-5 transition-transform duration-200 ease-out will-change-transform hover:rotate-90"
+          />
         </Button>
       </div>
 
       <nav className="flex-1 px-4">
         <ul className="space-y-2">
-          {navigationItems.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <li
-                key={item.href}
-                className="animate-slide-in-left opacity-0"
-                style={{
-                  animationDelay: `${index * 150 + 250}ms`,
-                  animationFillMode: "forwards",
-                }}
-              >
-                <Link
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className="flex items-center space-x-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors group"
-                >
-                  <Icon className="h-5 w-5 group-hover:scale-110 transition-transform" />
-                  <span className="font-medium text-lg">{item.label}</span>
-                </Link>
-              </li>
-            );
-          })}
+          {navigationItems.map((item, index) => (
+            <NavigationItem
+              key={item.href}
+              item={item}
+              index={index}
+              onClose={handleClose}
+            />
+          ))}
         </ul>
       </nav>
-      <div className="space-y-3">
-        <Select value={language} onValueChange={setLanguage}>
+
+      <div className="space-y-3 px-4">
+        <Select value={language} onValueChange={handleLanguageChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select language" />
           </SelectTrigger>
@@ -99,13 +126,14 @@ export function Sidebar() {
           </SelectContent>
         </Select>
       </div>
+
       <div className="p-4 space-y-4 border-t">
         <ChatModal>
           <Button className="w-full text-lg py-3">Let's Talk</Button>
         </ChatModal>
       </div>
     </div>
-  );
+  ));
 
   return (
     <>

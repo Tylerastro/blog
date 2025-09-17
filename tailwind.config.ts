@@ -192,6 +192,16 @@ const config: Config = {
             transform: "translateX(0)",
           },
         },
+        "sidebar-item-enter": {
+          from: {
+            opacity: "0",
+            transform: "translate3d(-20px, 0, 0)",
+          },
+          to: {
+            opacity: "1",
+            transform: "translate3d(0, 0, 0)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -207,6 +217,7 @@ const config: Config = {
         exitToLeft: "exitToLeft 250ms ease",
         exitToRight: "exitToRight 250ms ease",
         "slide-in-left": "slide-in-left 0.3s ease-out",
+        "sidebar-item-enter": "sidebar-item-enter 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
     },
   },

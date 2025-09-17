@@ -158,6 +158,19 @@
   }
 }
 
+/* Optimized sidebar item animation with hardware acceleration */
+@keyframes sidebar-item-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(-20px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+  }
+}
+
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
   so we've added these compatibility styles to make sure everything still
@@ -524,6 +537,13 @@ ol {
 
 .roll-in-animation {
   animation: rollIn 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Optimized sidebar animations with hardware acceleration */
+.sidebar-optimized {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 
 /* rehype-pretty-code default styles */

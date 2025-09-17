@@ -5,7 +5,9 @@ import { useEffect, useState } from "react";
 
 export function BaseballScoreboardBanner() {
   const [currentTime, setCurrentTime] = useState("");
-  const [animationValues, setAnimationValues] = useState<Array<{delay: number, duration: number}>>([]);
+  const [animationValues, setAnimationValues] = useState<
+    Array<{ delay: number; duration: number }>
+  >([]);
 
   useEffect(() => {
     const updateTime = () => {
@@ -18,7 +20,7 @@ export function BaseballScoreboardBanner() {
     // Generate animation values only on client side
     const animations = Array.from({ length: 96 }, () => ({
       delay: Math.random() * 2,
-      duration: 2 + Math.random() * 2
+      duration: 2 + Math.random() * 2,
     }));
     setAnimationValues(animations);
 
@@ -29,7 +31,7 @@ export function BaseballScoreboardBanner() {
   }, []);
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-2 sm:p-4">
+    <div className="w-full max-w-4xl mx-auto p-2 sm:p-4 select-none">
       <Card className="bg-black/20 backdrop-blur-md border-0 shadow-[0_0_30px_rgba(0,255,255,0.3)] overflow-hidden relative">
         {/* Enhanced Cyberpunk grid overlay */}
         <div className="absolute inset-0 opacity-20">
@@ -38,10 +40,14 @@ export function BaseballScoreboardBanner() {
               <div
                 key={i}
                 className="border border-cyan-400/30 animate-pulse"
-                style={animationValues[i] ? {
-                  animationDelay: `${animationValues[i].delay}s`,
-                  animationDuration: `${animationValues[i].duration}s`
-                } : {}}
+                style={
+                  animationValues[i]
+                    ? {
+                        animationDelay: `${animationValues[i].delay}s`,
+                        animationDuration: `${animationValues[i].duration}s`,
+                      }
+                    : {}
+                }
               />
             ))}
           </div>
