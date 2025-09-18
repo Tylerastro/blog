@@ -1,16 +1,15 @@
-import ScrollProgressBar from "@/components/ProgressBar";
 import type { Metadata } from "next";
+
+import ScrollProgressBar from "@/components/ProgressBar";
 import TocContainer from "@/components/posts/TocContainer";
+import { PostLayoutProps } from "@/lib/types";
 
 export const metadata: Metadata = {
   title: "Blog",
   description: "",
 };
 
-export default async function PostLayout(props: {
-  children: React.ReactNode;
-  params: Promise<{ lang: "en" | "zh" | "jp"; slug: string }>;
-}) {
+export default async function PostLayout(props: PostLayoutProps) {
   const params = await props.params;
 
   const { lang, slug } = params;
