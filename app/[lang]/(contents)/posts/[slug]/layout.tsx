@@ -24,7 +24,6 @@ export default async function PostLayout(props: PostLayoutProps) {
       <main className="flex-1 mx-auto w-[90svw] sm:w-[50svw] my-20">
         {children}
       </main>
-      <Footer />
     </>
   );
 }

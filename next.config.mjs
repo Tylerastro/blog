@@ -1,6 +1,7 @@
 import createMDX from '@next/mdx'
 import rehypeMdxCodeProps from 'rehype-mdx-code-props'
 import remarkMath from 'remark-math'
+import remarkGfm from 'remark-gfm'
 import rehypePrettyCode from 'rehype-pretty-code'
  
 /** @type {import('next').NextConfig} */
@@ -64,6 +65,7 @@ const withMDX = createMDX({
       rehypeMdxCodeProps
     ],
     remarkPlugins: [
+      remarkGfm,
       // remarkMath,
     ],
   }  

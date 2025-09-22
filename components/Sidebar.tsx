@@ -44,32 +44,38 @@ const navigationItems = [
 ];
 
 // Memoized navigation item component for performance
-const NavigationItem = memo(({ item, index, onClose }: {
-  item: typeof navigationItems[0],
-  index: number,
-  onClose: () => void
-}) => {
-  const Icon = item.icon;
+const NavigationItem = memo(
+  ({
+    item,
+    index,
+    onClose,
+  }: {
+    item: (typeof navigationItems)[0];
+    index: number;
+    onClose: () => void;
+  }) => {
+    const Icon = item.icon;
 
-  return (
-    <li
-      className="opacity-0 animate-sidebar-item-enter will-change-transform"
-      style={{
-        animationDelay: `${index * 150 + 250}ms`, // More noticeable staggered animation
-        animationFillMode: "forwards",
-      }}
-    >
-      <Link
-        href={item.href}
-        onClick={onClose}
-        className="flex items-center space-x-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors group will-change-transform"
+    return (
+      <li
+        className="opacity-0 animate-sidebar-item-enter will-change-transform"
+        style={{
+          animationDelay: `${index * 150 + 250}ms`, // More noticeable staggered animation
+          animationFillMode: "forwards",
+        }}
       >
-        <Icon className="h-5 w-5 group-hover:scale-110 transition-transform duration-150 ease-out will-change-transform" />
-        <span className="font-medium text-lg">{item.label}</span>
-      </Link>
-    </li>
-  );
-});
+        <Link
+          href={item.href}
+          onClick={onClose}
+          className="flex items-center space-x-3 px-4 py-3 rounded-lg text-muted-foreground hover:text-foreground hover:bg-accent transition-colors group will-change-transform"
+        >
+          <Icon className="h-5 w-5 group-hover:scale-110 transition-transform duration-150 ease-out will-change-transform" />
+          <span className="font-medium text-lg">{item.label}</span>
+        </Link>
+      </li>
+    );
+  }
+);
 
 NavigationItem.displayName = "NavigationItem";
 
@@ -96,9 +102,7 @@ export function Sidebar() {
           <span className="text-xl font-bold">Tyler Lin</span>
         </Link>
         <Button variant="ghost" size="icon" onClick={handleClose}>
-          <X
-            className="h-5 w-5 transition-transform duration-200 ease-out will-change-transform hover:rotate-90"
-          />
+          <X className="h-5 w-5 transition-transform duration-200 ease-out will-change-transform hover:rotate-90" />
         </Button>
       </div>
 
@@ -115,7 +119,7 @@ export function Sidebar() {
         </ul>
       </nav>
 
-      <div className="space-y-3 px-4">
+      {/* <div className="space-y-3 px-4">
         <Select value={language} onValueChange={handleLanguageChange}>
           <SelectTrigger className="w-full">
             <SelectValue placeholder="Select language" />
@@ -125,7 +129,7 @@ export function Sidebar() {
             <SelectItem value="zh-TW">繁體中文</SelectItem>
           </SelectContent>
         </Select>
-      </div>
+      </div> */}
 
       <div className="p-4 space-y-4 border-t">
         <ChatModal>

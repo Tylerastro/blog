@@ -47,14 +47,14 @@ en 結尾的是針對英文加強模型，也是只能使用在英文上，使�
 
 ### 使用
 
-```js copy filename="awesome.js"
+```js
 import whisper
 
 model = whisper.load_model("large") # 選擇你的模型名稱
 result = model.transcribe("path/to/your/file")
 ```
 
-```
+```python
 model.transcribe(name, verbose=verbose, word_timestamps=time_stamp, task=task)
 在Transcribe底下，可以帶verbose, word_timestamps和task參數。
 - verbose: 會顯示目前已經完成的逐字稿

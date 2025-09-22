@@ -130,8 +130,8 @@ packages= setuptools.find_packages())
 
 # Reference:
 
-https://medium.com/資工筆記/打包python-module-到pypi-上-aef1f73e1774
-https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html
-https://www.freecodecamp.org/news/build-your-first-python-package/
-https://www.tutorialsteacher.com/python/main-in-python
-https://stackoverflow.com/questions/27784271/how-can-i-use-setuptools-to-generate-a-console-scripts-entry-point-which-calls
+[https://medium.com/資工筆記/打包python-module-到pypi-上-aef1f73e1774](https://medium.com/資工筆記/打包python-module-到pypi-上-aef1f73e1774)
+[https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html](https://setuptools.readthedocs.io/en/latest/userguide/quickstart.html)
+[https://www.freecodecamp.org/news/build-your-first-python-package/](https://www.freecodecamp.org/news/build-your-first-python-package/)
+[https://www.tutorialsteacher.com/python/main-in-python](https://www.tutorialsteacher.com/python/main-in-python)
+[https://stackoverflow.com/questions/27784271/how-can-i-use-setuptools-to-generate-a-console-scripts-entry-point-which-calls](https://stackoverflow.com/questions/27784271/how-can-i-use-setuptools-to-generate-a-console-scripts-entry-point-which-calls)

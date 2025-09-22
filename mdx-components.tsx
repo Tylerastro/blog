@@ -123,7 +123,9 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       return (
         <ul
           className={
-            hasCheckboxes ? "github-task-list my-2" : "my-2 list-disc pl-3 ml-3"
+            hasCheckboxes
+              ? "github-task-list my-2"
+              : "my-2 list-disc pl-6 nested-list"
           }
         >
           {children}
@@ -131,7 +133,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       );
     },
     ol: ({ children }) => {
-      return <ol className="my-2 list-decimal pl-5">{children}</ol>;
+      return <ol className="my-2 list-decimal pl-6 nested-list">{children}</ol>;
     },
     li: ({ children }) => {
       // Handle [x] and [ ] for checkboxes
@@ -156,7 +158,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
           label = [match[2], ...children.slice(1)];
         }
       } else {
-        return <li className="py-1">{children}</li>;
+        return <li className="py-1 leading-relaxed">{children}</li>;
       }
 
       if (isCheckbox) {
@@ -175,7 +177,7 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
         );
       }
 
-      return <li>{children}</li>;
+      return <li className="py-1 leading-relaxed">{children}</li>;
     },
     YouTube,
     ...components,

@@ -342,32 +342,72 @@ ol {
   padding-left: 0;
 }
 
-.github-task-list>li {
-  margin-left: 0;
+.github-task-list li {
+  margin-bottom: 0.25rem;
 }
 
+/* Nested task lists */
 .github-task-list ul {
   list-style: none;
-  padding-left: 2em;
-  margin-left: 0;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
-.github-task-list ul>li {
-  margin-left: 0;
-}
-
+/* Checkbox styling */
 .github-task-list input[type="checkbox"] {
   width: 1rem;
   height: 1rem;
-  margin-right: 0.5rem;
-  accent-color: #2da44e;
-  /* GitHub green */
-  /* cursor: not-allowed; */
+  accent-color: #2da44e; /* GitHub green */
+  cursor: not-allowed;
+  vertical-align: top;
+  margin-top: 0.125rem;
 }
 
 .github-task-list li label {
-  cursor: pointer;
+  cursor: default;
   user-select: text;
+  word-break: break-word;
+  display: inline;
+}
+
+/* Regular nested lists styling */
+ul:not(.github-task-list) ul {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+ul:not(.github-task-list) li {
+  margin-bottom: 0.125rem;
+}
+
+/* Progressive indentation for nested lists */
+.nested-list ul {
+  margin-left: 1rem; /* 16px progressive indentation */
+}
+
+.nested-list ul ul {
+  margin-left: 1rem; /* Additional 16px for each level */
+}
+
+.nested-list ul ul ul {
+  margin-left: 1rem; /* Additional 16px for each level */
+}
+
+.nested-list ul ul ul ul {
+  margin-left: 1rem; /* Additional 16px for each level */
+}
+
+.nested-list ul ul ul ul ul {
+  margin-left: 1rem; /* Additional 16px for each level */
+}
+
+/* Ensure proper bullet style inheritance for different nesting levels */
+ul:not(.github-task-list) ul ul {
+  list-style-type: circle;
+}
+
+ul:not(.github-task-list) ul ul ul {
+  list-style-type: square;
 }
 
 .uiverse-badge-btn {
@@ -544,6 +584,30 @@ ol {
   will-change: transform, opacity;
   backface-visibility: hidden;
   perspective: 1000px;
+}
+
+/* Progress Bar CSS Animation Timeline */
+@keyframes scaleProgress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+.progress-bar-animated {
+  animation: scaleProgress linear forwards;
+  animation-timeline: scroll(root y);
+  transform-origin: 0% 50%;
+  will-change: transform;
+}
+
+/* Fallback for browsers without animation-timeline support */
+@supports not (animation-timeline: scroll()) {
+  .progress-bar-animated {
+    animation: none;
+  }
 }
 
 /* rehype-pretty-code default styles */

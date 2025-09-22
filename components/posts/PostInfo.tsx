@@ -1,6 +1,7 @@
-import { Calendar, Tag, ExternalLink } from "lucide-react";
+import { Calendar, Tag, ExternalLink, Clock } from "lucide-react";
 import Link from "next/link";
 import { AudioPlayer } from "./AudioPlayer";
+import { calculateReadingTime } from "@/utils/calculateReadingTime";
 import type { PostInfoProps } from "@/types";
 
 export default function PostInfo({
@@ -11,7 +12,9 @@ export default function PostInfo({
   categories,
   mediumLink,
   audioLink,
+  content,
 }: PostInfoProps) {
+  const readingTime = calculateReadingTime(content);
   return (
     <div className="max-w-2xl mx-auto rounded-lg overflow-hidden">
       <div className="p-6 flex flex-col items-center">
@@ -21,32 +24,42 @@ export default function PostInfo({
         >
           {title}
         </h1>
-        <div className="flex items-center text-muted-foreground mb-4">
-          <Calendar className="w-5 h-5 mr-2" />
-          <time dateTime={new Date(date).toISOString()}>
-            {new Date(date).toLocaleDateString("en-US", {
-              year: "numeric",
-              month: "long",
-              day: "numeric",
-              timeZone: "UTC",
-            })}
-          </time>
+        <div className="flex flex-col sm:flex-row items-center gap-4 text-muted-foreground mb-4">
+          <div className="flex items-center">
+            <Calendar className="w-5 h-5 mr-2" />
+            <time dateTime={new Date(date).toISOString()}>
+              {new Date(date).toLocaleDateString("en-US", {
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                timeZone: "UTC",
+              })}
+            </time>
+          </div>
+          <div className="flex items-center">
+            <Clock className="w-5 h-5 mr-2" />
+            <span aria-label={`Estimated reading time: ${readingTime.text}`}>
+              {readingTime.text}
+            </span>
+          </div>
         </div>
         <div className=" flex items-center justify-around gap-4">
-          <div className="flex flex-wrap items-center">
-            <Tag className="w-5 h-5 mr-2 text-blue-500" />
-            {tags.map((tag, index) => (
-              <Link
-                key={index}
-                href={`/posts/tags/${encodeURIComponent(tag.toLowerCase())}`}
-                className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
-                tabIndex={0}
-                aria-label={`View posts tagged with ${tag}`}
-              >
-                {tag}
-              </Link>
-            ))}
-          </div>
+          {tags.length > 0 && (
+            <div className="flex flex-wrap items-center">
+              <Tag className="w-5 h-5 mr-2 text-blue-500" />
+              {tags.map((tag, index) => (
+                <Link
+                  key={index}
+                  href={`/posts/tags/${encodeURIComponent(tag.toLowerCase())}`}
+                  className="bg-blue-100 text-blue-800 text-sm font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-blue-900 dark:text-blue-300 hover:bg-blue-200 dark:hover:bg-blue-800 transition-colors"
+                  tabIndex={0}
+                  aria-label={`View posts tagged with ${tag}`}
+                >
+                  {tag}
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
         {categories.includes("medium") && (
           <div className="flex flex-wrap items-center py-2 my-2">

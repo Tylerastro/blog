@@ -41,6 +41,7 @@ export interface PostInfoProps {
   categories: string[];
   mediumLink: string;
   audioLink: string;
+  content: string;
 }
 
 export interface TimelineProps {
