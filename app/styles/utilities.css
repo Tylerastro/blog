@@ -1,0 +1,41 @@
+/* Utility classes */
+
+/* Regular utility classes without @layer (for better compatibility) */
+.text-balance {
+  text-wrap: balance;
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(139, 92, 246, 0.5), 0 0 40px rgba(139, 92, 246, 0.3);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 20px rgba(0, 255, 204, 0.5), 0 0 40px rgba(0, 255, 204, 0.3);
+}
+
+.glow-accent {
+  box-shadow: 0 0 20px rgba(255, 0, 127, 0.5), 0 0 40px rgba(255, 0, 127, 0.3);
+}
+
+.text-glow-primary {
+  text-shadow: 0 0 10px rgba(139, 92, 246, 0.8), 0 0 20px rgba(139, 92, 246, 0.6);
+}
+
+.text-glow-secondary {
+  text-shadow: 0 0 10px rgba(0, 255, 204, 0.8), 0 0 20px rgba(0, 255, 204, 0.6);
+}
+
+.text-glow-accent {
+  text-shadow: 0 0 10px rgba(255, 0, 127, 0.8), 0 0 20px rgba(255, 0, 127, 0.6);
+}
+
+.border-glow-primary {
+  border: 2px solid rgba(139, 92, 246, 0.8);
+  box-shadow: 0 0 10px rgba(139, 92, 246, 0.4), inset 0 0 10px rgba(139, 92, 246, 0.1);
+}
+
+.border-glow-secondary {
+  border: 2px solid rgba(0, 255, 204, 0.8);
+  box-shadow: 0 0 10px rgba(0, 255, 204, 0.4), inset 0 0 10px rgba(0, 255, 204, 0.1);
+}

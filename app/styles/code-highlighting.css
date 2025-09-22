@@ -1,0 +1,98 @@
+/* Code syntax highlighting styles (rehype-pretty-code) */
+
+/* Default pre styles */
+pre {
+  overflow-x: auto;
+  border-radius: 0.5rem;
+  padding: 1rem;
+}
+
+/* Fix first line indentation issue */
+pre > code {
+  display: block;
+}
+
+pre > code > [data-line]:first-child:empty,
+pre > code > span:first-child:empty {
+  display: none;
+}
+
+pre[data-theme] {
+  --tab-size: 2;
+  tab-size: var(--tab-size);
+}
+
+/* Light theme styles */
+pre[data-theme*=' '],
+pre[data-theme*=' '] span {
+  color: var(--shiki-light);
+  background-color: var(--shiki-light-bg);
+}
+
+/* Dark theme styles */
+@media (prefers-color-scheme: dark) {
+  pre[data-theme*=' '],
+  pre[data-theme*=' '] span {
+    color: var(--shiki-dark);
+    background-color: var(--shiki-dark-bg);
+  }
+}
+
+html[data-theme='dark'] pre[data-theme*=' '],
+html[data-theme='dark'] pre[data-theme*=' '] span {
+  color: var(--shiki-dark);
+  background-color: var(--shiki-dark-bg);
+}
+
+/* Line numbers */
+pre[data-line-numbers] {
+  counter-reset: line;
+}
+
+pre[data-line-numbers] > [data-line]::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 1rem;
+  margin-right: 2rem;
+  text-align: right;
+  color: gray;
+}
+
+pre[data-line-numbers-max-digits='2'] > [data-line]::before {
+  width: 2rem;
+}
+
+pre[data-line-numbers-max-digits='3'] > [data-line]::before {
+  width: 3rem;
+}
+
+/* Highlighting styles */
+[data-highlighted-line] {
+  background: rgba(200, 200, 255, 0.1);
+}
+
+[data-highlighted-chars] {
+  background: rgba(200, 200, 255, 0.2);
+  border-radius: 0.25rem;
+}
+
+[data-chars-id] {
+  border-bottom: 1px solid;
+}
+
+/* Character highlighting variants */
+pre:has([data-chars-id='v']) [data-chars-id='v'] {
+  background: rgba(196, 125, 255, 0.1);
+  border-color: rgb(196, 125, 255);
+}
+
+pre:has([data-chars-id='s']) [data-chars-id='s'] {
+  background: rgba(125, 255, 125, 0.1);
+  border-color: rgb(125, 255, 125);
+}
+
+pre:has([data-chars-id='i']) [data-chars-id='i'] {
+  background: rgba(255, 200, 125, 0.1);
+  border-color: rgb(255, 200, 125);
+}
