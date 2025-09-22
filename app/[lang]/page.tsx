@@ -5,12 +5,13 @@ import {
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
 import type { HomeProps } from "@/types";
+import SplitText from "@/components/reactbits/SplitText";
 
 export default async function Home({ params }: HomeProps) {
   const { lang } = await params;
   return (
     <main className="flex flex-col">
-      <section className="h-[120vh] relative overflow-hidden">
+      <section className="h-[100vh] relative overflow-hidden">
         {/* Split Background with Tilted Line */}
         <div className="absolute inset-0">
           {/* Light Half */}
@@ -84,8 +85,11 @@ export default async function Home({ params }: HomeProps) {
           </div>
 
           {/* Baseball Scoreboard positioned at bottom */}
-          <div className="pb-8">
-            <BaseballScoreboardBanner />
+          <div className="h-1/4 pb-8 text-center">
+            {/* <BaseballScoreboardBanner /> */}
+            <span className="w-full max-w-4xl mx-auto p-2 sm:p-4 select-none text-4xl font-bold">
+              Under Construction
+            </span>
           </div>
         </div>
       </section>

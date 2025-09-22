@@ -34,74 +34,72 @@ html {
 }
 
 :root {
-  /* Updated color tokens to match baseball scoreboard design brief */
-  --background: oklch(0.98 0.02 85);
-  /* #fffbeb - soft cream background */
-  --foreground: oklch(0.35 0.01 250);
-  /* #4b5563 - dark gray text */
-  --card: oklch(1 0 0);
-  /* #ffffff - white cards */
-  --card-foreground: oklch(0.35 0.01 250);
-  /* #4b5563 - dark gray card text */
-  --popover: oklch(1 0 0);
-  /* #ffffff - white popover */
-  --popover-foreground: oklch(0.35 0.01 250);
-  /* #4b5563 - dark gray popover text */
-  --primary: oklch(0.65 0.18 45);
-  /* #ea580c - vibrant orange primary */
-  --primary-foreground: oklch(1 0 0);
-  /* #ffffff - white text on primary */
-  --secondary: oklch(0.7 0.16 35);
-  /* #f97316 - lighter orange accent */
-  --secondary-foreground: oklch(1 0 0);
-  /* #ffffff - white text on secondary */
-  --muted: oklch(0.96 0.01 85);
-  /* #ecfeff - very light muted background */
-  --muted-foreground: oklch(0.32 0.01 240);
-  /* #475569 - muted text */
-  --accent: oklch(0.7 0.16 35);
-  /* #f97316 - orange accent */
-  --accent-foreground: oklch(1 0 0);
-  /* #ffffff - white text on accent */
+  /* Color Palette - #7C94DE, #3C5CAA, #FCFBFD, #D7BBDE, #E3D9F4, #A2D3F6, #EEF1F8, #9BAFDB */
+
+  /* Ghost White - #EEF1F8 - Light background */
+  --background: oklch(0.9558 0.0166 245.86);
+  /* Sapphire - #3C5CAA - Dark text */
+  --foreground: oklch(0.4297 0.1175 264.42);
+  /* White - #FCFBFD - Cards */
+  --card: oklch(0.9907 0.0046 290.57);
+  --card-foreground: oklch(0.4297 0.1175 264.42);
+  /* White - #FCFBFD - Popovers */
+  --popover: oklch(0.9907 0.0046 290.57);
+  --popover-foreground: oklch(0.4297 0.1175 264.42);
+  /* Vista Blue - #7C94DE - Primary */
+  --primary: oklch(0.6508 0.0969 268.31);
+  /* White - #FCFBFD - Primary text */
+  --primary-foreground: oklch(0.9907 0.0046 290.57);
+  /* Powder Blue - #9BAFDB - Secondary */
+  --secondary: oklch(0.7233 0.0508 263.89);
+  /* Sapphire - #3C5CAA - Secondary text */
+  --secondary-foreground: oklch(0.4297 0.1175 264.42);
+  /* Pale Purple - #E3D9F4 - Muted */
+  --muted: oklch(0.8883 0.0296 289.32);
+  /* Sapphire - #3C5CAA - Muted text */
+  --muted-foreground: oklch(0.4297 0.1175 264.42);
+  /* Uranian Blue - #A2D3F6 - Accent */
+  --accent: oklch(0.8239 0.0527 223.39);
+  /* Sapphire - #3C5CAA - Accent text */
+  --accent-foreground: oklch(0.4297 0.1175 264.42);
+  /* Keep existing destructive red */
   --destructive: oklch(0.55 0.25 15);
-  /* #be123c - red for destructive actions */
   --destructive-foreground: oklch(1 0 0);
-  /* #ffffff - white text on destructive */
-  --border: oklch(0.35 0.01 250);
-  /* #4b5563 - dark gray borders */
-  --input: oklch(1 0 0);
-  /* #ffffff - white input background */
-  --ring: oklch(0.65 0.18 45 / 0.5);
-  /* Primary color with opacity for focus rings */
-  --chart-1: oklch(0.65 0.18 45);
-  /* #ea580c - primary orange */
-  --chart-2: oklch(0.7 0.16 35);
-  /* #f97316 - secondary orange */
-  --chart-3: oklch(0.25 0.08 220);
-  /* #164e63 - dark blue */
-  --chart-4: oklch(0.55 0.25 15);
-  /* #be123c - red */
-  --chart-5: oklch(0.32 0.01 240);
-  /* #475569 - gray */
+  /* Powder Blue - #9BAFDB - Borders */
+  --border: oklch(0.7233 0.0508 263.89);
+  /* White - #FCFBFD - Input background */
+  --input: oklch(0.9907 0.0046 290.57);
+  /* Vista Blue with opacity - Focus rings */
+  --ring: oklch(0.6508 0.0969 268.31 / 0.5);
+  /* Vista Blue - #7C94DE */
+  --chart-1: oklch(0.6508 0.0969 268.31);
+  /* Sapphire - #3C5CAA */
+  --chart-2: oklch(0.4297 0.1175 264.42);
+  /* Uranian Blue - #A2D3F6 */
+  --chart-3: oklch(0.8239 0.0527 223.39);
+  /* Thistle - #D7BBDE */
+  --chart-4: oklch(0.7766 0.0467 318.31);
+  /* Pale Purple - #E3D9F4 */
+  --chart-5: oklch(0.8883 0.0296 289.32);
   --radius: 0.5rem;
-  /* Slightly smaller radius for scoreboard aesthetic */
-  --sidebar: oklch(1 0 0);
-  /* #ffffff - white sidebar */
-  --sidebar-foreground: oklch(0.35 0.01 250);
-  /* #4b5563 - dark gray sidebar text */
-  --sidebar-primary: oklch(0.65 0.18 45);
-  /* #ea580c - primary orange */
-  --sidebar-primary-foreground: oklch(1 0 0);
-  /* #ffffff - white text */
-  --sidebar-accent: oklch(0.7 0.16 35);
-  /* #f97316 - orange accent */
-  --sidebar-accent-foreground: oklch(1 0 0);
-  /* #ffffff - white text */
-  --sidebar-border: oklch(0.35 0.01 250);
-  /* #4b5563 - dark gray border */
-  --sidebar-ring: oklch(0.65 0.18 45 / 0.5);
-  /* Primary color with opacity */
-  --link: oklch(0.65 0.18 45);
+  /* White - #FCFBFD - Sidebar */
+  --sidebar: oklch(0.9907 0.0046 290.57);
+  /* Sapphire - #3C5CAA - Sidebar text */
+  --sidebar-foreground: oklch(0.4297 0.1175 264.42);
+  /* Vista Blue - #7C94DE - Sidebar primary */
+  --sidebar-primary: oklch(0.6508 0.0969 268.31);
+  /* White - #FCFBFD - Sidebar primary text */
+  --sidebar-primary-foreground: oklch(0.9907 0.0046 290.57);
+  /* Powder Blue - #9BAFDB - Sidebar accent */
+  --sidebar-accent: oklch(0.7233 0.0508 263.89);
+  /* Sapphire - #3C5CAA - Sidebar accent text */
+  --sidebar-accent-foreground: oklch(0.4297 0.1175 264.42);
+  /* Powder Blue - #9BAFDB - Sidebar border */
+  --sidebar-border: oklch(0.7233 0.0508 263.89);
+  /* Vista Blue with opacity - Sidebar focus */
+  --sidebar-ring: oklch(0.6508 0.0969 268.31 / 0.5);
+  /* Vista Blue - #7C94DE - Links */
+  --link: oklch(0.6508 0.0969 268.31);
 }
 
 /* Global element styles */
