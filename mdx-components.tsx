@@ -9,7 +9,7 @@ import React from "react";
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
     h1: ({ children }) => (
-      <h2 className="text-4xl font-bold py-4" id={children}>
+      <h2 className="text-4xl font-bold pb-4 pt-8" id={children}>
         {children}
       </h2>
     ),
@@ -35,20 +35,31 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ),
     p: ({ children }) => {
       // Check if children contains block elements that shouldn't be in <p>
-      const hasBlockElements = React.Children.toArray(children).some(child => {
-        if (React.isValidElement(child)) {
-          const tagName = typeof child.type === 'string' ? child.type : '';
-          // Check for HTML block elements
-          const isHTMLBlockElement = ['iframe', 'div', 'blockquote', 'pre', 'ul', 'ol', 'table'].includes(tagName);
-          
-          // Check for React components that render block elements (like YouTube)
-          const componentName = typeof child.type === 'function' ? child.type.name : '';
-          const isBlockComponent = ['YouTube'].includes(componentName);
-          
-          return isHTMLBlockElement || isBlockComponent;
+      const hasBlockElements = React.Children.toArray(children).some(
+        (child) => {
+          if (React.isValidElement(child)) {
+            const tagName = typeof child.type === "string" ? child.type : "";
+            // Check for HTML block elements
+            const isHTMLBlockElement = [
+              "iframe",
+              "div",
+              "blockquote",
+              "pre",
+              "ul",
+              "ol",
+              "table",
+            ].includes(tagName);
+
+            // Check for React components that render block elements (like YouTube)
+            const componentName =
+              typeof child.type === "function" ? child.type.name : "";
+            const isBlockComponent = ["YouTube"].includes(componentName);
+
+            return isHTMLBlockElement || isBlockComponent;
+          }
+          return false;
         }
-        return false;
-      });
+      );
 
       if (hasBlockElements) {
         return <div className="text-lg py-2 my-2">{children}</div>;
@@ -69,13 +80,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     },
     pre: ({ children, ...props }) => {
       // Check if this is a rehype-pretty-code processed pre element
-      if (props['data-rehype-pretty-code-fragment'] !== undefined) {
+      if (props["data-rehype-pretty-code-fragment"] !== undefined) {
         // This is already processed by rehype-pretty-code, wrap with CodeBlock for copy functionality
         return <CodeBlock {...props}>{children}</CodeBlock>;
       }
 
       // For non-code pre elements, render normally
-      return <pre className="p-4 rounded-lg bg-muted overflow-x-auto" {...props}>{children}</pre>;
+      return (
+        <pre className="p-4 rounded-lg bg-muted overflow-x-auto" {...props}>
+          {children}
+        </pre>
+      );
     },
     blockquote: ({ children }) => (
       <MediumBlockquote>{children}</MediumBlockquote>

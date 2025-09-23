@@ -55,7 +55,9 @@ export const getAllTagsWithCount = (): Tag[] => {
 
 export const getPostsByTag = (tagName: string): Post[] => {
   const posts = getAllPosts();
-  return posts.filter((post) => post.tags.includes(tagName));
+  return posts
+    .filter((post) => post.tags.includes(tagName))
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
 };
 
 export const getTagBySlug = (slug: string): Tag | null => {

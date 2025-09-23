@@ -1,27 +1,44 @@
 ---
-title: "DockerFile"
+title: "Dockerfile：入門概念"
 date: "2025-05-12"
 tags:
   - Docker
   - Dockerfile
 ---
 
-應用程式容器化已經是現在不可或缺的技術之一，這篇文章想要紀錄Dockerfile的攥寫技巧以及該注意的事項。
+應用程式容器化是現代軟體開發不可或缺的技術。透過 Docker，可以將環境打包成映像檔 (Image)。而 `Dockerfile` 就是用來定義如何建置這個映像檔的藍圖。這篇文章旨在紀錄 Dockerfile 的撰寫技巧、核心概念與最佳實踐。
 
-# Dockerfile
+# 映像檔分層 (Layers) 與快取 (Cache)
 
-## A good start
+在深入指令之前，必須先理解 Docker 最核心的設計：**分層**。
 
-Dockerfile是一個文字檔，沒有副檔名，但純就叫做`Dockerfile`。
-使用上平鋪直敘，也非yaml格式，剛接觸可能會有些不習慣。
+Dockerfile 中的每一條指令（如 `FROM`, `RUN`, `COPY`）都會在前一層的基礎上，建立一個新的**唯讀層 (read-only layer)**。當你建置映像檔時，Docker 會依序執行這些指令。如果某個指令和其內容（例如 `COPY` 的來源檔案）沒有變更，Docker 會直接使用上次建置時的快取層，而不是重新執行，這大大加速了建置過程。
 
-- Dockerfile必須用FROM指令開頭
-- Docker會依照順序執行指令
-- WORKDIR會指向工作目錄，影響到後面`RUN`, `CMD`等指令
+這個特性導出一個原則：**將變動最不頻繁的指令放在最前面，變動最頻繁的指令放在最後面。**
 
-一個好的開始就從FROM開始定義，指向我們需要的工作目錄，安裝需要的函式庫
+```dockerfile
+WORKDIR /app
 
-```Dockerfile
+# 1. 複製變動最少的 requirements.txt
+COPY requirements.txt .
+# 2. 安裝依賴套件。只有在 requirements.txt 變更時，這一步才會重新執行
+RUN pip install --no-cache-dir -r requirements.txt
+# 3. 最後才複製變動最頻繁的應用程式原始碼
+COPY . .
+
+CMD ["python", "app.py"]
+````
+
+# Dockerfile 基礎指令
+
+Dockerfile 是一個沒有副檔名的純文字檔，就叫做 `Dockerfile`。
+
+  * `FROM`：必須是 Dockerfile 的第一條指令，用來指定基礎映像檔 (Base Image)。
+  * `WORKDIR`：設定工作目錄，後續的 `RUN`, `CMD`, `COPY`, `ADD` 等指令都會在這個目錄下執行。
+  * `COPY`：複製檔案或目錄到映像檔中。
+  * `RUN`：在映像檔建置過程中執行的指令，例如安裝套件。
+
+```dockerfile
 FROM python:3.12
 WORKDIR /usr/local/app
 
@@ -29,219 +46,242 @@ COPY requirements.txt ./
 RUN pip install --no-cache-dir -r requirements.txt
 ```
 
----
+若需切換目錄，可以再次使用 `WORKDIR` 指令，它會影響後續指令的執行位置。
 
-然而如果我們需要切換不同工作目錄，WORKDIR可以重新指向，影響後面的指令執行位置。
+# SHELL vs EXEC form
 
-## SHELL & EXEC form
+根據官方文件，我們有兩種方式可以撰寫指令：
 
-接下來我們要了解如何在dockerfile裡面寫下指令。
-根據官方我們有兩種寫法Shell form 以及 Exec form
+## Shell form
 
-### shell form
+`INSTRUCTION command param1 param2`
 
-shell form: `INSTRUCTION command param1 param2`
-在使用shell form的時候，寫法就像在使用終端機一樣，增加了可讀性
+寫法就像在終端機輸入指令一樣，直觀且可讀性高。Shell form 會透過 `/bin/sh -c` (在 Linux) 或 `cmd /S /C` (在 Windows) 來執行，因此可以使用環境變數、管線 (`|`) 等 Shell 特性。
 
-```bash
+```dockerfile
 RUN source $HOME/.bashrc && \
-echo $HOME
+    echo $HOME
 ```
 
-### exec form
+## Exec form
 
-exec form需要傳入一組JSON array，必須注意使用double quotes (")而非single quotes(')
-使用exec form的好處在於傳入值，避免了字串的清理，舉例來說空格、引號、萬用字元(*)、重新導向(>)等等
+`INSTRUCTION ["executable", "param1", "param2"]`
 
-相對這也意味著沒有使用shell情況下，若導入環境變數`$HOME`在exec form並不會被轉成實際路徑，而是會以純文字`$HOME`被執行。
+需要傳入一組 JSON 陣列，並且**必須使用雙引號 (`"`)** 而非單引號。
 
+使用 Exec form 的好處是它不會經過 Shell 解析，可以避免非預期的字串處理（如空格、引號、萬用字元 `*`）。這也意味著環境變數如 `$HOME` 不會被自動展開，它會被當作純文字 `$HOME` 傳遞。
 
----
+```dockerfile
+# $HOME 不會被展開
+RUN ["echo", "$HOME"]
 
-總結來說，使用 Exec 形式可以在不需要 Shell 特性的情況下，確保指令及其引數能夠精確地傳遞給要執行的程式，避免了 Shell 在執行前對指令字串進行的可能難以預測的處理
+# 若要使用 Shell 功能，必須明確呼叫 Shell
+RUN ["sh", "-c", "echo $HOME"]
+```
 
-## ENV & ARG
+總結來說，當你不需要 Shell 的特性時，優先使用 Exec form 可以讓指令的行為更精確、可預測。
 
-`ENV`是拿來宣告環境變數，並且會保持到最終映像檔中，`ENV key=val key=val`另外ENV宣告也支援多變數在同一行。
-ENV宣告開始，後續指令都可以吃到該變數，引用方式為`$variable_name` 或 `${variable_name}`
+# ENV & ARG
 
----
+`ENV` 和 `ARG` 都可用於設定變數，但它們的生命週期和作用域完全不同。
 
-ARG (Argument)：用於定義建構時期(build time)變數。可以在使用 docker build 命令時透過 --build-arg 傳遞數值來覆寫預設值。ARG 變數不會持久儲存在最終的映像檔中。
-ENV (Environment)：用於設定環境變數。這些變數會被應用於 Dockerfile 中後續的大部分指令，並且會持久儲存在最終的映像檔中，在容器執行時可用。
+* `ARG` (Argument): 建置時期 (build-time) 變數。
 
----
+    * 僅在 `docker build` 過程中存在。
+    * 可以透過 `--build-arg <varname>=<value>` 在建置時傳遞。
+    * **不會**被儲存在最終的映像檔中。
+    * 注意：`ARG` 變數在 `FROM` 指令後會失效，若要繼續使用，必須重新宣告。
 
-```Dockerfile
+* `ENV` (Environment): 執行時期 (run-time)環境變數。
+
+    * 在 `docker build` 過程中設定。
+    * 會被永久寫入映像檔中，在容器執行時依然可用。
+    * `ENV key=val` 支援單行宣告多個變數。
+
+```dockerfile
 # 使用 ARG 來定義 Python 版本作為建構時變數
-ARG PYTHON_VERSION=3.9
+ARG PYTHON_VERSION=3.12
 
-# FROM 指令設定Base Image
+# FROM 指令設定 Base Image
 FROM python:${PYTHON_VERSION}-slim
 
-# 使用 ENV 設定環境變數
+# 在 FROM 之後 ARG 會失效，若要給後續指令使用需重新宣告
+ARG PYTHON_VERSION
+
+# 使用 ENV 設定環境變數，這些變數在容器執行時依然存在
 ENV APP_HOME=/app \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1 \
     TZ=Asia/Taipei
 ```
 
-### Why ARG not working
 
-另外需要注意到的是ARG在每一次`FROM`指令之後都會被重設，也就是說在上面這個範例，如果要在ENV階段在讀取PYTHON_VERSION會讀取不到，必須重新宣告`ARG PYTHON_VERSION`才會繼承已經宣告的值。
+> `ENV` 會將變數值寫入映像檔中，任何人只要取得映像檔，就能透過 `docker inspect` 看到這些值。**因此，絕對不要使用 `ENV` 來儲存 API Keys、密碼等敏感資訊！**
 
-### Cautions
+# ADD vs COPY
 
-ENV會將變數寫入environment variable，也就是如果用docker inspect能夠看到變數值。
-換句話說，ENV不適合放置API key等敏感資訊，如果映像檔流出，等同把密鑰都流出了。
+`ADD` 和 `COPY` 功能相似，但行為有所不同。
 
-## ADD & COPY
+## COPY
 
-`ADD`跟`COPY`兩者功用很像，都是將目標檔案傳入映像檔中，我們在這邊仔細看看兩者微小的差異在哪裡。
-
-### COPY
-
-建議上會使用COPY優先，因為功能單純可預測，把檔案複製到目標位置。
-像是把底下的requirements.txt複製到先前設置的WORKDIR。
-```
-COPY requirements.txt .
-```
-
-雖然這寫法很常見，但官方建議使用`bind`的方法，這樣檔案不會保存進去最終映像檔中，只會暫時性的掛載上去。
-```CMD
-RUN --mount=type=bind,source=requirements.txt,target=/tmp/requirements.txt \
-    pip install --requirement /tmp/requirements.txt
-```
-
-### ADD
-
-ADD功能更強大，但也就更無法預測結果，因為ADD指令會自動解壓縮，並且接受URL進行下載。使用上的方法為`ADD src dest`並接受多個src以及wildcard。
-
-- 如果src是一個本地端檔案或目錄，則會複製到目標位置
-- 如果src是一個本地端壓縮檔，則會解壓縮到目標位置
-- 如果src是一個網址，則會將將網址檔案下載到目標位置
-- 如果src是一個git repo，則會將repo clone到目標位置
-
-
-在2013有討論串討論這項功能，甚至2024年仍然還有相關討論是否自動解壓縮，或是不同的壓縮格式。
-[ADD in Dockerfile copy the file instead of decompressing it #2369](https://github.com/moby/moby/issues/2369)
-
-
-
-## RUN
-
-在了解兩種指令撰寫形式（Shell 與 Exec）後，我們可以開始使用 `RUN` 指令來對映像檔進行變更。`RUN` 用於**執行指令並在映像上建立新的層 (layer)**，這些變更會被快取，以加速後續建置流程。
-
-### 指令範例與最佳實踐
-
-例如：
+**永遠優先使用 `COPY`**。它的功能單純、可預測：就是將指定的檔案或目錄從建置上下文 (build context) 複製到映像檔的指定路徑。
 
 ```dockerfile
-RUN apt-get update && apt-get dist-upgrade -y && rm -rf /var/lib/apt/lists/*
+COPY requirements.txt .
+COPY src/ /usr/local/app/src/
 ```
 
-這行指令示範了常見的升級作業，並遵循以下最佳實踐：
+## ADD
 
-* **結合 `update` 和 `install`** 以避免快取錯誤。
-* 使用 `&&` 串聯指令，並可搭配 `\` 拆成多行，提高可讀性。
-* 安裝完後**清除快取**以減少映像大小。
+`ADD` 是 `COPY` 的超集，但它的額外功能可能導致非預期的行為：
 
-### Shell vs Exec 形式
+  * **自動解壓縮：** 如果來源檔是本地的壓縮檔（如 `.tar.gz`, `.zip`），`ADD` 會自動將其解壓縮到目標位置。
+  * **支援 URL：** 來源可以是 URL，`ADD` 會下載檔案到目標位置。
 
-* **Shell 形式**：預設使用 `/bin/sh -c`，支援變數替換、管道指令與 here-document。
+這些「智慧」功能使得 `ADD` 的行為變得難以預測。例如，你可能只是想複製一個 `.tar.gz` 檔案，但它卻被自動解開了。因此，除非你**明確需要**自動解壓縮的功能，否則請堅持使用 `COPY`。
 
-  * 可使用反斜線換行，提升可讀性。
-  * 適合需要 shell 功能的場景，例如 `apt-get` 安裝、設定環境變數等。
-* **Exec 形式**：避免 shell 處理，採用 JSON 陣列語法。
+# RUN
 
-  * 不支援變數替換，需顯式呼叫 shell，如：
+`RUN` 指令用於在映像檔上執行命令並建立新的層。這些變更會被快取，以加速後續建置。
 
-    ```dockerfile
-    RUN ["sh", "-c", "echo $HOME"]
-    ```
-  * 適用於對執行指令安全性或字串解析較敏感的情境。
-
-### 常見使用情境分類
-
-#### 1. 安裝軟體
+  * 串接指令與清理： 將多個指令用 `&&` 串接在同一個 `RUN` 中，並在結尾清除快取，可以有效減少映像檔的層數和大小。
+  * 提高可讀性： 使用 `\` 進行換行。
 
 ```dockerfile
 RUN apt-get update && \
-    apt-get install -y curl git && \
-    rm -rf /var/lib/apt/lists/*
+    apt-get install -y --no-install-recommends \
+        curl \
+        git \
+    && rm -rf /var/lib/apt/lists/*
 ```
 
-* **結合安裝與清理**，減少映像體積。
-* 可指定版本號提升穩定性，如：`s3cmd=1.1.*`。
+## --mount
 
-#### 2. 建立內部檔案
+`--mount` 可以在建置過程中掛載檔案系統，而**不會**將這些檔案包含在最終的映像檔層中，非常適合處理快取和密鑰。
+
+  * **掛載套件快取**以加速依賴安裝：
+    ```dockerfile
+    RUN --mount=type=cache,target=/root/.cache/pip \
+        pip install -r requirements.txt
+    ```
+  * **掛載密鑰**以存取私有資源（例如 SSH key）：
+    ```dockerfile
+    RUN --mount=type=secret,id=mysecret,dst=/secrets/secret_file.txt \
+        cat /secrets/secret_file.txt
+    ```
+
+# CMD vs ENTRYPOINT
+
+這兩個指令決定了當容器啟動時，預設要執行的命令是什麼。
+
+## CMD
+
+`CMD` 用於為執行的容器提供**預設命令或參數**。
+
+  * **特性：** 如果在 `docker run` 後面提供了其他命令，`CMD` 的內容會被**完全覆蓋**。
+  * **用途：** 提供一個預設的執行行為。
+  * **形式：** 推薦使用 Exec form `CMD ["executable", "param1"]`。
 
 ```dockerfile
-RUN echo "export PATH=\"$PATH:/custom/bin\"" >> /etc/profile.d/custom_path.sh
+# 容器啟動時預設執行 `python app.py`
+CMD ["python", "app.py"]
 ```
 
-* 透過 Shell 形式寫入配置，常用於環境變數設定。
+  * `docker run <image>` -\> 執行 `python app.py`
+  * `docker run <image> python manage.py shell` -\> `CMD` 被覆蓋，改執行 `python manage.py shell`
 
-#### 3. 執行多行腳本
+## ENTRYPOINT
+
+`ENTRYPOINT` 則是將容器設定成一個**可執行檔**。
+
+  * **特性：** `docker run` 後面提供的內容會被當作**參數**傳遞給 `ENTRYPOINT` 指令，而**不會**覆蓋它。
+  * **用途：** 建立一個行為固定的容器，只接受不同的參數。
+  * **形式：** 推薦使用 Exec form `ENTRYPOINT ["executable", "param1"]`。
 
 ```dockerfile
-RUN <<EOF
-#!/bin/bash
-set -e
-mkdir -p /app/logs
-echo "初始化完成"
-EOF
+ENTRYPOINT ["ping", "-c", "3"]
+CMD ["localhost"] # 提供預設參數
 ```
 
-* 使用 here-documents 管理複數行邏輯，語意更清晰。
+  * `docker run <image>` -\> 執行 `ping -c 3 localhost`
+  * `docker run <image> google.com` -\> `CMD` 被覆蓋，執行 `ping -c 3 google.com`
 
+# Best Practices
 
-#### 4. 使用快取與掛載
+### 1\. 使用 `.dockerignore` 保持映像檔乾淨
+
+在 Dockerfile 的同層目錄下建立一個 `.dockerignore` 檔案，語法類似 `.gitignore`。告訴 Docker 在建置時忽略哪些檔案或目錄。
+
+**好處：**
+
+  * **減小映像檔大小：** 避免打包 `.git`, `node_modules`, `*.log`, `*.md` 等不必要的檔案。
+  * **加速建置：** 減少傳輸到 Docker Daemon 的上下文 (build context) 大小。
+  * **避免快取失效：** 修改日誌或 README 不會導致 `COPY . .` 的快取失效。
+  * **提升安全性：** 避免將 `.env`, `id_rsa` 等敏感檔案複製到映像檔。
+
+### 2\. 提升安全性：使用非 Root 使用者
+
+預設情況下，容器內的程序是以 `root` 使用者身分執行的，這存在安全風險。最佳實踐是建立一個專用的非 root 使用者來執行應用程式。
 
 ```dockerfile
-RUN --mount=type=cache,target=/root/.cache \
-    pip install -r requirements.txt
+FROM python:3.12-slim
+WORKDIR /app
+
+# 建立一個非 root 使用者和群組
+RUN addgroup --system app && adduser --system --group app
+
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+
+# 切換到新建立的使用者
+USER app
+
+CMD ["python", "app.py"]
 ```
 
-* 建立快取點以加速重複建置。
 
-### 進階選項
-
-#### --mount
-
-* `type=bind`：掛載主機檔案進建置容器。
-* `type=cache`：建立快取資料夾。
-* `type=tmpfs`：使用記憶體掛載暫存資料。
-* `type=secret`：注入敏感資訊（如私鑰）。
-* `type=ssh`：提供 Git 或 CI/CD 存取權。
-
-#### --network
-
-* `default`：預設網路環境。
-* `none`：完全隔離的無網路模式。
-* `host`：使用主機網路，常見於需要存取內部服務的建置情境。
-
-#### --security
-
-* `sandbox`：預設安全模式。
-* `insecure`：允許需要提權的操作，需明確授權。
-
-### 快取失效策略
-
-* `RUN` 層快取不會自動失效。
-* 可使用 `docker build --no-cache` 強制重建。
-* `COPY` 和 `ADD` 的變動會影響快取是否生效。
-* 使用 `ARG` 傳遞變數時，只要值變動也會導致 `RUN` 快取失效。
-
-### 使用環境變數
-
-* 使用 `ENV` 宣告的變數可用於 `RUN` 指令中：
+# Python 應用程式範例
 
 ```dockerfile
-ENV APP_HOME=/app
-RUN mkdir -p $APP_HOME/logs
+# 1. 建置階段 (Builder Stage)
+FROM python:3.12-slim AS builder
+
+WORKDIR /usr/src/app
+
+# 安裝編譯依賴，並建立虛擬環境
+RUN apt-get update && \
+    apt-get install -y --no-install-recommends gcc && \
+    python -m venv /opt/venv
+
+# 啟動虛擬環境
+ENV PATH="/opt/venv/bin:$PATH"
+
+# 複製並安裝 Python 套件
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+
+# 2. 正式環境階段 (Production Stage)
+FROM python:3.12-slim
+
+WORKDIR /usr/src/app
+
+# 建立非 root 使用者
+RUN addgroup --system app && adduser --system --group app
+
+# 從 builder 階段複製虛擬環境
+COPY --from=builder /opt/venv /opt/venv
+
+# 複製應用程式原始碼
+COPY . .
+
+# 設定環境變數，讓 python 指向 venv
+ENV PATH="/opt/venv/bin:$PATH"
+
+# 切換使用者
+USER app
+
+# 設定容器啟動指令
+CMD ["gunicorn", "--bind", "0.0.0.0:8000", "my_project.wsgi"]
 ```
-
-* 使用 Shell 形式才能正常替換變數；Exec 形式需透過 `sh -c` 手動呼叫 shell。
-
-

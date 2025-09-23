@@ -8,7 +8,7 @@ export function TableOfContents() {
   useEffect(() => {
     const headings = Array.from(
       document.querySelectorAll("h2, h3, h4, h5, h6")
-    );
+    ).filter(heading => !heading.closest('nav[aria-label="Post navigation"]'));
     // Create a hierarchical structure for keys
     const tocItems: TOCItem[] = [];
     const headingTexts: string[] = ["", "", "", "", "", ""]; // Index 0 is unused, 1-5 for h2-h6

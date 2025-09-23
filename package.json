@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "bash scripts/movePostAssets.sh && node scripts/createMDX.js && python scripts/convertProp.py && next dev",
+    "dev": "bash scripts/movePostAssets.sh && node scripts/createMDX.js && python scripts/convertProp.py && node scripts/watchMarkdown.js & next dev",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

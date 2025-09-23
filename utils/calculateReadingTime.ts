@@ -27,6 +27,15 @@ export function calculateReadingTime(
     };
   }
 
+  // Extract code blocks and calculate their reading time separately
+  const codeBlocks = content.match(/```[\s\S]*?```/g) || [];
+
+  // Calculate code reading time (100 chars per minute)
+  const codeCharCount = [...codeBlocks].reduce((total, code) => {
+    return total + code.length;
+  }, 0);
+  const codeReadingMinutes = codeCharCount / 600;
+
   // Remove markdown syntax, HTML tags, and extra whitespace
   const cleanText = content
     .replace(/```[\s\S]*?```/g, "") // Remove code blocks
@@ -44,36 +53,19 @@ export function calculateReadingTime(
   // Count words (split by whitespace and filter out empty strings)
   const words = cleanText.split(/\s+/).filter((word) => word.length > 0).length;
 
-  // Calculate reading time
-  const minutes = Math.max(1, Math.ceil(words / wordsPerMinute));
+  // Calculate total reading time (text + code)
+  const textReadingMinutes = words / wordsPerMinute;
+  const totalMinutes = Math.max(
+    1,
+    Math.ceil(textReadingMinutes + codeReadingMinutes)
+  );
 
   // Format the reading time text
-  const text = minutes === 1 ? "~1 min read" : `~${minutes} min read`;
+  const text = totalMinutes === 1 ? "~1 min read" : `~${totalMinutes} min read`;
 
   return {
-    minutes,
+    minutes: totalMinutes,
     words,
     text,
-  };
-}
-
-/**
- * Get a more detailed reading time breakdown
- * @param content - The text content to analyze
- * @param wordsPerMinute - Average reading speed (default: 225 WPM)
- * @returns Detailed reading time information
- */
-export function getDetailedReadingTime(
-  content: string,
-  wordsPerMinute: number = 225
-) {
-  const result = calculateReadingTime(content, wordsPerMinute);
-
-  return {
-    ...result,
-    estimatedSeconds: Math.ceil((result.words / wordsPerMinute) * 60),
-    readingSpeed: wordsPerMinute,
-    isLongForm: result.minutes > 10,
-    isShortForm: result.minutes <= 3,
   };
 }

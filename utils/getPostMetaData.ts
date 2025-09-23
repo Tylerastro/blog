@@ -28,8 +28,15 @@ export default function getPostsMetadata() {
     };
   });
 
-  // Filter out posts with draft = true or password protection
-  const publishedPosts = posts.filter((post) => !post.draft && !post.password);
+  // Filter out posts with password protection, and drafts only in production
+  const isDev = process.env.NODE_ENV === "development";
+  const publishedPosts = posts.filter((post) => {
+    // Always filter out password protected posts
+    if (post.password) return false;
+    // In development, include drafts; in production, exclude drafts
+    if (post.draft && !isDev) return false;
+    return true;
+  });
 
   return publishedPosts;
 }
