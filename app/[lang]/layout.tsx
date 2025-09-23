@@ -6,7 +6,6 @@ import { RootLayoutProps } from "@/lib/types";
 import "@/app/globals.css";
 import { Sidebar } from "@/components/Sidebar";
 import Footer from "@/components/ui/footer";
-import { BackToTop } from "@/components/BackToTop";
 import { fontVariables, outfit } from "@/styles/fonts";
 
 export const metadata: Metadata = {
@@ -37,7 +36,6 @@ export default async function RootLayout({
         <Sidebar />
         {children}
         <Footer />
-        <BackToTop />
       </body>
     </html>
   );

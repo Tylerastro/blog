@@ -1,11 +1,10 @@
-import { BaseballScoreboardBanner } from "@/components/BaseballScoreboardBanner";
 import {
   GitHubLogoIcon,
   TwitterLogoIcon,
   LinkedInLogoIcon,
 } from "@radix-ui/react-icons";
 import type { HomeProps } from "@/types";
-import SplitText from "@/components/reactbits/SplitText";
+import { BaseballSection } from "@/components/sections/BaseballSection";
 
 export default async function Home({ params }: HomeProps) {
   const { lang } = await params;
@@ -83,16 +82,11 @@ export default async function Home({ params }: HomeProps) {
               </a>
             </div>
           </div>
-
-          {/* Baseball Scoreboard positioned at bottom */}
-          <div className="h-1/4 pb-8 text-center">
-            {/* <BaseballScoreboardBanner /> */}
-            <span className="w-full max-w-4xl mx-auto p-2 sm:p-4 select-none text-4xl font-bold">
-              Under Construction
-            </span>
-          </div>
         </div>
       </section>
+
+      {/* Baseball Field Section */}
+      <BaseballSection />
     </main>
   );
 }

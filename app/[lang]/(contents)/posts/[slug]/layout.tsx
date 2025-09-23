@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 
 import ScrollProgressBar from "@/components/ProgressBar";
 import TocContainer from "@/components/posts/TocContainer";
-import Footer from "@/components/ui/footer";
 import { PostLayoutProps } from "@/lib/types";
+import { BackToTop } from "@/components/BackToTop";
 
 export const metadata: Metadata = {
   title: "Blog",
@@ -21,6 +21,7 @@ export default async function PostLayout(props: PostLayoutProps) {
     <>
       <TocContainer />
       <ScrollProgressBar />
+      <BackToTop />
       <main className="flex-1 mx-auto w-[90svw] sm:w-[50svw] my-20">
         {children}
       </main>
