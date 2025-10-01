@@ -3,11 +3,7 @@
 import { useEffect, useState } from "react";
 import { BaseballCanvas } from "../baseball/BaseballCanvas";
 
-interface BaseballSectionProps {
-  className?: string;
-}
-
-export function BaseballSection({ className = "" }: BaseballSectionProps) {
+export function BaseballSection() {
   const [scrollProgress, setScrollProgress] = useState(0);
 
   useEffect(() => {
@@ -32,12 +28,36 @@ export function BaseballSection({ className = "" }: BaseballSectionProps) {
   }, []);
 
   return (
-    <section className={`h-screen relative overflow-hidden ${className}`}>
-      {/* Baseball Field Canvas */}
+    <div className="relative w-full h-screen">
       <BaseballCanvas
         scrollProgress={scrollProgress}
         className="absolute inset-0 z-0"
       />
-    </section>
+
+      {/* Text overlay in the third column */}
+      <div className="absolute inset-0 z-10 flex items-center">
+        <div className="w-2/3"></div>
+        <div className="w-1/3 p-8 text-white flex justify-start">
+          <div className="max-w-md">
+            <div className="space-y-6">
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
+                Hi I am Tyler.
+              </h1>
+              <div className="space-y-4 text-lg md:text-xl leading-relaxed">
+                <p>
+                  I'm a passionate developer who loves creating interactive
+                  experiences and exploring the intersection of technology and
+                  creativity.
+                </p>
+                <p>
+                  Welcome to my digital space where I share my thoughts on
+                  software development, creative coding, and the latest in tech.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   );
 }

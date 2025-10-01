@@ -44,3 +44,14 @@ export interface TagSlugPageProps {
   }>;
   searchParams: Promise<{ page?: string }>;
 }
+
+// Shader gallery page props
+export interface ShaderGalleryProps extends BasePageProps {}
+
+// Individual shader page props
+export interface ShaderPageProps {
+  params: Promise<{
+    lang: Language;
+    slug: string;
+  }>;
+}

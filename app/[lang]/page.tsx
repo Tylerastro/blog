@@ -10,7 +10,7 @@ export default async function Home({ params }: HomeProps) {
   const { lang } = await params;
   return (
     <main className="flex flex-col">
-      <section className="h-[100vh] relative overflow-hidden">
+      <section className="h-[100svh] relative overflow-hidden">
         {/* Split Background with Tilted Line */}
         <div className="absolute inset-0">
           {/* Light Half */}
@@ -85,8 +85,13 @@ export default async function Home({ params }: HomeProps) {
         </div>
       </section>
 
+      {/* Transition section */}
+      <section className="h-[30svh] relative overflow-hidden bg-gradient-to-b from-secondary to-secondary-foreground" />
+
       {/* Baseball Field Section */}
-      <BaseballSection />
+      <section className="h-[100svh] relative overflow-hidden bg-secondary-foreground">
+        <BaseballSection />
+      </section>
     </main>
   );
 }

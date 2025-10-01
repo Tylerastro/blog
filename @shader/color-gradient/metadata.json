@@ -1,0 +1,14 @@
+{
+  "title": "Color Gradient",
+  "description": "Simple color gradient with wave distortion",
+  "showControls": true,
+  "showPerformance": false,
+  "uniforms": {
+    "colorShift": {
+      "default": 0,
+      "min": -3.14159,
+      "max": 3.14159,
+      "step": 0.1
+    }
+  }
+}

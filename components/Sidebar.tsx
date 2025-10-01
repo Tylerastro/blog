@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/sheet";
 import { useState, useCallback, memo } from "react";
 import ChatModal from "@/components/chat/chat-modal";
-import { User } from "lucide-react";
+import { User, SquareChartGantt } from "lucide-react";
 import {
   Select,
   SelectContent,
@@ -33,8 +33,13 @@ const navigationItems = [
   },
   {
     href: "/projects",
-    label: "Portfolio",
+    label: "Projects",
     icon: FolderOpen,
+  },
+  {
+    href: "/posts/shader",
+    label: "Shader",
+    icon: SquareChartGantt,
   },
   {
     href: "/posts",
