@@ -35,9 +35,9 @@ export function BaseballSection() {
       />
 
       {/* Text overlay in the third column */}
-      <div className="absolute inset-0 z-10 flex items-center">
+      <div className="absolute inset-0 z-10 flex items-center pointer-events-none">
         <div className="w-2/3"></div>
-        <div className="w-1/3 p-8 text-white flex justify-start">
+        <div className="w-1/3 p-8 text-white flex justify-start pointer-events-auto">
           <div className="max-w-md">
             <div className="space-y-6">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold">
