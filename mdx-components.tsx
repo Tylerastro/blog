@@ -19,17 +19,17 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
       </h3>
     ),
     h3: ({ children }) => (
-      <h4 className="text-2xl font-semibold py-4 border-b" id={children}>
+      <h4 className="text-2xl font-semibold py-4 border-b mb-2" id={children}>
         {children}
       </h4>
     ),
     h4: ({ children }) => (
-      <h5 className="text-xl font-semibold py-4 border-b" id={children}>
+      <h5 className="text-xl font-semibold py-4 border-b mb-2" id={children}>
         {children}
       </h5>
     ),
     h5: ({ children }) => (
-      <h6 className="text-lg font-semibold py-4 border-b" id={children}>
+      <h6 className="text-lg font-semibold py-4 border-b mb-2" id={children}>
         {children}
       </h6>
     ),
@@ -87,7 +87,10 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
       // For non-code pre elements, render normally
       return (
-        <pre className="p-4 rounded-lg bg-muted overflow-x-auto" {...props}>
+        <pre
+          className="p-4 my-4 rounded-lg bg-muted overflow-x-auto"
+          {...props}
+        >
           {children}
         </pre>
       );
@@ -194,6 +197,36 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
 
       return <li className="py-1 leading-relaxed">{children}</li>;
     },
+    table: ({ children }) => (
+      <div className="my-6 overflow-x-auto">
+        <table className="w-full border-collapse border border-border rounded-lg">
+          {children}
+        </table>
+      </div>
+    ),
+    thead: ({ children }) => <thead className="bg-muted/50">{children}</thead>,
+    tbody: ({ children }) => <tbody>{children}</tbody>,
+    tr: ({ children }) => (
+      <tr className="border-b border-border hover:bg-muted/30 transition-colors">
+        {children}
+      </tr>
+    ),
+    th: ({ children, style }) => (
+      <th
+        className="px-4 py-3 text-left font-semibold border-r border-border last:border-r-0"
+        style={style}
+      >
+        {children}
+      </th>
+    ),
+    td: ({ children, style }) => (
+      <td
+        className="px-4 py-3 border-r border-border last:border-r-0 align-top"
+        style={style}
+      >
+        {children}
+      </td>
+    ),
     YouTube,
     ...components,
   };

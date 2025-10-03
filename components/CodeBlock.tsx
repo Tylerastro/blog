@@ -47,9 +47,7 @@ export function CodeBlock({ children, ...props }: CodeBlockProps) {
           <Clipboard size={14} />
         )}
       </button>
-      <pre {...props}>
-        {children}
-      </pre>
+      <pre {...props}>{children}</pre>
     </div>
   );
 }

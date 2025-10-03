@@ -1,5 +1,5 @@
 ---
-title: "Dockerfile：入門概念"
+title: "Docker：入門概念"
 date: "2025-05-12"
 tags:
   - Docker
@@ -7,6 +7,114 @@ tags:
 ---
 
 應用程式容器化是現代軟體開發不可或缺的技術。透過 Docker，可以將環境打包成映像檔 (Image)。而 `Dockerfile` 就是用來定義如何建置這個映像檔的藍圖。這篇文章旨在紀錄 Dockerfile 的撰寫技巧、核心概念與最佳實踐。
+
+# Open Container Initiative (OCI)
+
+容器化技術最早源於1979年Keith Tantlinger所提出，這邊的容器是字面上的**容器**，也就是貨運上所看到的貨櫃。
+直到2000年，FreeBSD Jails被FreeBSD團隊提出，FreeBSD Jails 不僅隔離了**檔案系統**，還隔離了**網路、使用者和行程**，創造了一個更完整的「_**監獄**_」環境
+
+容器化技術的成功可以歸功於Namespaces (命名空間)
+Namespaces 負責**隔離**。它能讓容器內的行程擁有自己獨立的視圖，彷彿它在一個獨立的作業系統中運行。例如：
+
+- PID namespace: 容器內的行程有自己獨立的行程編號 (PID 1)。
+- NET namespace: 擁有獨立的網路設備、IP 地址和路由表。
+- MNT namespace: 擁有獨立的掛載點和檔案系統。
+
+近一步的發展要到2006年，Google提出Cgroups
+
+Cgroups 負責 **「資源限制與管理」** 。它能限制一個容器可以使用的 CPU、記憶體、硬碟 I/O 等資源，確保容器之間不會互相搶佔資源，避免單一容器耗盡主機所有資源。
+
+---
+
+在Docker出現之前，靠著Namespaces以及Cgroups的操控，就可以達到容器化。缺點在於過程繁瑣及複雜。
+
+而這也成為Docker成為現在主流的原因之一，Docker在於它將複雜的底層技術抽象化，提供舒適的開發者體驗，讓容器化從少數系統管理員的專屬工具，變成了所有開發者都能輕易上手的標準技術。
+
+## OCI 規範
+
+為了建立一個開放且標準化的容器生態系統，OCI 制定了三大核心規範，為容器的生命週期提供了清晰的定義，確保了不同工具之間的互通性。
+
+### 執行階段規範 (Runtime Specification)
+
+OCI 執行階段規範（runtime-spec）定義了容器該如何 **「運行」**。它詳細描述了一個被稱為「OCI Runtime Bundle」的標準檔案系統結構，其中必須包含：
+
+* `config.json`: 這是一個核心設定檔，裡面定義了容器的所有運行參數，例如要執行的命令、環境變數、掛載點、以及前面提到的 Namespaces 和 Cgroups 等資源限制。
+* **根檔案系統 (Root Filesystem)**: 一個目錄，包含了容器內部所需的所有檔案與目錄結構。
+
+此規範確保了任何符合 OCI 標準的容器執行引擎（如 runc、crun）都能夠讀取這個 Bundle，並以相同且可預測的方式啟動和管理容器。這意味著，只要您建立了一個符合規範的容器，它就可以在任何支援 OCI 的平台上（例如 Docker、Podman 或 Kubernetes）無縫運行。
+
+### 映像檔規範 (Image Specification)
+
+OCI 映像檔規範（image-spec）定義了容器映像檔的 **「打包格式」**。一個符合 OCI 標準的映像檔主要由以下幾個部分組成：
+
+* **映像檔清單 (Image Manifest)**: 一個 `JSON` 檔案，用來描述映像檔的整體結構，包含了對設定檔和各個檔案系統圖層 (Layers) 的引用（通常是透過其內容的雜湊值）。
+* **映像檔設定檔 (Image Config)**: 一個 `JSON` 檔案，包含了映像檔的元數據（Metadata），例如映像檔的作者、建立時間、以及預設的執行參數（如 `config.json` 的內容）。
+* **檔案系統圖層 (Filesystem Layers)**: 一系列經過壓縮的檔案系統變更集（通常是 tar 檔案）。容器的根檔案系統是由這些圖層堆疊組合而成的，這種分層設計使得映像檔的儲存和傳輸更有效率。
+
+這個規範讓不同的容器工具（例如 Docker、Buildah、Kaniko）能夠以標準化的方式建立、推送 (push) 和拉取 (pull) 映像檔，確保了映像檔在不同工具和平台之間的可攜性。
+
+### 分發規範 (Distribution Specification)
+
+OCI 分發規範（distribution-spec）定義了容器映像檔 **「如何儲存與分發」** 的標準 API。這個規範主要針對容器倉庫 (Container Registry) 的行為進行了標準化，例如：
+
+* 如何透過 API 上傳 (push) 映像檔的各個圖層和清單。
+* 如何透過 API 下載 (pull) 映像檔。
+* 如何進行身份驗證與授權。
+
+遵循此規範的容器倉庫（如 Docker Hub, Google Container Registry (GCR), Harbor）可以被任何符合標準的客戶端工具存取。這為容器映像檔的全球分發和共享提供了一個穩定、可靠的基礎設施。
+
+# Docker vs Podman
+
+當我們整天講容器化，Docker已經快變成容器化代名詞了，但我們必須知道容器化技術像前面所說，是遵循OCI，透過Namespaces存取以及Cgroups控制，達成容器化。而Docker只是達成的其中一個手段。
+
+再更深入了解Docker與其他工具的差別前，我們先看看Docker啟動時，他會在背景程序做哪些事情。
+
+## Docker Engine 的核心：Client-Server 架構
+
+要理解 Docker，首先必須認識其核心——**Docker Engine**。它並不是一個單一的程式，這個架構主要由三個部分組成：
+
+*  **Docker 守護行程 (Daemon)**:
+
+   * 這是一個名為 `dockerd` 的持續性背景程序，也是 Docker 的「大腦」與權力核心。
+   * 當你的系統開機後，`dockerd` 就會以 `root` 高權限啟動並在背景監聽。
+   * 它負責處理所有繁重的工作：管理映像檔、建立與執行容器、設定網路、掛載儲存卷等。基本上，所有與容器生命週期相關的操作都由它一手包辦。
+
+*  **REST API**:
+
+   * `dockerd` 會對外提供一個標準化的 REST API 接口。這套 API 定義了客戶端可以如何與守護行程溝通並命令它執行任務。
+
+*  **Docker 命令列介面 (CLI)**:
+
+   * 這是我們最熟悉的 `docker` 指令。當你在終端機輸入 `docker run` 或 `docker ps` 時，`docker` CLI 並不會自己去執行容器。
+   * 相反地，它會將你的指令打包成一個 API 請求，然後發送給在本機上運行的 `dockerd`。`dockerd` 收到請求後，才會執行對應的操作，並將結果回傳給 CLI 顯示。
+
+這個 Client-Server 架構是 Docker 設計的基石，但也正是這個**中央化的 `dockerd` 守護行程**，成為了它與 Podman 最根本的區別。
+
+## Podman：無守護行程 (Daemonless) 架構
+
+Podman (Pod Manager) 的出現，旨在提供一個更符合傳統 Linux/UNIX 哲學的容器管理工具。它最大的特點就是**無守護行程 (Daemonless)**。
+
+Podman 認為，不需要一個永遠在背景以 `root` 權限運行的中央程序來管理容器。
+
+  * 當你執行 `podman run` 時，Podman 會直接從你的 Shell 程序中建立一個子程序來執行容器。
+  * 這個過程與你執行 `ls` 或 `cp` 等任何其他 Linux 指令的模式完全相同。
+  * 對於需要在背景運行的容器（使用 `-d` 參數），Podman 會啟動一個名為 `conmon` 的超輕量級監控程序來作為容器的「監護人」，而 `podman` 指令本身則會退出。
+
+因為兩者都完全遵循 OCI 規範，所以用 Docker 建構的映像檔可以在 Podman 上完美運行，反之亦然。它們共享相同的標準，但用截然不同的架構來實現它。
+
+### 核心差異比較
+
+| 特性         | Docker                                                                                      | Podman                                                                                                   |
+|:-------------|:--------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------|
+| **核心架構** | **守護行程 (Daemon)** 一個中央 `dockerd` 程序管理所有容器，所有 `docker` 指令都與它通訊。 | **無守護行程 (Daemonless)** 每個指令都是獨立程序，直接建立容器程序，無中央管理者。                    |
+| **安全性**   | **`root` 依賴**`dockerd` 預設以 `root` 權限運行，成為潛在的單點安全風險。               | **預設無根 (Rootless)** 從設計之初就為無根模式優化，可讓普通使用者安全地管理容器，大幅提升安全性。    |
+| **系統整合** | **自有管理機制**使用 `--restart=always` 等自有策略管理容器生命週期。                    | **與 Systemd 深度整合** 可輕易為容器產生 `systemd` 服務檔，讓容器像標準的系統服務一樣被管理。         |
+| **生態系**   | **All-in-One 平台** Docker 是一個集成了建構、執行、網路等功能的龐大平台。                | **模組化工具集** 專注於容器執行，常與 `Buildah`(建構映像)、`Skopeo`(操作倉庫)等專業工具搭配。        |
+
+
+* Docker：如果開發者，`Docker Desktop` 提供了無與倫比的便利性和整合體驗。其龐大的社群、豐富的文件和成熟的生態系，使其成為入門和快速開發的首選。
+* Podman：如果是SRE/DevOps或需要在 Linux 伺服器上部署正式環境，Podman 的優勢就非常突出。其無守護行程的輕量架構、以安全為核心的無根模式、以及與 `systemd` 的無縫整合，使其成為一個更穩定、更安全、更符合 Linux 管理哲學的伺服器端容器引擎。
+
 
 # 映像檔分層 (Layers) 與快取 (Cache)
 
@@ -285,3 +393,11 @@ USER app
 # 設定容器啟動指令
 CMD ["gunicorn", "--bind", "0.0.0.0:8000", "my_project.wsgi"]
 ```
+
+
+# Appendix
+
+[什麼是容器化？](https://aws.amazon.com/tw/what-is/containerization/)\
+[[Day2] 淺談 Container 實現原理, 以 Docker 為例(I)](https://ithelp.ithome.com.tw/m/articles/10216215)\
+[[Day3] 淺談 Container 實現原理, 探討 OCI 實作](https://ithelp.ithome.com.tw/m/articles/10216880)\
+[Introduction to Containerization: A Beginner’s Walkthrough](https://medium.com/@stefan.paladuta17/introduction-to-containerization-a-beginners-walkthrough-f5dc2508e16f)
